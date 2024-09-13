@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil de Usuario</title>
+  <link rel="stylesheet" href="/core/css/perfil.css">
+</head>
+<body>
+
+<div class="perfil-container">
+  <form action="/guardar-cambios" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Contraseña:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" required th:text="${usuario.descripcion}"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="ciudad">Ciudad:</label>
+      <input type="text" id="ciudad" name="ciudad" th:value="${usuario.ciudad}" required>
+    </div>
+    <div class="form-group">
+      <label for="foto">Foto de Perfil:</label>
+      <input type="file" id="foto" name="foto">
+    </div>
+    <button type="submit" class="guardar-cambios">Guardar cambios</button>
+    <button type="button" class="cancelar" onclick="window.location.href='/perfil'">Cancelar</button>
+  </form>
+</div>
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (password !== confirmPassword) {
+      alert('Las contraseñas no coinciden.');
+      event.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>

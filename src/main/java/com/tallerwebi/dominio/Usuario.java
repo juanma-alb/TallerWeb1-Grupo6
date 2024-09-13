@@ -15,6 +15,11 @@ public class Usuario {
     private String password;
     private String rol;
     private Boolean activo = false;
+    private String nombre;
+    private String descripcion;
+    private String ciudad;
+    private String foto;
+
 
     public Long getId() {
         return id;
@@ -45,6 +50,30 @@ public class Usuario {
     }
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public String getCiudad() {
+        return ciudad;
+    }
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public boolean activo() {
