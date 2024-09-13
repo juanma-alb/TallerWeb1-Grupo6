@@ -1,0 +1,12 @@
+body {
+    padding-top: 5rem;
+    background-image: url("../imagenes/imagen1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.botonRegistro{
+    margin-top:15px;
+}
+

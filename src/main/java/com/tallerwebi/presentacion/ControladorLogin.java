@@ -1,5 +1,7 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.DatosLogin;
+import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
@@ -63,7 +65,7 @@ public class ControladorLogin {
     @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
         ModelMap model = new ModelMap();
-        model.put("usuario", new Usuario());
+        model.put("DatosRegistro", new DatosRegistro());
         return new ModelAndView("nuevo-usuario", model);
     }
 

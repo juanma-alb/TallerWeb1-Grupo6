@@ -1,0 +1,45 @@
+.seccion{
+    display: inline-block;
+    padding: 20px 30px 20px 30px;
+    color: black;
+    text-decoration: none;
+    width:  142px;
+    transition: 1s;
+
+}
+.seccion:hover{
+    transition: 1s;
+    background-color: silver;
+}
+
+.navegacion{
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+    position: fixed;
+    width: 15%;
+    background-color: #f1f3f4;
+    height: 600px;
+    left: 0px;
+    top: 0px;
+    justify-content: space-between;
+
+}
+.ul{
+    list-style: none;
+}
+
+h1{
+    margin-left:100px;
+}
+
+.icono{
+    margin-left:1300px;
+    margin-top: -70px;
+
+
+}
+
+h2{
+    margin-left:250px;
+}
