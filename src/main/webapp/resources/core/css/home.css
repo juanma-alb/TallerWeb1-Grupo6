@@ -35,11 +35,81 @@ h1{
 
 .icono{
     margin-left:1300px;
-    margin-top: -70px;
+    margin-top: -1080px;
 
 
 }
 
-h2{
-    margin-left:250px;
+.item{
+    margin-left:100px;
+    width: calc(24% - 3em);
+    box-sizing: border-box;
+    border-radius: 20px;
+    height: 250px;
+    background-color: #414242;
+    flex-direction: column;
+    align-items: center;
+    transition: 1s;
+    margin-top :50px;
+}
+
+
+.item:hover{
+    transition: 1s;
+    background-color: #5d5757;
+    transition: 1s;
+    transform: scale(1.03);
+}
+
+.item p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+    text-align: center;
+}
+
+.album{
+    max-width: 80%;
+    border-radius: 20px;
+    margin: 15px;
+    border: 2px solid black;
+}
+
+.recetasDelDia{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 150px;
+}
+
+.buscador{
+    width: 70%;
+    position: relative;
+    left: 100px;
+
+}
+button{
+    width: 45px;
+    height: 45px;
+    background-color:silver;
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 5px;
+    background-size: cover;
+    transition: 1s;
+    cursor: pointer;
+}
+button:hover{
+    transition: 1s;
+    background-color: gray;
+}
+
+input{
+    height: 40px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid black;
+
 }
