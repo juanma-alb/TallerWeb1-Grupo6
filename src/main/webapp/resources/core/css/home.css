@@ -57,7 +57,6 @@ h1{
 .item:hover{
     transition: 1s;
     background-color: #5d5757;
-    transition: 1s;
     transform: scale(1.03);
 }
 
@@ -113,3 +112,4 @@ input{
     border: 2px solid black;
 
 }
+
