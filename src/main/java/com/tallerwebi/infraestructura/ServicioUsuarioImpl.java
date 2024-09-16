@@ -28,4 +28,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     public void modificarUsuario(Usuario usuario) {
         repositorioUsuario.modificar(usuario);
     }
+
+    @Override
+    public boolean validarContraseñaActual(String email, String password) {
+        Usuario usuario = obtenerUsuarioPorEmail(email);
+        if (usuario == null) {
+            return false;
+        }
+        return usuario.getPassword().equals(password);
+    }
 }

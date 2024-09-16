@@ -27,6 +27,88 @@ body {
     position: relative;
 }
 
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.guardar-cambios, .cancelar {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.guardar-cambios {
+    background-color: #4caf50;
+}
+
+.guardar-cambios:hover {
+    background-color: #45a049;
+}
+
+.cancelar {
+    background-color: #f44336;
+}
+
+.cancelar:hover {
+    background-color: #d32f2f;
+}
+
 .foto-usuario img {
     width: 120px;
     height: 120px;
@@ -108,32 +190,4 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-}
-
-.guardar-cambios {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.guardar-cambios:hover {
-    background-color: #45a049;
-}
-
-.cancelar {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cancelar:hover {
-    background-color: #d32f2f;
 }
