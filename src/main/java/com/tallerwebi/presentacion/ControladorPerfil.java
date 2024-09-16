@@ -81,15 +81,12 @@ public class ControladorPerfil {
             usuarioActual.setPassword(usuario.getPassword());
         }
 
-        // Asegúrate de que todos los campos se están actualizando correctamente
         usuarioActual.setNombre(usuario.getNombre());
         usuarioActual.setDescripcion(usuario.getDescripcion());
         usuarioActual.setCiudad(usuario.getCiudad());
 
-        // Guarda los cambios
         servicioUsuario.modificarUsuario(usuarioActual);
 
-        // Actualiza la sesión con el usuario modificado
         request.getSession().setAttribute("usuario", usuarioActual);
 
         return new ModelAndView("redirect:/perfil");
