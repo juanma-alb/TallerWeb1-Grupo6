@@ -39,6 +39,21 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
         if (usuarioBuscado != null) {
+            request.getSession().setAttribute("usuario", usuarioBuscado); //se guarda al usuario
+            request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+            return new ModelAndView("redirect:/home");
+        } else {
+            model.put("error", "Usuario o clave incorrecta");
+        }
+        return new ModelAndView("login", model);
+    }
+/*
+    @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
+    public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
+        ModelMap model = new ModelMap();
+
+        Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
+        if (usuarioBuscado != null) {
             request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
         } else {
@@ -47,6 +62,29 @@ public class ControladorLogin {
         return new ModelAndView("login", model);
     }
 
+ */
+
+    @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
+    public ModelAndView registrarme(@ModelAttribute("DatosRegistro") DatosRegistro datosRegistro) {
+        ModelMap model = new ModelMap();
+        Usuario usuario = new Usuario();
+        usuario.setEmail(datosRegistro.getEmail());
+        usuario.setPassword(datosRegistro.getPassword());
+        usuario.setNombre(datosRegistro.getNombre());
+
+        try {
+            servicioLogin.registrar(usuario);
+        } catch (UsuarioExistente e) {
+            model.put("error", "El usuario ya existe");
+            return new ModelAndView("nuevo-usuario", model);
+        } catch (Exception e) {
+            model.put("error", "Error al registrar el nuevo usuario");
+            return new ModelAndView("nuevo-usuario", model);
+        }
+        return new ModelAndView("redirect:/login");
+    }
+
+    /*
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("usuario") Usuario usuario) {
         ModelMap model = new ModelMap();
@@ -61,6 +99,8 @@ public class ControladorLogin {
         }
         return new ModelAndView("redirect:/login");
     }
+
+     */
 
     @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
