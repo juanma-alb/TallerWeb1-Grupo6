@@ -4,50 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar Perfil de Usuario</title>
-  <link rel="stylesheet" href="/core/css/perfil.css">
+  <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
 </head>
 <body>
 
 <div class="perfil-container">
-  <form action="/guardar-cambios" method="post" enctype="multipart/form-data">
+  <form th:action="@{/guardar-cambios}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+    <h1>Editar Perfil </h1> <br><br>
     <div class="form-group">
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" required>
+      <input type="text" id="nombre" name="nombre" th:field="*{nombre}">
     </div>
+
     <div class="form-group">
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
+      <label for="currentPassword">Contraseña Actual:</label>
+      <input type="password" id="currentPassword" name="currentPassword">
     </div>
+
     <div class="form-group">
-      <label for="confirmPassword">Confirmar Contraseña:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
+      <label for="password">Nueva Contraseña:</label>
+      <input type="password" id="password" name="password" th:field="*{password}">
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Nueva Contraseña:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword">
+    </div>
+
+    <div class="error-message" id="error-message" style="display: none;">
+      <p id="error-text"></p>
     </div>
     <div class="form-group">
       <label for="descripcion">Descripción:</label>
-      <textarea id="descripcion" name="descripcion" required th:text="${usuario.descripcion}"></textarea>
+      <textarea id="descripcion" name="descripcion" th:field="*{descripcion}"></textarea>
     </div>
     <div class="form-group">
       <label for="ciudad">Ciudad:</label>
-      <input type="text" id="ciudad" name="ciudad" th:value="${usuario.ciudad}" required>
+      <input type="text" id="ciudad" name="ciudad" th:field="*{ciudad}">
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="foto">Foto de Perfil:</label>
       <input type="file" id="foto" name="foto">
-    </div>
+    </div>-->
     <button type="submit" class="guardar-cambios">Guardar cambios</button>
-    <button type="button" class="cancelar" onclick="window.location.href='/perfil'">Cancelar</button>
   </form>
 </div>
 
 <script>
   document.querySelector('form').addEventListener('submit', function(event) {
+    const currentPassword = document.getElementById('currentPassword').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    if (password !== confirmPassword) {
-      alert('Las contraseñas no coinciden.');
-      event.preventDefault();
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+
+    errorMessage.style.display = 'none';
+
+    if (password || confirmPassword) {
+      if (!currentPassword) {
+        errorText.textContent = 'Debe ingresar la contraseña actual.';
+        errorMessage.style.display = 'block';
+        event.preventDefault();
+        return;
+      }
+
+      if (!password) {
+        errorText.textContent = 'Debe ingresar una nueva contraseña.';
+        errorMessage.style.display = 'block';
+        event.preventDefault();
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorText.textContent = 'Las nuevas contraseñas no coinciden.';
+        errorMessage.style.display = 'block';
+        event.preventDefault();
+        return;
+      }
     }
+
+    console.log('Formulario validado correctamente.');
   });
 </script>
+
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil de Usuario</title>
-  <link rel="stylesheet" href="/core/css/perfil.css">
+  <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -12,14 +12,8 @@
 <div class="perfil-container">
   <div class="perfil-header">
     <div class="foto-usuario">
-      <img src="/core/imagenes/default-user.png" alt="Foto de usuario"/>
-
-      <!--
-       <img th:if="${usuario != null}" th:src="@{${usuario.foto != null ? '/core/imagenes/' + usuario.foto : '/core/imagenes/default-user.png'}}" alt="Foto de usuario"/>
-       <img th:if="${usuario == null}" src="/core/imagenes/default-user.png" alt="Foto de usuario"/>
-     <img src="/core/imagenes/default-user.png" alt="Foto de usuario"/>
-     <img th:src="@{${usuario.foto != null ? usuario.foto : '/core/imagenes/default-user.png'}}" alt="Foto de usuario"/>
-     -->
+        <img th:src="@{/imagenes/default-user.png}">
+      <!-- <img th:src="${usuario.foto != null ? '/core/imagenes/' + usuario.foto : '/imagenes/default-user.png'}" /> -->
     </div>
     <div class="info-usuario">
       <h2 th:text="${usuario.nombre}">Nombre del usuario</h2>
@@ -27,7 +21,7 @@
 
     <div class="iconos-derecha">
       <button class="editar-perfil">
-        <a href="/editar-perfil"><i class="fas fa-pencil-alt"></i></a>
+        <a th:href="@{/editar-perfil}"><i class="fas fa-pencil-alt"></i></a>
       </button>
 
       <button class="btn-ajustes">
@@ -37,9 +31,10 @@
   </div>
 
   <div class="perfil-detalles">
+    <p class="datos-titulo">Datos del Perfil:</p>
     <p><strong>Email:</strong> <span th:text="${usuario.email}">usuario@email.com</span></p>
-    <p><strong>Ciudad:</strong> <span th:text="${usuario.ciudad}">Ciudad del usuario</span></p>
-    <p><strong>Descripción:</strong> <span th:text="${usuario.descripcion}">Descripción del usuario</span></p>
+    <p><strong>Ciudad:</strong> <span th:text="${usuario.ciudad}">Añadir ciudad...</span></p>
+    <p><strong>Descripción:</strong> <span th:text="${usuario.descripcion}">Añadir descripcion...</span></p>
   </div>
 </div>
 

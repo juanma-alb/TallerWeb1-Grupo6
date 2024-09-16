@@ -5,10 +5,7 @@ import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
@@ -29,39 +26,79 @@ public class ControladorPerfil {
         this.servicioUsuario = servicioUsuario;
     }
 
-    @GetMapping("/perfil")
+
+    @RequestMapping(path = "/perfil", method = RequestMethod.GET)
     public ModelAndView verPerfil(HttpServletRequest request) {
-        String email = (String) request.getSession().getAttribute("USER_EMAIL");
-        Usuario usuario = servicioUsuario.obtenerUsuarioPorEmail(email);
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
         return new ModelAndView("perfil", model);
     }
 
+    @RequestMapping(path = "/editar-perfil", method = RequestMethod.GET)
+    public ModelAndView editarPerfil(HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        ModelMap model = new ModelMap();
+        model.put("usuario", usuario);
+        return new ModelAndView("editarPerfil", model);
+    }
+
     @PostMapping("/guardar-cambios")
-    public ModelAndView editarPerfil(@ModelAttribute("usuario") Usuario usuario,
-                                     @RequestParam("password") String password,
-                                     @RequestParam("confirmPassword") String confirmPassword,
-                                     @RequestParam("foto") MultipartFile foto,
+    public ModelAndView editarPerfil(@ModelAttribute Usuario usuario,
+                                     @RequestParam(value = "currentPassword", required = false) String currentPassword,
+                                     @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
                                      HttpServletRequest request) {
 
-        if (!password.equals(confirmPassword)) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuarioActual == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        if ((usuario.getPassword() != null && !usuario.getPassword().isEmpty()) &&
+                (currentPassword == null || currentPassword.isEmpty() ||
+                        !servicioUsuario.validarContraseñaActual(usuarioActual.getEmail(), currentPassword))) {
             ModelMap model = new ModelMap();
             model.put("usuario", usuario);
-            model.put("error", "Las contraseñas no coinciden.");
+            model.put("error", "La contraseña actual es incorrecta.");
             return new ModelAndView("editarPerfil", model);
         }
 
-        Usuario usuarioActual = servicioUsuario.obtenerUsuarioPorEmail(usuario.getEmail());
-        if (usuarioActual != null) {
-            usuarioActual.setNombre(usuario.getNombre());
-            usuarioActual.setDescripcion(usuario.getDescripcion());
-            usuarioActual.setCiudad(usuario.getCiudad());
-            if (!password.isEmpty()) {
-                usuarioActual.setPassword(password);
+        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
+            if (!usuario.getPassword().equals(confirmPassword)) {
+                ModelMap model = new ModelMap();
+                model.put("usuario", usuario);
+                model.put("error", "Las nuevas contraseñas no coinciden.");
+                return new ModelAndView("editarPerfil", model);
             }
+            usuarioActual.setPassword(usuario.getPassword());
+        }
 
-            if (!foto.isEmpty()) {
+        // Asegúrate de que todos los campos se están actualizando correctamente
+        usuarioActual.setNombre(usuario.getNombre());
+        usuarioActual.setDescripcion(usuario.getDescripcion());
+        usuarioActual.setCiudad(usuario.getCiudad());
+
+        // Guarda los cambios
+        servicioUsuario.modificarUsuario(usuarioActual);
+
+        // Actualiza la sesión con el usuario modificado
+        request.getSession().setAttribute("usuario", usuarioActual);
+
+        return new ModelAndView("redirect:/perfil");
+    }
+
+
+        /*
+        if (!foto.isEmpty()) {
+            if (foto.getContentType().startsWith("image/") && foto.getSize() <= 5 * 1024 * 1024) {
                 String nombreArchivo = foto.getOriginalFilename();
                 String rutaRelativa = "core/imagenes/" + nombreArchivo;
                 Path rutaAbsoluta = Paths.get("src/main/webapp/resources/" + rutaRelativa);
@@ -73,11 +110,13 @@ public class ControladorPerfil {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                ModelMap model = new ModelMap();
+                model.put("usuario", usuario);
+                model.put("error", "El archivo no es válido. Debe ser una imagen y no exceder los 5 MB.");
+                return new ModelAndView("editarPerfil", model);
             }
-
-            servicioUsuario.modificarUsuario(usuarioActual);
         }
+        */
 
-        return new ModelAndView("redirect:/perfil");
-    }
 }
