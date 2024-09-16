@@ -110,10 +110,30 @@ public class ControladorLogin {
     }
 
 
-
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
     }
-}
 
+    private boolean validarContraseña(String contraseña) {
+        if (contraseña == null || contraseña.length() <= 5) {
+            return false;
+        }
+
+        boolean tieneLetra = false;
+        boolean tieneNumero = false;
+        boolean tieneSimbolo = false;
+
+        for (char c : contraseña.toCharArray()) {
+            if (Character.isLetter(c)) {
+                tieneLetra = true;
+            } else if (Character.isDigit(c)) {
+                tieneNumero = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                tieneSimbolo = true;
+            }
+        }
+
+        return tieneLetra && tieneNumero && tieneSimbolo;
+    }
+}

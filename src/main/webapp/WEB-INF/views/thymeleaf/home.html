@@ -12,7 +12,7 @@
   <!-- custom style -->
   <link rel="stylesheet" th:href="@{/css/home.css}"/>
 
-  <script th:src="@{/scripts/buscador.js}" defer></script>
+
 
 </head>
 
@@ -68,6 +68,20 @@
 <!-- /.container -->
 
 <!-- Boostrap core js -->
+<script>
+  document.getElementById('buscador').addEventListener('keyup', function() {
+  let query = this.value.toLowerCase();
+  let recetas = document.querySelectorAll('.recetasDelDia .item');
+
+  recetas.forEach(function(receta) {
+    let nombre = receta.querySelector('.nombreReceta').textContent.toLowerCase();
+    if (nombre.includes(query)) {
+      receta.style.display = '';
+    } else {
+      receta.style.display = 'none';
+    }
+  });
+});</script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 </body>
 </html>
