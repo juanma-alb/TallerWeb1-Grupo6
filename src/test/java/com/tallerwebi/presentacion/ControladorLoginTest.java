@@ -6,6 +6,14 @@ import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.junit.jupiter.api.BeforeEach;
+
+
+import com.tallerwebi.dominio.DatosLogin;
+import com.tallerwebi.dominio.DatosRegistro;
+import com.tallerwebi.dominio.ServicioLogin;
+import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.excepcion.UsuarioExistente;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 public class ControladorLoginTest {
@@ -50,7 +59,7 @@ public class ControladorLoginTest {
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Usuario o clave incorrecta"));
 		verify(sessionMock, times(0)).setAttribute("ROL", "ADMIN");
 	}
-	
+
 	@Test
 	public void loginConUsuarioYPasswordCorrectosDeberiaLLevarAHome(){
 		// preparacion
@@ -59,10 +68,10 @@ public class ControladorLoginTest {
 
 		when(requestMock.getSession()).thenReturn(sessionMock);
 		when(servicioLoginMock.consultarUsuario(anyString(), anyString())).thenReturn(usuarioEncontradoMock);
-		
+
 		// ejecucion
 		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
-		
+
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
 		verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
@@ -109,4 +118,25 @@ public class ControladorLoginTest {
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al registrar el nuevo usuario"));
 	}
 
-}
+	@Test
+	public void testRegistrarmeExitoso() {
+		DatosRegistro datosRegistro = new DatosRegistro();
+		datosRegistro.setEmail("nuevo_usuario@example.com");
+		datosRegistro.setPassword("P@ssw0rd");
+		datosRegistro.setNombre("Nuevo Usuario");
+
+		Usuario usuario = new Usuario();
+		usuario.setEmail("nuevo_usuario@example.com");
+		usuario.setPassword("P@ssw0rd");
+		usuario.setNombre("Nuevo Usuario");
+
+		try {
+			controladorLogin.registrarme(datosRegistro);
+		} catch (Exception e) {
+			fail("El registro del usuario debería ser exitoso");
+		}
+	}
+
+
+
+	}
