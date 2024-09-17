@@ -21,3 +21,4 @@ public class ControladorHomeTest {
         assertEquals("home", modelAndView.getViewName(), "El nombre de la vista debería ser 'home'");
 }
 }
+
