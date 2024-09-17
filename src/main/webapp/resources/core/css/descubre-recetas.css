@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+nav {
+    background-color: #ffaa01;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.barra-busqueda input {
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+}
+
+.barra-busqueda button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #c44004;
+    color: white;
+    cursor: pointer;
+}
+
+.enlaces-navegacion a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.enlaces-navegacion a:hover {
+    text-decoration: underline;
+}
+
+.grilla-recetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tarjeta-receta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.tarjeta-receta img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.etiqueta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #dd321e;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.icono-categoria {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent; 
+    width: 40px;
+    height: 40px;
+}
+
+.icono-categoria img {
+    width: 100%;
+    height: 100%;
+}
+
+.subcategoria {
+    visibility: hidden; 
+    height: 0;
+}
+
+.tarjeta-receta h3 {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.calificacion {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+footer {
+    background-color: #ffaa01;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.iconos-sociales img {
+    width: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.menu-categorias {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.categoria-menu {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 18%;
+    text-align: center;
+}
+
+.categoria-menu h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.categoria-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.categoria-menu li {
+    margin: 10px 0;
+}
+
+.categoria-menu button {
+    background-color: transparent;
+    border: none;
+    color: #3498db;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.categoria-menu button:hover {
+    text-decoration: underline;
+}
+
+/* carrusel con slides, grid de info, y detalles del carru */
+
+.carrusel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    transition: 0.5s;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.slide.active {
+    display: flex; 
+}
+
+.slide img {
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+}
+
+.info {
+    position: relative;
+    left: -3%;
+    top: 20%;
+    transform: translateY(-50%);
+    background-color: #f4efee;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400px;
+    height: 150px;
+}
+
+.info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.boton-receta {
+    background-color: #dd321e;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.boton-receta:hover {
+    background-color: #ffaa01;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.img-slide {
+    max-width: 1000px;
+    max-height: 500px;
+    object-fit: cover; 
+}
