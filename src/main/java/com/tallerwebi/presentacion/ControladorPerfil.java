@@ -62,6 +62,7 @@ public class ControladorPerfil {
             return new ModelAndView("redirect:/login");
         }
 
+        // contra actual
         if ((usuario.getPassword() != null && !usuario.getPassword().isEmpty()) &&
                 (currentPassword == null || currentPassword.isEmpty() ||
                         !servicioUsuario.validarContraseñaActual(usuarioActual.getEmail(), currentPassword))) {
@@ -71,6 +72,7 @@ public class ControladorPerfil {
             return new ModelAndView("editarPerfil", model);
         }
 
+        // nueva contraseña
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
             if (!usuario.getPassword().equals(confirmPassword)) {
                 ModelMap model = new ModelMap();
@@ -81,9 +83,18 @@ public class ControladorPerfil {
             usuarioActual.setPassword(usuario.getPassword());
         }
 
-        usuarioActual.setNombre(usuario.getNombre());
-        usuarioActual.setDescripcion(usuario.getDescripcion());
-        usuarioActual.setCiudad(usuario.getCiudad());
+        if (usuario.getNombre() != null && !usuario.getNombre().isEmpty()) {
+            usuarioActual.setNombre(usuario.getNombre());
+        }
+
+        if (usuario.getDescripcion() != null && !usuario.getDescripcion().isEmpty()) {
+            usuarioActual.setDescripcion(usuario.getDescripcion());
+        }
+
+        if (usuario.getCiudad() != null && !usuario.getCiudad().isEmpty()) {
+            usuarioActual.setCiudad(usuario.getCiudad());
+        }
+
 
         servicioUsuario.modificarUsuario(usuarioActual);
 
@@ -91,6 +102,11 @@ public class ControladorPerfil {
 
         return new ModelAndView("redirect:/perfil");
     }
+
+
+
+}
+
 
 
         /*
@@ -116,4 +132,4 @@ public class ControladorPerfil {
         }
         */
 
-}
+
