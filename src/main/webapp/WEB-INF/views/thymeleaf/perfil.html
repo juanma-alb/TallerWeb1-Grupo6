@@ -18,7 +18,6 @@
     <div class="info-usuario">
       <h2 th:text="${usuario.nombre}">Nombre del usuario</h2>
     </div>
-
     <div class="iconos-derecha">
       <button class="editar-perfil">
         <a th:href="@{/editar-perfil}"><i class="fas fa-pencil-alt"></i></a>
@@ -33,8 +32,8 @@
   <div class="perfil-detalles">
     <p class="datos-titulo">Datos del Perfil:</p>
     <p><strong>Email:</strong> <span th:text="${usuario.email}">usuario@email.com</span></p>
-    <p><strong>Ciudad:</strong> <span th:text="${usuario.ciudad}">Añadir ciudad...</span></p>
-    <p><strong>Descripción:</strong> <span th:text="${usuario.descripcion}">Añadir descripcion...</span></p>
+    <p><strong>Ciudad:</strong> <span th:text="${usuario.ciudad != null ? usuario.ciudad : 'Añadir ciudad...'}"></span></p>
+    <p><strong>Descripción:</strong> <span th:text="${usuario.descripcion != null ? usuario.descripcion : 'Añadir descripción...'}"></span></p>
   </div>
 </div>
 
