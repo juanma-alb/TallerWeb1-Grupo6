@@ -25,15 +25,16 @@
         <button>Buscar</button>
     </div>
     <div class="enlaces-navegacion">
-        <a th:href="@{/descubre-recetas}" class="descubrerecetas-boton">Descubre recetas </a>
-        <a href="#" class="misrecetas-boton">Mis Recetas</a>
-        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
-        <a class="misrecetas-boton" th:href="@{/login}">Cerrar Sesión</a>
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+        <a href="#" class="">Mis Recetas</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
     </div>
 </nav>
 
 
 <div class="carrusel">
+  <h2 class="recetas-destacadas-semana"><span>★</span> RECETAS DESTACADAS DE LA SEMANA <span>★</span></h2>
   <div class="slides">
       <div class="slide active">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta1.jpeg}" alt="Receta 1" class="img-slide">
@@ -190,7 +191,7 @@
 
 <!-- Footer -->
 <footer>
-    <p>© 2024 EasyCocina.net - Todos los derechos reservados<br><br></p>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
     <div class="iconos-sociales">
         <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
         <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>

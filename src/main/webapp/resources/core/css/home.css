@@ -69,25 +69,13 @@ nav {
 
 .enlaces-navegacion a:hover {
     text-decoration: none;
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
 }
 
-.misrecetas-boton:hover{
-    color:  #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
 
-.perfil-boton:hover{
-    color:  #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
-
-.descubrerecetas-boton:hover{
-    color: #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
 
 .recetas-destacadas-semana{
     padding: 10px 0px;
@@ -172,6 +160,7 @@ nav {
     transform: scale(3.5);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
 }
 
 .prev, .next {
@@ -330,6 +319,7 @@ section {
     gap: 20px;
 }
 
+
 .tip-img {
     margin-top: 20px;
     max-width: 500px;
@@ -358,7 +348,7 @@ section {
     height: auto;
 }
 
-.receta img:hover, .nota img:hover {
+.receta:hover, .nota:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;

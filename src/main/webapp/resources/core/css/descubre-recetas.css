@@ -69,25 +69,12 @@ nav {
 
 .enlaces-navegacion a:hover {
     text-decoration: none;
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
 }
 
-.misrecetas-boton:hover{
-    color:  #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
-
-.perfil-boton:hover{
-    color:  #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
-
-.descubrerecetas-boton:hover{
-    color: #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;}
 
 .grilla-recetas {
     display: grid;
@@ -105,6 +92,12 @@ nav {
     overflow: hidden;
     position: relative;
 }
+
+.tarjeta-receta:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
 .tarjeta-receta img {
     width: 100%;
@@ -200,6 +193,7 @@ nav {
     text-decoration: underline;
 }
 
+
 /* carrusel con slides, grid de info, y detalles del carru */
 
 .carrusel {
@@ -273,6 +267,7 @@ nav {
     transform: scale(3.5);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
 }
 
 .prev, .next {
