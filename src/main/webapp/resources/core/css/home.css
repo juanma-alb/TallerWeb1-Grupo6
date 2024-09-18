@@ -1,133 +1,412 @@
-.seccion{
-    display: inline-block;
-    padding: 20px 30px 20px 30px;
-    color: black;
-    text-decoration: none;
-    width:  142px;
-    transition: 1s;
-
-}
-.seccion:hover{
-    transition: 1s;
-    background-color: darkorange;
-}
-
-.navegacion{
-    display: flex;
-    flex-direction: column;
-    margin-right: 5px;
-    position: fixed;
-    width: 15%;
-    background-color: orange;
-    height: 650px;
-    left: 0px;
-    top: 0px;
-    justify-content: space-between;
-
-}
-.ul{
-    list-style: none;
-}
-
-h1{
-    margin-left:300px;
-}
-
-.icono{
-    margin-left:1300px;
-    margin-top: -60px;
-
-
-}
-
-.item{
-    margin-left:100px;
-    width: calc(24% - 3em);
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    border-radius: 20px;
-    height: 250px;
-    background-color: orangered;
-    flex-direction: column;
-    align-items: center;
-    transition: 1s;
-    margin-top :50px;
 }
 
-
-.item:hover{
-    transition: 1s;
-    background-color: coral;
-    transform: scale(1.03);
+body {
+    
+    background-color: #f8f8f8;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.item p{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 80%;
-    text-align: center;
-    color:black;
-    text-decoration: none;
-}
-
-.album{
-    max-width: 80%;
-    border-radius: 20px;
-    margin: 15px;
-    border: 2px solid black;
-}
-
-.recetasDelDia{
+/* nav todo */
+nav {
+    background-color: #ffaa01;
+    color: white;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-bottom: 150px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
-.buscador{
-    width: 70%;
-    position: relative;
-    left: 100px;
+.logo h1 {
+    font-size: 24px;
+    color: white;
+}
+
+.enlace-titulo-home{
+    text-decoration: none;
+    color: #c44004;
 
 }
-button{
-    width: 45px;
-    height: 45px;
-    background-color:silver;
-    border: 2px solid black;
-    border-radius: 50%;
+
+
+.enlace-titulo-home:hover{
+    color: #f6d5d5;
+    transform: scale(5.5);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
+
+
+}
+.barra-busqueda input {
     padding: 5px;
-    background-size: cover;
-    transition: 1s;
+    border-radius: 4px;
+    border: none;
+}
+
+.barra-busqueda button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #c44004;
+    color: white;
     cursor: pointer;
 }
-button:hover{
-    transition: 1s;
-    background-color: gray;
+
+.barra-busqueda button:hover{
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-input{
-    height: 40px;
-    width: 60%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid black;
-    margin-left:150px;
-
-}
-
-.cerrarSesion{
-    margin-left:1190px;
-    color: black;
+.enlaces-navegacion a {
+    color: white;
     text-decoration: none;
-    margin-top:-80px;
-    display:flex;
-
-}
-.cerrarSesion:hover{
-    color:gray;
+    margin-left: 20px;
+    font-size: 16px;
 }
 
+.enlaces-navegacion a:hover {
+    text-decoration: none;
+}
+
+.misrecetas-boton:hover{
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
+
+.perfil-boton:hover{
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
+
+.descubrerecetas-boton:hover{
+    color: #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
+
+.recetas-destacadas-semana{
+    padding: 10px 0px;
+    text-align: center;
+    color: #777;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+
+/* carrusel con slides, grid de info, y detalles del carru */
+
+.carrusel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    transition: 0.5s;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.slide.active {
+    display: flex; 
+}
+
+.slide img {
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+}
+
+.info {
+    position: relative;
+    left: -4.5%;
+    top: 15%;
+    transform: translateY(-50%);
+    background-color: #f4efee;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400px;
+    height: 150px;
+}
+
+.info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.boton-receta {
+    background-color: #dd321e;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.boton-receta:hover {
+    background-color: #ffaa01;
+    transform: scale(3.5);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateX(-10%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev:hover, .next:hover{
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0.5, 0.5, 0.5, 0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.img-slide {
+    max-width: 1000px;
+    max-height: 500px;
+    object-fit: cover; 
+}
+
+
+/* seccion de bienvenida */
+
+.bienvenida {
+    background: linear-gradient(90deg, #f8f8f8, #e4dedd );
+    color: #5d5151;
+    padding: 30px 20px;
+    text-align: center;
+    
+    
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-bienvenida {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.titulo-principal {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+
+.titulo-principal span {
+    color: #df7e22;
+    font-style: italic;
+}
+
+.texto-bienvenida {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titulo-secundario {
+    font-size: 2.0rem;
+    margin-bottom: 15px;
+    color: #5d5151;
+}
+
+.texto-quienes-somos {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -15px;
+}
+
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2.5rem;
+    }
+    
+    .titulo-secundario {
+        font-size: 2rem;
+    }
+    
+    .texto-bienvenida,
+    .texto-quienes-somos {
+        font-size: 1rem;
+    }
+}
+
+
+/* Seccion tips, top10 y art.interes */
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+h2 span {
+    color: gold;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+.recetas-grid, .tips-grid, .notas-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.tip-img {
+    margin-top: 20px;
+    max-width: 500px;
+    max-height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tip-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.receta, .tip, .nota {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.receta img,  .nota img {
+    width: 100%;
+    height: auto;
+}
+
+.receta img:hover, .nota img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 14px;
+    color: #777;
+}
+
+.rating {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.tip a {
+    display: block;
+    margin: 10px 0;
+}
+
+.notas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.notas-grid .nota h3 {
+    font-size: 16px;
+}
+
+.notas-grid .nota p {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+
+/* footer */
 footer {
     background-color: #ffaa01;
     color: white;
@@ -141,3 +420,13 @@ footer {
     cursor: pointer;
 }
 
+
+.img-icon:hover{
+
+    
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    
+}

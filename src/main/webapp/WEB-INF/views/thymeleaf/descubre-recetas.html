@@ -3,31 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyCocina</title>
+    <title>EasyCocina-Descubre Recetas</title>
     <!-- Boostrap core css -->
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
-<!-- custom style -->
+<!-- estilos -->
 <link rel="stylesheet" th:href="@{/css/descubre-recetas.css}"/>
 
 </head>
 <body>
 
-    <!-- Barra de navegacion -->
-    <nav th:fragment="barraNavegacion">
-        <div class="logo">
-            <h1 th:text="'EASYCOCINA.NET'"></h1>
-        </div>
-        <div class="barra-busqueda">
-            <input type="text" placeholder="¿Qué estás buscando?">
-            <button>Buscar</button>
-        </div>
-        <div class="enlaces-navegacion">
-            <a href="#">Descubre recetas</a>
-            <a href="#">Mis Recetas</a>
-            <a href="#">Perfil</a>
-        </div>
-    </nav>
+    <!-- nav todo -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a href="home.html" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+
+    </div>
+    <div class="barra-busqueda">
+        <input type="text" placeholder="¿Qué estás buscando?">
+        <button>Buscar</button>
+    </div>
+    <div class="enlaces-navegacion">
+        <a href="DescubreRecetas.html" class="descubrerecetas-boton">Descubre recetas </a>
+        <a href="#" class="misrecetas-boton">Mis Recetas</a>
+        <a href="#" class="perfil-boton">Perfil</a>
+    </div>
+</nav>
 
     <div class="carrusel">
         <div class="slides">
@@ -363,9 +364,9 @@
     <footer>
         <p>© 2024 EasyCocina.net - Todos los derechos reservados<br><br></p>
         <div class="iconos-sociales">
-            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" alt="Facebook"></a>
-            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" alt="Twitter"></a>
-            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" alt="Instagram"></a>
+            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+            <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
         </div>
     </footer>
 

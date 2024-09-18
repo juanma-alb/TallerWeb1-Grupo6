@@ -5,10 +5,12 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    
     background-color: #f8f8f8;
+    font-family: 'Open Sans', sans-serif;
 }
 
+/* nav todo */
 nav {
     background-color: #ffaa01;
     color: white;
@@ -20,8 +22,24 @@ nav {
 
 .logo h1 {
     font-size: 24px;
+    color: white;
 }
 
+.enlace-titulo-home{
+    text-decoration: none;
+    color: #c44004;
+
+}
+
+
+.enlace-titulo-home:hover{
+    color: #f6d5d5;
+    transform: scale(5.5);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
+
+
+}
 .barra-busqueda input {
     padding: 5px;
     border-radius: 4px;
@@ -36,6 +54,12 @@ nav {
     cursor: pointer;
 }
 
+.barra-busqueda button:hover{
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .enlaces-navegacion a {
     color: white;
     text-decoration: none;
@@ -44,8 +68,26 @@ nav {
 }
 
 .enlaces-navegacion a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
+
+.misrecetas-boton:hover{
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
+
+.perfil-boton:hover{
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
+
+.descubrerecetas-boton:hover{
+    color: #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;}
 
 .grilla-recetas {
     display: grid;
@@ -113,18 +155,7 @@ nav {
 }
 
 
-footer {
-    background-color: #ffaa01;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
 
-.iconos-sociales img {
-    width: 24px;
-    margin: 0 10px;
-    cursor: pointer;
-}
 
 .menu-categorias {
     display: flex;
@@ -206,8 +237,8 @@ footer {
 
 .info {
     position: relative;
-    left: -3%;
-    top: 20%;
+    left: -4.5%;
+    top: 15%;
     transform: translateY(-50%);
     background-color: #f4efee;
     padding: 20px;
@@ -239,12 +270,15 @@ footer {
 
 .boton-receta:hover {
     background-color: #ffaa01;
+    transform: scale(3.5);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .prev, .next {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateX(-10%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -260,6 +294,12 @@ footer {
 
 .next {
     right: 10px;
+}
+
+.prev:hover, .next:hover{
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0.5, 0.5, 0.5, 0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dots {
@@ -288,4 +328,27 @@ footer {
     max-width: 1000px;
     max-height: 500px;
     object-fit: cover; 
+}
+
+footer {
+    background-color: #ffaa01;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.iconos-sociales img {
+    width: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.img-icon:hover{
+
+    
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
 }

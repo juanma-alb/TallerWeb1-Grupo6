@@ -1,111 +1,205 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCocina</title>
+    <!-- Boostrap core css -->
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
-  <title>Home</title>
-
-  <!-- Boostrap core css -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-
-  <!-- custom style -->
-  <link rel="stylesheet" th:href="@{/css/home.css}"/>
-
-
+<!-- estilos -->
+<link rel="stylesheet" th:href="@{/css/home.css}"/>
 
 </head>
 
 <body>
 
-<header>
-  <h1>Recetas Ordinarias</h1>
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
 
-  <div class="buscador">
-    <input type="text" placeholder="Buscar" id="buscador">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button></div>
+    </div>
+    <div class="barra-busqueda">
+        <input type="text" placeholder="¿Qué estás buscando?">
+        <button>Buscar</button>
+    </div>
+    <div class="enlaces-navegacion">
+        <a th:href="@{/descubre-recetas}" class="descubrerecetas-boton">Descubre recetas </a>
+        <a href="#" class="misrecetas-boton">Mis Recetas</a>
+        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
+    </div>
+</nav>
 
-  <a class="cerrarSesion" href="login.html">cerrar sesion</a>
 
+<div class="carrusel">
+  <div class="slides">
+      <div class="slide active">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta1.jpeg}" alt="Receta 1" class="img-slide">
+          <div class="info">
+              <h2>Pozole Rojo </h2>
+              <p>¡Te damos la mejor receta de todos los tiempos!</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
+      <div class="slide">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta2.jpg}" alt="Receta 2" class="img-slide">
+          <div class="info">
+              <h2>Pavo a la Hawaiana</h2>
+              <p>¡Irresistible por donde lo veas!</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
 
-  <a href="perfil.html"><svg class="icono" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#5f6368"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg></a>
+      <div class="slide">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta3.jpg}" alt="Receta 3" class="img-slide">
+          <div class="info">
+              <h2>Pan de zanahoria</h2>
+              <p>Dulzura natural de las zanahorias.</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
 
+      <div class="slide">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta4.jpg}" alt="Receta 4" class="img-slide">
+          <div class="info">
+              <h2>Ají de calabaza</h2>
+              <p>Plato tradicional de la cocina arequipeña.</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
 
-</header>
+      <div class="slide">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta5.jpg}" alt="Receta 5" class="img-slide">
+          <div class="info">
+              <h2>Bacalao a la vazcaína</h2>
+              <p>Receta con un toque especial al estilo mexicano.</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
 
-<main role="main" class="container">
-  <div class = "container">
-
-    <nav class="navegacion">
-      <ul class="ul">
-        <li><a class="seccion" href="home.html" id="id">Home</a></li>
-        <li><a class="seccion" href="home.html">Mis Recetas</a></li>
-        <li><a class="seccion" th:href="@{/descubre-recetas}">Descubre Recetas</a></li>
-      </ul>
-
-    </nav>
-
+      <div class="slide">
+          <img th:src="@{/imagenes/descubre-recetas-slides/receta6.jpg}" alt="Receta 6" class="img-slide">
+          <div class="info">
+              <h2>Sukiyaki</h2>
+              <p>Estofado japonés que combina múltiples sabores.</p>
+              <a href="#" class="boton-receta">Ver Receta</a>
+          </div>
+      </div>
+      
   </div>
-
-  <div class="recetasDelDia">
-
-    <a class="item" href="">
-      <img th:src="@{/imagenes/Burrito1.JPG}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Burritos Mexicanos</p>
-    </a>
-    <a class="item" href="">
-      <img th:src="@{imagenes/paella-valenciana.jpg}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Paella Valenciana</p>
-    </a>
-    <a class="item" href="">
-      <img th:src="@{/imagenes/ratattuile.jpg}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Ratattuile</p>
-    </a>
-    <a class="item" href="">
-      <img th:src="@{/imagenes/ceviche-peruano-de-pescado.jpg}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Ceviche peruano</p>
-    </a>
-    <a class="item" href="">
-      <img th:src="@{/imagenes/FideosSingapur.jpg}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Fideos singapur</p>
-    </a>
-    <a class="item" href="">
-      <img th:src="@{/imagenes/Cocidomadrileño.jpg}" alt="imagen" class="album">
-      <p title="title" class="nombreReceta">Cocido madrileño</p>
-    </a>
-
-  </div>
+    
+    <!-- carrusel:Botones de navegacion -->
+    <button class="prev">←</button>
+    <button class="next">→</button>
+    
+    <!-- carrusel:Puntos indicadores -->
+    <div class="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
 
 
+<!-- texto bienvenida -->
+<section class="bienvenida">
+    <div class="contenedor-bienvenida">
+    <h1 class="titulo-principal"><span>¡Convertite en chef!</h1>
+    <p class="texto-bienvenida">
+        Aquí en <strong>EASYCOCINA.NET</strong>, estamos comprometidos a hacer que la experiencia de cocinar sea más accesible y divertida para todos. Descubrí recetas inspiradoras, sencillas y deliciosas para cada ocasión.
+    </p>
+    <h2 class="titulo-secundario">¿Quiénes somos?</h2>
+    <p class="texto-quienes-somos">
+        Somos un equipo apasionado por la gastronomía, dedicados a compartir recetas cuidadosamente seleccionadas para ayudarte a mejorar tus habilidades culinarias. ¡Unite a nuestra comunidad y comenzá a crear platos increíbles hoy mismo!
+    </p>
+    </div>
+</section>
 
-</main>
 
+
+
+<!-- Sección de Top 10 Recetas  (falta agregar slide)-->
+<section class="top-recetas">
+    <h2><br>TOP 10 RECETAS <span>★</span></h2>
+    <div class="recetas-grid">
+        <div class="receta">
+            <img th:src="@{/imagenes/home-imagenes/home-1.JPG}" alt="Corundas con Crema">
+            <h3>Burritos Mexicanos</h3>
+            <p class="rating">5.0 ★★★★★</p>
+        </div>
+        <div class="receta">
+            <img th:src="@{/imagenes/home-imagenes/home-2.jpg}" alt="Receta de Chilaquiles para la Cruda">
+            <h3>Ceviche Peruano</h3>
+            <p class="rating">5.0 ★★★★★</p>
+        </div>
+        <div class="receta">
+            <img th:src="@{/imagenes/home-imagenes/home-3.jpg}" alt="Carne al Pastor">
+            <h3>Cocido Madrileño</h3>
+            <p class="rating">5.0 ★★★★★</p>
+        </div>
+        <div class="receta">
+            <img th:src="@{/imagenes/home-imagenes/home-4.jpg}" alt="Agua de Jamaica con Guayaba">
+            <h3>Paella Valenciana</h3>
+            <p class="rating">5.0 ★★★★★</p>
+        </div>
+    </div>
+</section>
+
+<!-- seccion de tips y notas (falta agregar mas grids y un slide) -->
+<section class="tips-notas">
+    <h2>TIPS Y NOTAS</h2>
+    <div class="tips-grid">
+        <div class="tip">
+            <img th:src="@{/imagenes/home-imagenes/carbon.jpg}" class="tip-img" alt="Cómo se prende el carbón">
+            <h3>¿Cómo se prende el carbón?</h3>
+            <p>En EasyCocina te enseñamos cómo prender el carbón de tres maneras diferentes...</p>
+            <a href="#">Ver el tip →</a>
+        </div>
+    </div>
+</section>
+
+<!-- seccion de articulos interes -->
+<section class="notas">
+    <h2>Articulos de interés</h2>
+    <div class="notas-grid">
+        <div class="nota">
+            <img th:src="@{/imagenes/home-imagenes/Tuppers.jpg}" alt="Los mejores tuppers para guardar comida">
+            <h3>Los mejores tuppers para guardar comida</h3>
+            <p>¡Te van a encantar!</p>
+        </div>
+        <div class="nota">
+            <img th:src="@{/imagenes/home-imagenes/rol-canela.jpg}" alt="Los mejores roles de canela">
+            <h3>Los mejores roles de canela para el otoño</h3>
+            <p>Ideales para una tarde de otoño.</p>
+        </div>
+        <div class="nota">
+            <img th:src="@{/imagenes/home-imagenes/dieta-keto-2.jpg}" alt="15 recetas para celebrar">
+            <h3>¿Qué es y en qué consiste la dieta Keto?</h3>
+            <p>¡La dieta del momento!</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Footer -->
 <footer>
-  <p>© 2024 EasyCocina.net - Todos los derechos reservados<br><br></p>
-  <div class="iconos-sociales">
-    <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" alt="Facebook"></a>
-    <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" alt="Twitter"></a>
-    <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" alt="Instagram"></a>
-  </div>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados<br><br></p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
 </footer>
 
-<!-- /.container -->
 
-<!-- Boostrap core js -->
-<script>
-  document.getElementById('buscador').addEventListener('keyup', function() {
-  let query = this.value.toLowerCase();
-  let recetas = document.querySelectorAll('.recetasDelDia .item');
 
-  recetas.forEach(function(receta) {
-    let nombre = receta.querySelector('.nombreReceta').textContent.toLowerCase();
-    if (nombre.includes(query)) {
-      receta.style.display = '';
-    } else {
-      receta.style.display = 'none';
-    }
-  });
-});</script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/home.js}"></script>
 </body>
 </html>
