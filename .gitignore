@@ -19,4 +19,8 @@ hs_err_pid*
 /.idea/
 /.settings/
 
+# Ignorar archivos de configuración de VS Code
+.vscode/settings.json
+
+
 src/main/webapp/resources/core/js/node_modules
