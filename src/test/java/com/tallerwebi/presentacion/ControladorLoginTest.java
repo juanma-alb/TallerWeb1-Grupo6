@@ -103,19 +103,20 @@ public class ControladorLoginTest {
 
 
 	@Test
-	public void errorEnRegistrarmeDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente {
+	public void errorEnNombreDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente {
 
+		// Preparación
 		DatosRegistro datosRegistroMock = mock(DatosRegistro.class);
 		when(datosRegistroMock.getEmail()).thenReturn("test@example.com");
-		when(datosRegistroMock.getPassword()).thenReturn("password");
-		when(datosRegistroMock.getNombre()).thenReturn("Nombre");
+		when(datosRegistroMock.getPassword()).thenReturn("P@ssw0rd");
+		when(datosRegistroMock.getNombre()).thenReturn("Nombre123"); // Nombre inválido con números
 
-		doThrow(RuntimeException.class).when(servicioLoginMock).registrar(any(Usuario.class));
-
+		// Ejecución
 		ModelAndView modelAndView = controladorLogin.registrarme(datosRegistroMock);
 
+		// Validación
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("nuevo-usuario"));
-		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al registrar el nuevo usuario"));
+		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("El nombre solo puede contener letras"));
 	}
 
 	@Test
