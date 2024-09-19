@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyCocina</title>
     <!-- Boostrap core css -->
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <!-- estilos -->
 <link rel="stylesheet" th:href="@{/css/home.css}"/>
@@ -34,12 +37,12 @@
 
 
 <div class="carrusel">
-  <h2 class="recetas-destacadas-semana"><span>★</span> RECETAS DESTACADAS DE LA SEMANA <span>★</span></h2>
+  <h2 class="recetas-destacadas-semana"><span>&#9733; </span> RECETAS DESTACADAS DE LA SEMANA <span>&#9733;</span></h2>
   <div class="slides">
       <div class="slide active">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta1.jpeg}" alt="Receta 1" class="img-slide">
           <div class="info">
-              <h2>Pozole Rojo </h2>
+              <h2 class="grids-estilos">Pozole Rojo </h2>
               <p>¡Te damos la mejor receta de todos los tiempos!</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -47,7 +50,7 @@
       <div class="slide">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta2.jpg}" alt="Receta 2" class="img-slide">
           <div class="info">
-              <h2>Pavo a la Hawaiana</h2>
+              <h2 class="grids-estilos">Pavo a la Hawaiana</h2>
               <p>¡Irresistible por donde lo veas!</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -56,7 +59,7 @@
       <div class="slide">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta3.jpg}" alt="Receta 3" class="img-slide">
           <div class="info">
-              <h2>Pan de zanahoria</h2>
+              <h2 class="grids-estilos">Pan de zanahoria</h2>
               <p>Dulzura natural de las zanahorias.</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -65,7 +68,7 @@
       <div class="slide">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta4.jpg}" alt="Receta 4" class="img-slide">
           <div class="info">
-              <h2>Ají de calabaza</h2>
+              <h2 class="grids-estilos">Ají de calabaza</h2>
               <p>Plato tradicional de la cocina arequipeña.</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -74,7 +77,7 @@
       <div class="slide">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta5.jpg}" alt="Receta 5" class="img-slide">
           <div class="info">
-              <h2>Bacalao a la vazcaína</h2>
+              <h2 class="grids-estilos">Bacalao a la vazcaína</h2>
               <p>Receta con un toque especial al estilo mexicano.</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -83,7 +86,7 @@
       <div class="slide">
           <img th:src="@{/imagenes/descubre-recetas-slides/receta6.jpg}" alt="Receta 6" class="img-slide">
           <div class="info">
-              <h2>Sukiyaki</h2>
+              <h2 class="grids-estilos">Sukiyaki</h2>
               <p>Estofado japonés que combina múltiples sabores.</p>
               <a href="#" class="boton-receta">Ver Receta</a>
           </div>
@@ -92,8 +95,8 @@
   </div>
     
     <!-- carrusel:Botones de navegacion -->
-    <button class="prev">←</button>
-    <button class="next">→</button>
+    <button class="prev"><</button>
+    <button class="next">></button>
     
     <!-- carrusel:Puntos indicadores -->
     <div class="dots">
@@ -126,34 +129,34 @@
 
 <!-- Sección de Top 10 Recetas  (falta agregar slide)-->
 <section class="top-recetas">
-    <h2><br>TOP 10 RECETAS <span>★</span></h2>
+    <h2 class="titulos-notas"><br>TOP 10 RECETAS  <span>&#9733</span></h2>
     <div class="recetas-grid">
         <div class="receta">
             <img th:src="@{/imagenes/home-imagenes/home-1.JPG}" alt="Corundas con Crema">
-            <h3>Burritos Mexicanos</h3>
-            <p class="rating">5.0 ★★★★★</p>
+            <h4 class="grids-estilos">Burritos Mexicanos</h4>
+            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9734;</p>
         </div>
         <div class="receta">
             <img th:src="@{/imagenes/home-imagenes/home-2.jpg}" alt="Receta de Chilaquiles para la Cruda">
-            <h3>Ceviche Peruano</h3>
-            <p class="rating">5.0 ★★★★★</p>
+            <h4 class="grids-estilos">Ceviche Peruano</h4>
+            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9734;</p>
         </div>
         <div class="receta">
             <img th:src="@{/imagenes/home-imagenes/home-3.jpg}" alt="Carne al Pastor">
-            <h3>Cocido Madrileño</h3>
-            <p class="rating">5.0 ★★★★★</p>
+            <h4 class="grids-estilos">Cocido Madrileño</h4>
+            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9734;</p>
         </div>
         <div class="receta">
             <img th:src="@{/imagenes/home-imagenes/home-4.jpg}" alt="Agua de Jamaica con Guayaba">
-            <h3>Paella Valenciana</h3>
-            <p class="rating">5.0 ★★★★★</p>
+            <h4 class="grids-estilos">Paella Valenciana</h4>
+            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9734;</p>
         </div>
     </div>
 </section>
 
 <!-- seccion de tips y notas (falta agregar mas grids y un slide) -->
 <section class="tips-notas">
-    <h2>TIPS Y NOTAS</h2>
+    <h2 class="titulos-notas">TIPS Y NOTAS</h2>
     <div class="tips-grid">
         <div class="tip">
             <img th:src="@{/imagenes/home-imagenes/carbon.jpg}" class="tip-img" alt="Cómo se prende el carbón">
@@ -166,7 +169,7 @@
 
 <!-- seccion de articulos interes -->
 <section class="notas">
-    <h2>Articulos de interés</h2>
+    <h2 class="titulos-notas">Articulos de interés</h2>
     <div class="notas-grid">
         <div class="nota">
             <img th:src="@{/imagenes/home-imagenes/Tuppers.jpg}" alt="Los mejores tuppers para guardar comida">
