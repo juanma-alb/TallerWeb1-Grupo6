@@ -35,7 +35,13 @@ public class ControladorLogin {
 
     @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
+
         ModelMap model = new ModelMap();
+
+        if (!validarContraseña(datosLogin.getPassword())) {
+            model.put("error", "La contraseña no cumple con los requisitos.");
+            return new ModelAndView("login", model);
+        }
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
         if (usuarioBuscado != null) {
@@ -66,7 +72,19 @@ public class ControladorLogin {
 
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("DatosRegistro") DatosRegistro datosRegistro) {
+
         ModelMap model = new ModelMap();
+
+        if (!validarContraseña(datosRegistro.getPassword())) {
+            model.put("error", "La contraseña debe tener al menos 6 caracteres, incluir letras, números y símbolos.");
+            return new ModelAndView("nuevo-usuario", model);
+        }
+
+        if (!validarNombreSoloLetras(datosRegistro.getNombre())) {
+            model.put("error", "El nombre solo puede contener letras");
+            return new ModelAndView("nuevo-usuario", model);
+        }
+
         Usuario usuario = new Usuario();
         usuario.setEmail(datosRegistro.getEmail());
         usuario.setPassword(datosRegistro.getPassword());
@@ -135,5 +153,9 @@ public class ControladorLogin {
         }
 
         return tieneLetra && tieneNumero && tieneSimbolo;
+    }
+
+    private boolean validarNombreSoloLetras(String nombre) {
+        return nombre != null && nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
     }
 }
