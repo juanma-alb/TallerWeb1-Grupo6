@@ -38,10 +38,11 @@ public class ControladorLogin {
 
         ModelMap model = new ModelMap();
 
-        if (!validarContraseña(datosLogin.getPassword())) {
+       /* if (!validarContraseña(datosLogin.getPassword())) {
             model.put("error", "La contraseña no cumple con los requisitos.");
             return new ModelAndView("login", model);
-        }
+        }*/
+
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
         if (usuarioBuscado != null) {
@@ -75,7 +76,7 @@ public class ControladorLogin {
 
         ModelMap model = new ModelMap();
 
-        if (!validarContraseña(datosRegistro.getPassword())) {
+       /* if (!validarContraseña(datosRegistro.getPassword())) {
             model.put("error", "La contraseña debe tener al menos 6 caracteres, incluir letras, números y símbolos.");
             return new ModelAndView("nuevo-usuario", model);
         }
@@ -83,7 +84,8 @@ public class ControladorLogin {
         if (!validarNombreSoloLetras(datosRegistro.getNombre())) {
             model.put("error", "El nombre solo puede contener letras");
             return new ModelAndView("nuevo-usuario", model);
-        }
+        }*/
+
 
         Usuario usuario = new Usuario();
         usuario.setEmail(datosRegistro.getEmail());
