@@ -11,13 +11,12 @@ public class ControladorHomeTest {
 
     @Test
     public void testIrAHome() {
-        // Crear una instancia del controlador
         ControladorHome controlador = new ControladorHome();
 
-        // Llamar al método irAHome
+
         ModelAndView modelAndView = controlador.irAHome();
 
-        // Verificar que el nombre de la vista es "home"
+
         assertEquals("home", modelAndView.getViewName(), "El nombre de la vista debería ser 'home'");
 }
 }
