@@ -5,6 +5,7 @@ import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
+import com.tallerwebi.dominio.excepcion.ValidacionesIncorrectas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -76,29 +77,18 @@ public class ControladorLogin {
 
         ModelMap model = new ModelMap();
 
-       /* if (!validarContraseña(datosRegistro.getPassword())) {
-            model.put("error", "La contraseña debe tener al menos 6 caracteres, incluir letras, números y símbolos.");
-            return new ModelAndView("nuevo-usuario", model);
-        }
-
-        if (!validarNombreSoloLetras(datosRegistro.getNombre())) {
-            model.put("error", "El nombre solo puede contener letras");
-            return new ModelAndView("nuevo-usuario", model);
-        }*/
-
-
         Usuario usuario = new Usuario();
         usuario.setEmail(datosRegistro.getEmail());
         usuario.setPassword(datosRegistro.getPassword());
         usuario.setNombre(datosRegistro.getNombre());
 
         try {
-            servicioLogin.registrar(usuario);
+            servicioLogin.registrar(usuario,datosRegistro);
         } catch (UsuarioExistente e) {
             model.put("error", "El usuario ya existe");
             return new ModelAndView("nuevo-usuario", model);
-        } catch (Exception e) {
-            model.put("error", "Error al registrar el nuevo usuario");
+        } catch (ValidacionesIncorrectas e) {
+            model.put("error", e.getMessage());
             return new ModelAndView("nuevo-usuario", model);
         }
         return new ModelAndView("redirect:/login");
@@ -135,29 +125,5 @@ public class ControladorLogin {
         return new ModelAndView("redirect:/login");
     }
 
-    private boolean validarContraseña(String contraseña) {
-        if (contraseña == null || contraseña.length() <= 5) {
-            return false;
-        }
 
-        boolean tieneLetra = false;
-        boolean tieneNumero = false;
-        boolean tieneSimbolo = false;
-
-        for (char c : contraseña.toCharArray()) {
-            if (Character.isLetter(c)) {
-                tieneLetra = true;
-            } else if (Character.isDigit(c)) {
-                tieneNumero = true;
-            } else if (!Character.isLetterOrDigit(c)) {
-                tieneSimbolo = true;
-            }
-        }
-
-        return tieneLetra && tieneNumero && tieneSimbolo;
-    }
-
-    private boolean validarNombreSoloLetras(String nombre) {
-        return nombre != null && nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
-    }
 }
