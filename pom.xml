@@ -114,6 +114,12 @@
             <version>${thymeleaf.spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
 
         <!-- compile only, deployed container will provide this -->
         <!--
