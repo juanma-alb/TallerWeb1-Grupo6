@@ -16,13 +16,29 @@ public class Receta {
 
     private int calorias;
 
-    private boolean esAltaEnProteinas;
-
     private int tiempoPreparacion; // Tiempo en minutos
+
+    private int comensales;
+
+    private String foto;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "receta_id")
     private List<Ingrediente> ingredientes;
+
+    @ElementCollection
+    private List<String> pasos;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Long getId() {
         return id;
@@ -56,14 +72,6 @@ public class Receta {
         this.calorias = calorias;
     }
 
-    public boolean isEsAltaEnProteinas() {
-        return esAltaEnProteinas;
-    }
-
-    public void setEsAltaEnProteinas(boolean esAltaEnProteinas) {
-        this.esAltaEnProteinas = esAltaEnProteinas;
-    }
-
     public int getTiempoPreparacion() {
         return tiempoPreparacion;
     }
@@ -78,5 +86,29 @@ public class Receta {
 
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public int getComensales() {
+        return comensales;
+    }
+
+    public void setComensales(int comensales) {
+        this.comensales = comensales;
+    }
+
+    public List<String> getPasos() {
+        return pasos;
+    }
+
+    public void setPasos(List<String> pasos) {
+        this.pasos = pasos;
     }
 }

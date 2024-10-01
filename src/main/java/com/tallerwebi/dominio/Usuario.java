@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -17,6 +18,9 @@ public class Usuario {
     private String ciudad;
     private String foto;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Receta> recetas;
+
     @Transient
     private String confirmPassword;
 
@@ -25,6 +29,14 @@ public class Usuario {
 
     @Transient
     private String newPassword; // Nueva contraseña (para actualización)
+
+    public List<Receta> getRecetas() {
+        return recetas;
+    }
+
+    public void setRecetas(List<Receta> recetas) {
+        this.recetas = recetas;
+    }
 
     public String getNewPassword() {
         return newPassword;
