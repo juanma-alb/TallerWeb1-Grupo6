@@ -6,8 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.NoResultException;
 
 @Repository("repositorioUsuario")
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
@@ -60,6 +63,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         } finally {
             session.close();
         }
+
     }
+
+    //CONSULTAS POSIBLES PARA USUARIOS
+
+
 
 }
