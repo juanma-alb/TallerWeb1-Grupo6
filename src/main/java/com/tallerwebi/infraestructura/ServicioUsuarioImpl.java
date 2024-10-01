@@ -25,16 +25,39 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     }
 
     @Override
-    public void modificarUsuario(Usuario usuario) {
-        repositorioUsuario.modificar(usuario);
+    public void modificarContraseniaUsuario(Usuario usuarioActual, String currentPassword, String newPassword, String confirmPassword) throws Exception {
+        if (currentPassword == null || !usuarioActual.getPassword().equals(currentPassword)) {
+            throw new Exception("La contraseña actual no es válida.");
+        }
+
+        if (newPassword != null && !newPassword.isEmpty()) {
+            if (!newPassword.equals(confirmPassword)) {
+                throw new Exception("Las nuevas contraseñas no coinciden.");
+            }
+            if (newPassword.equals(currentPassword)) {
+                throw new Exception("La nueva contraseña no puede ser la misma que la contraseña actual.");
+            }
+            usuarioActual.setPassword(newPassword);
+        }
+
+        repositorioUsuario.modificar(usuarioActual);
     }
 
+
     @Override
-    public boolean validarContraseñaActual(String email, String password) {
-        Usuario usuario = obtenerUsuarioPorEmail(email);
-        if (usuario == null) {
-            return false;
+    public void modificarDatosPerfil(Usuario usuarioActual, Usuario datosPerfil) throws Exception {
+        if (datosPerfil.getNombre() != null && !datosPerfil.getNombre().isEmpty()) {
+            usuarioActual.setNombre(datosPerfil.getNombre());
         }
-        return usuario.getPassword().equals(password);
+
+        if (datosPerfil.getDescripcion() != null && !datosPerfil.getDescripcion().isEmpty()) {
+            usuarioActual.setDescripcion(datosPerfil.getDescripcion());
+        }
+
+        if (datosPerfil.getCiudad() != null && !datosPerfil.getCiudad().isEmpty()) {
+            usuarioActual.setCiudad(datosPerfil.getCiudad());
+        }
+
+        repositorioUsuario.modificar(usuarioActual);
     }
 }
