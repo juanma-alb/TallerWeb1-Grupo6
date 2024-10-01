@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RepositorioRecetaImpl implements RepositorioReceta {
 
@@ -21,4 +23,14 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
     public void save(Receta receta) {
         sessionFactory.getCurrentSession().save(receta);
     }
+
+    @Override
+    public List<Receta> findByUsuarioId(Long usuarioId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId", Receta.class)
+                .setParameter("usuarioId", usuarioId)
+                .list(); // Retorna una lista de recetas
+    }
+
+
 }
