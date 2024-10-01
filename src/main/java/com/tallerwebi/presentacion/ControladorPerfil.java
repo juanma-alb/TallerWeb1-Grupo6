@@ -52,63 +52,32 @@ public class ControladorPerfil {
     }
 
     @PostMapping("/guardar-cambios")
-    public ModelAndView editarPerfil(@ModelAttribute Usuario usuario,
-                                     @RequestParam(value = "currentPassword", required = false) String currentPassword,
-                                     @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
-                                     HttpServletRequest request) {
+    public ModelAndView editarPerfil(@ModelAttribute Usuario usuario, HttpServletRequest request) {
 
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
         if (usuarioActual == null) {
             return new ModelAndView("redirect:/login");
         }
 
-        // contra actual
-        if ((usuario.getPassword() != null && !usuario.getPassword().isEmpty()) &&
-                (currentPassword == null || currentPassword.isEmpty() ||
-                        !servicioUsuario.validarContraseñaActual(usuarioActual.getEmail(), currentPassword))) {
-            ModelMap model = new ModelMap();
+        ModelMap model = new ModelMap();
+
+        try {
+            if (usuario.getNewPassword() != null && !usuario.getNewPassword().isEmpty()) {
+                servicioUsuario.modificarContraseniaUsuario(usuarioActual, usuario.getCurrentPassword(), usuario.getNewPassword(), usuario.getConfirmPassword());
+            }
+
+            servicioUsuario.modificarDatosPerfil(usuarioActual, usuario);
+
+            request.getSession().setAttribute("usuario", usuarioActual);
+
+            return new ModelAndView("redirect:/perfil");
+        } catch (Exception e) {
             model.put("usuario", usuario);
-            model.put("error", "La contraseña actual es incorrecta.");
+            model.put("error", e.getMessage());
             return new ModelAndView("editarPerfil", model);
         }
-
-        // nueva contraseña
-        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
-            if (!usuario.getPassword().equals(confirmPassword)) {
-                ModelMap model = new ModelMap();
-                model.put("usuario", usuario);
-                model.put("error", "Las nuevas contraseñas no coinciden.");
-                return new ModelAndView("editarPerfil", model);
-            }
-            usuarioActual.setPassword(usuario.getPassword());
-        }
-
-        if (usuario.getNombre() != null && !usuario.getNombre().isEmpty()) {
-            usuarioActual.setNombre(usuario.getNombre());
-        }
-
-        if (usuario.getDescripcion() != null && !usuario.getDescripcion().isEmpty()) {
-            usuarioActual.setDescripcion(usuario.getDescripcion());
-        }
-
-        if (usuario.getCiudad() != null && !usuario.getCiudad().isEmpty()) {
-            usuarioActual.setCiudad(usuario.getCiudad());
-        }
-
-
-        servicioUsuario.modificarUsuario(usuarioActual);
-
-        request.getSession().setAttribute("usuario", usuarioActual);
-
-        return new ModelAndView("redirect:/perfil");
     }
-
-
-
 }
-
-
-
         /*
         if (!foto.isEmpty()) {
             if (foto.getContentType().startsWith("image/") && foto.getSize() <= 5 * 1024 * 1024) {
@@ -131,5 +100,3 @@ public class ControladorPerfil {
             }
         }
         */
-
-

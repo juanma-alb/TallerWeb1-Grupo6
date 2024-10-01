@@ -265,6 +265,8 @@ nav {
 .titulo-principal span {
     color: #df7e22;
     font-family: "Bebas Neue", sans-serif;
+    position: relative;
+    right: -7px;
 }
 
 .texto-bienvenida {
@@ -326,6 +328,10 @@ h2 span {
     margin-left: 20px;
     margin-top: 5px;
     margin-bottom: -0.2px;
+}
+
+.titulos-normales{
+    font-weight: 700;
 }
 
 .grids-estilos{
