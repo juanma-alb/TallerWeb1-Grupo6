@@ -13,7 +13,15 @@
         <h1> Crea tu Receta </h1>
     </div>
 
-    <form th:action="@{/crear-receta}" method="post" th:object="${receta}">
+    <form th:action="@{/crear-receta}" method="post" th:object="${receta}" enctype="multipart/form-data">
+
+        <!--
+        <section class="seccion-foto">
+            <h2>Foto de la Receta </h2>
+            <label for="foto">Sube la foto de la receta:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" required>
+        </section>
+        -->
 
         <section class="seccion-info-basica">
             <h2>Información Básica</h2>
@@ -23,6 +31,31 @@
 
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+        </section>
+
+        <section class="seccion-comensales">
+            <h2> Cantidad de Comensales </h2>
+            <label for="comensales"> cantidad de comensales:</label>
+            <input type="number" id="comensales" th:field="*{comensales}" required>
+        </section>
+
+        <section class="seccion-ingredientes">
+            <h2> Ingredientes </h2>
+
+            <div th:each="ingrediente, iterStat : *{ingredientes}">
+                <label for="ingrediente-nombre">Nombre del Ingrediente:</label>
+                <input type="text" id="ingrediente-nombre" th:field="*{ingredientes[__${iterStat.index}__].nombre}" placeholder="Ej: Harina" required/>
+
+                <label for="ingrediente-cantidad">Cantidad:</label>
+                <input type="number" id="ingrediente-cantidad" th:field="*{ingredientes[__${iterStat.index}__].cantidad}" placeholder="Ej: 5" />
+
+                <label for="ingrediente-unidad">Unidad:</label>
+                <input type="number" id="ingrediente-unidad" th:field="*{ingredientes[__${iterStat.index}__].unidad}" placeholder="Ej: gramos" />
+
+                <button type="button" class="eliminar-ingrediente" th:onclick="|removeIngrediente(${iterStat.index})|">Eliminar</button>
+            </div>
+
+            <button type="button" id="agregar-ingrediente" onclick="addIngrediente()">Agregar Ingrediente</button>
         </section>
 
         <section class="seccion-info-nutricional">
@@ -40,13 +73,90 @@
             <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" required/>
         </section>
 
+        <section id="pasos">
+            <h2> Pasos </h2>
+            <div id="paso-container">
+
+                <div class="paso">
+                    <label for="pasos[0]">Paso 1:</label>
+                    <textarea id="pasos[0]" th:field="*{pasos[0]}" required></textarea>
+                    <button type="button" class="eliminar-paso">Eliminar Paso</button>
+                </div>
+            </div>
+            <button type="button" id="agregar-paso">Agregar Paso</button>
+        </section>
+
         <section class="seccion-boton">
             <button type="submit">Publicar Receta</button>
         </section>
 
     </form>
 
-</div>
+    <!-- PARA MIS RECETAS <img th:src="@{/resources/core/Imagenes/imagenReceta/{foto}(foto=${receta.foto})}" alt="Foto de la receta"> -->
 
+</div>
+<script>
+    function addIngrediente() {
+        var container = document.querySelector(".seccion-ingredientes");
+        var index = container.querySelectorAll("div").length;
+
+        var nuevoIngrediente = `
+        <div>
+            <label for="ingrediente-nombre-${index}">Nombre del Ingrediente:</label>
+            <input type="text" name="ingredientes[${index}].nombre" placeholder="Ej: Harina" />
+
+            <label for="ingrediente-cantidad-${index}">Cantidad:</label>
+            <input type="text" name="ingredientes[${index}].cantidad" placeholder="Ej: 500" />
+
+            <label for="ingrediente-unidad-${index}">Unidad:</label>
+            <input type="text" name="ingredientes[${index}].unidad" placeholder="Ej: gramos, tazas" />
+
+            <button type="button" onclick="removeIngrediente(this)">Eliminar</button>
+        </div>
+    `;
+        container.insertAdjacentHTML('beforeend', nuevoIngrediente);
+    }
+
+    function removeIngrediente(button) {
+        button.parentElement.remove();
+    }
+
+    let pasoCount = 1;
+
+    document.getElementById("agregar-paso").addEventListener("click", function() {
+        const pasoContainer = document.getElementById("paso-container");
+        pasoCount++;
+
+        const nuevoPasoDiv = document.createElement("div");
+        nuevoPasoDiv.classList.add("paso");
+        nuevoPasoDiv.innerHTML = `
+        <label for="pasos[${pasoCount}]">Paso ${pasoCount}:</label>
+        <textarea id="pasos[${pasoCount}]" th:field="*{pasos[${pasoCount}]}" required></textarea>
+        <button type="button" class="eliminar-paso">Eliminar Paso</button>
+    `;
+        pasoContainer.appendChild(nuevoPasoDiv);
+    });
+
+    document.getElementById("paso-container").addEventListener("click", function(event) {
+        if (event.target.classList.contains("eliminar-paso")) {
+            const pasoDiv = event.target.parentElement;
+            pasoDiv.remove();
+            pasoCount--;
+            actualizarIndicesPasos();
+        }
+    });
+
+    function actualizarIndicesPasos() {
+        const pasos = document.querySelectorAll(".paso");
+        pasos.forEach((paso, index) => {
+            const label = paso.querySelector("label");
+            const textarea = paso.querySelector("textarea");
+            label.setAttribute("for", `pasos[${index}]`);
+            label.textContent = `Paso ${index + 1}:`;
+            textarea.id = `pasos[${index}]`;
+            textarea.setAttribute("th:field", `*{pasos[${index}]}`);
+        });
+    }
+</script>
 </body>
 </html>
