@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Receta {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "receta_id")
-    private List<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientes = new ArrayList<>();
 
     @ElementCollection
     private List<String> pasos;
