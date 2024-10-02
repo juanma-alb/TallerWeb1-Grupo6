@@ -1,0 +1,97 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.logo .titulo a {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 36px;
+    color: #333;
+    text-decoration: none;
+}
+
+.enlaces-navegacion a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.enlaces-navegacion .activo {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.filtro-recetas {
+    padding: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+}
+
+.barra-busqueda input {
+    padding: 10px;
+    width: 60%;
+    margin-right: 10px;
+}
+
+.barra-busqueda button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.mis-recetas {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.recetas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.receta {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.receta img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.grids-estilos {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.rating {
+    color: #ff9800;
+    font-size: 16px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+}
+
+.iconos-sociales img {
+    width: 30px;
+    margin: 0 10px;
+}

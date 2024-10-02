@@ -60,4 +60,5 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
         repositorioUsuario.modificar(usuarioActual);
     }
+
 }
