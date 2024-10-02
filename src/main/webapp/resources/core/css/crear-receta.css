@@ -87,6 +87,31 @@ button[type="submit"]:hover {
     background-color: #ff6b01;
 }
 
+button.eliminar-paso,
+button.eliminar-ingrediente{
+    background-color: #ffaa01;
+    color: white;
+    padding: 8px 18px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#agregar-ingrediente,
+#agregar-paso{
+    background-color: #ffaa01;
+    color: white;
+    padding: 8px 18px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+
 input:focus,
 textarea:focus {
     outline: none;

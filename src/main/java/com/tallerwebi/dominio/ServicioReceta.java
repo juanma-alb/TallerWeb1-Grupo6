@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ServicioReceta {
     void crearReceta(Receta receta);
+    /*String guardarFoto(MultipartFile archivo);*/
 
     List<Receta> listarRecetasPorUsuario(Long usuarioId);
+
 }
