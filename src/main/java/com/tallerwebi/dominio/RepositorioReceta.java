@@ -7,4 +7,9 @@ public interface RepositorioReceta {
     void save(Receta receta);
 
     List<Receta> findByUsuarioId(Long usuarioId);
+
+    List<Receta> listarTodasLasRecetas();
+
+    List<Receta> buscarRecetasPorNombreRecetas(String filtro);
+
 }

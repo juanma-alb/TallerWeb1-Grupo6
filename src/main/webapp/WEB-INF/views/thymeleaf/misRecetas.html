@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Recetas - EasyCocina</title>
+    <!-- Bootstrap core css -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+</head>
+
+<body>
+<!-- Nav -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+    </div>
+    <div class="enlaces-navegacion">
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas</a>
+        <a th:href="@{/mis-recetas}" class="activo">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
+    </div>
+</nav>
+
+<!-- Filtro de búsqueda -->
+<section class="filtro-recetas">
+    <h2>Mis Recetas</h2>
+    <form action="/misRecetas" method="get">
+        <div class="barra-busqueda">
+            <input type="text" name="filtro" placeholder="Buscar por nombre de receta..." >
+            <button type="submit">Buscar</button>
+        </div>
+    </form>
+</section>
+
+<!-- Listado de Recetas -->
+<section class="mis-recetas">
+    <form th:action="@{/mis-recetas}" method="get">
+        <input type="text" name="filtro" th:value="${filtro}" placeholder="Filtrar recetas...">
+        <button type="submit">Filtrar</button>
+
+    <div>
+        </form>
+
+        <h2>Mis Recetas</h2>
+        <div th:each="receta : ${recetas}">
+            <p th:text="${receta.nombre}"></p>
+            <p th:text="${receta.descripcion}"></p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
+</footer>
+
+</body>
+</html>

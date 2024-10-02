@@ -1,8 +1,5 @@
 package com.tallerwebi.dominio;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 public interface ServicioReceta {
@@ -11,4 +8,8 @@ public interface ServicioReceta {
 
     List<Receta> listarRecetasPorUsuario(Long usuarioId);
 
+
+    List<Receta> listarTodasLasRecetas(long l);
+
+    List<Receta> buscarRecetasPorNombreRecetas(String filtro);
 }
