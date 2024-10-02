@@ -5,13 +5,8 @@ import com.tallerwebi.dominio.RepositorioReceta;
 import com.tallerwebi.dominio.ServicioReceta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -50,6 +45,16 @@ public class ServicioRecetaImpl implements ServicioReceta {
         return repositorioReceta.findByUsuarioId(usuarioId); // Obtiene las recetas del usuario
     }
 
+    @Override
+    public List<Receta> listarTodasLasRecetas(long l) {
+        return repositorioReceta.listarTodasLasRecetas();
+    }
+
+    @Override
+    public List<Receta> buscarRecetasPorNombreRecetas(String filtro) {
+        return repositorioReceta.buscarRecetasPorNombreRecetas(filtro);
+    }
 
 
 }
+

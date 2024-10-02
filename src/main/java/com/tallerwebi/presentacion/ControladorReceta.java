@@ -62,21 +62,5 @@ public class ControladorReceta {
         }
     }
 
-    // Listar las recetas del usuario actual
-    @GetMapping("/mis-recetas")
-    public ModelAndView listarMisRecetas(HttpServletRequest request) {
-        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
-
-        if (usuarioActual == null) {
-            return new ModelAndView("redirect:/login");
-        }
-
-        List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuarioActual.getId());
-        ModelAndView modelAndView = new ModelAndView("misRecetas");
-        modelAndView.addObject("recetas", recetas);
-        return modelAndView;
-    }
-
-
 
 }

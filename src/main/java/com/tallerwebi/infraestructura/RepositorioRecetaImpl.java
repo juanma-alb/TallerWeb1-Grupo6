@@ -24,12 +24,31 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
         sessionFactory.getCurrentSession().save(receta);
     }
 
+
     @Override
     public List<Receta> findByUsuarioId(Long usuarioId) {
+        // Consulta HQL para obtener recetas por el id de usuario
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId", Receta.class)
                 .setParameter("usuarioId", usuarioId)
-                .list(); // Retorna una lista de recetas
+                .getResultList();
+    }
+
+    @Override
+    public List<Receta> listarTodasLasRecetas() {
+        // Consulta HQL para listar todas las recetas
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Receta", Receta.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<Receta> buscarRecetasPorNombreRecetas(String filtro) {
+        // Consulta HQL para buscar recetas cuyo nombre coincida con el filtro
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Receta r WHERE r.nombre LIKE :filtro", Receta.class)
+                .setParameter("filtro", "%" + filtro + "%")
+                .getResultList();
     }
 
 
