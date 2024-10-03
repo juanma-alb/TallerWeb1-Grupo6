@@ -52,7 +52,7 @@
             <div class="receta-item">
                 <h3 th:text="${receta.nombre}"></h3>
                 <p th:text="${receta.descripcion}"></p>
-                <img th:src="@{${receta.foto}}" alt="Imagen de receta" class="receta-foto"/>
+                <img th:src="${receta.foto}"  alt="Imagen de receta" class="receta-foto"/>
                 <p>Calorías: <span th:text="${receta.calorias}"></span></p>
                 <p>Tiempo de preparación: <span th:text="${receta.tiempoPreparacion}"></span> minutos</p>
                 <p>Comensales: <span th:text="${receta.comensales}"></span></p>
@@ -62,7 +62,7 @@
     </section>
 
     <footer>
-        <a href="/descubre-recetas">Volver a Descubre Recetas</a>
+        <a th:href="@{/descubre-recetas}">Volver a Descubre Recetas</a>
     </footer>
 
 </body>

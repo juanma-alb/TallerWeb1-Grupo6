@@ -27,7 +27,7 @@
 <!-- Filtro de búsqueda -->
 <section class="filtro-recetas">
     <h2>Mis Recetas</h2>
-    <form action="/misRecetas" method="get">
+    <form th:action="@{/misRecetas}" method="get">
         <div class="barra-busqueda">
             <input type="text" name="filtro" placeholder="Buscar por nombre de receta..." >
             <button type="submit">Buscar</button>
