@@ -20,12 +20,12 @@ public class ServicioHomeImpl implements ServicioHome {
 
     @Override
     public List<Receta> listarRecetas() {
-        return repositorioHome.listarRecetas();  // Listar todas las recetas
+        return repositorioHome.listarRecetas();  
     }
 
     @Override
     public List<Receta> obtenerRecetasParaCarrusel() {
-        return repositorioHome.listarRecetas();  // Aquí también se puede filtrar o limitar
+        return repositorioHome.listarRecetas();  
     }
     
 }
