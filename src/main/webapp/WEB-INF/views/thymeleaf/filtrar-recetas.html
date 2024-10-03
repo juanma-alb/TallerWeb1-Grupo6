@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCocina-Descubre Recetas</title>
+    <!-- Boostrap core css -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<!-- estilos -->
+<link rel="stylesheet" th:href="@{/css/filtrar-recetas.css}"/>
+</head>
+
+<body>
+    <!-- nav todo -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+
+    </div>
+    <div class="barra-busqueda">
+        <input type="text" placeholder="¿Qué estás buscando?">
+        <button>Buscar</button>
+    </div>
+    <div class="enlaces-navegacion">
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+        <a href="#" class="misrecetas-boton">Mis Recetas</a>
+        
+        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
+        <a class="misrecetas-boton" th:href="@{/login}">Cerrar Sesión</a>
+    </div>
+</nav>
+
+    <header>
+        <h1>Recetas Filtradas</h1>
+    </header>
+
+    <section class="filtro-info">
+        <h2 th:text="'Subcategoría seleccionada: ' + ${subcategoria}"></h2>
+    </section>
+
+    <section class="lista-recetas">
+        <div th:if="${#lists.isEmpty(recetas)}">
+            <p>No se encontraron recetas en esta categoría.</p>
+        </div>
+
+        <div th:each="receta : ${recetas}">
+            <div class="receta-item">
+                <h3 th:text="${receta.nombre}"></h3>
+                <p th:text="${receta.descripcion}"></p>
+                <img th:src="@{${receta.foto}}" alt="Imagen de receta" class="receta-foto"/>
+                <p>Calorías: <span th:text="${receta.calorias}"></span></p>
+                <p>Tiempo de preparación: <span th:text="${receta.tiempoPreparacion}"></span> minutos</p>
+                <p>Comensales: <span th:text="${receta.comensales}"></span></p>
+                <p>Calificación: <span th:text="${receta.calificacion}"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/descubre-recetas">Volver a Descubre Recetas</a>
+    </footer>
+
+</body>
+</html>

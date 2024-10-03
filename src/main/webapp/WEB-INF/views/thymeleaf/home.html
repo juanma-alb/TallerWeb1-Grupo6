@@ -38,62 +38,16 @@
 
 
 <div class="carrusel">
-  <h2 class="recetas-destacadas-semana"><span>&#9733; </span> RECETAS DESTACADAS DE LA SEMANA <span>&#9733;</span></h2>
-  <div class="slides">
-      <div class="slide active">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta1.jpeg}" alt="Receta 1" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Pozole Rojo </h2>
-              <p>¡Te damos la mejor receta de todos los tiempos!</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-      <div class="slide">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta2.jpg}" alt="Receta 2" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Pavo a la Hawaiana</h2>
-              <p>¡Irresistible por donde lo veas!</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-
-      <div class="slide">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta3.jpg}" alt="Receta 3" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Pan de zanahoria</h2>
-              <p>Dulzura natural de las zanahorias.</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-
-      <div class="slide">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta4.jpg}" alt="Receta 4" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Ají de calabaza</h2>
-              <p>Plato tradicional de la cocina arequipeña.</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-
-      <div class="slide">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta5.jpg}" alt="Receta 5" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Bacalao a la vazcaína</h2>
-              <p>Receta con un toque especial al estilo mexicano.</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-
-      <div class="slide">
-          <img th:src="@{/imagenes/descubre-recetas-slides/receta6.jpg}" alt="Receta 6" class="img-slide">
-          <div class="info">
-              <h2 class="grids-estilos">Sukiyaki</h2>
-              <p>Estofado japonés que combina múltiples sabores.</p>
-              <a href="#" class="boton-receta">Ver Receta</a>
-          </div>
-      </div>
-      
-  </div>
+    <div class="slides">
+        <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">
+            <img th:src="${receta.foto}" alt="Receta" class="img-slide">
+            <div class="info">
+                <h2 th:text="${receta.nombre}">Nombre de la receta</h2>
+                <p th:text="${receta.descripcion}">Descripción de la receta</p>
+                <a href="#" class="boton-receta">Ver Receta</a>
+            </div>
+        </div>
+    </div>
     
     <!-- carrusel:Botones de navegacion -->
     <button class="prev"><</button>
