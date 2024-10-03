@@ -23,6 +23,12 @@ public class Receta {
 
     private String foto;
 
+    private String categoria;
+
+    private String subcategoria;
+
+    private int calificacion;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "receta_id")
     private List<Ingrediente> ingredientes = new ArrayList<>();
@@ -112,4 +118,28 @@ public class Receta {
     public void setPasos(List<String> pasos) {
         this.pasos = pasos;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getSubcategoria() {
+        return subcategoria;
+    }
+
+    public void setSubcategoria(String subcategoria) {
+        this.subcategoria = subcategoria;
+    }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+}
 }
