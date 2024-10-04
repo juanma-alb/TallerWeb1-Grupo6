@@ -15,8 +15,7 @@
 <link rel="stylesheet" th:href="@{/css/filtrar-recetas.css}"/>
 </head>
 
-<body>
-    <!-- nav todo -->
+<!-- nav todo -->
 <nav fragment="barraNavegacion">
     <div class="logo">
         <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
@@ -28,19 +27,16 @@
     </div>
     <div class="enlaces-navegacion">
         <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a href="#" class="misrecetas-boton">Mis Recetas</a>
-        
-        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
-        <a class="misrecetas-boton" th:href="@{/login}">Cerrar Sesión</a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
     </div>
 </nav>
 
-    <header>
-        <h1>Recetas Filtradas</h1>
-    </header>
 
     <section class="filtro-info">
-        <h2 th:text="'Subcategoría seleccionada: ' + ${subcategoria}"></h2>
+        <h2 th:text="'Se muestran resultados para recetas de tipo: ' + ${subcategoria}"></h2>
     </section>
 
     <section class="lista-recetas">
@@ -48,22 +44,29 @@
             <p>No se encontraron recetas en esta categoría.</p>
         </div>
 
-        <div th:each="receta : ${recetas}">
-            <div class="receta-item">
-                <h3 th:text="${receta.nombre}"></h3>
-                <p th:text="${receta.descripcion}"></p>
-                <img th:src="${receta.foto}"  alt="Imagen de receta" class="receta-foto"/>
-                <p>Calorías: <span th:text="${receta.calorias}"></span></p>
-                <p>Tiempo de preparación: <span th:text="${receta.tiempoPreparacion}"></span> minutos</p>
-                <p>Comensales: <span th:text="${receta.comensales}"></span></p>
-                <p>Calificación: <span th:text="${receta.calificacion}"></span></p>
+        
+        <div id="grilla-recetas" class="grilla-recetas">
+            <div class="tarjeta-receta" th:each="receta : ${recetas}">
+                <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de Espaguetis">
+                <div class="info-receta">
+                    <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
+                    <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
+    
+                </div>
             </div>
         </div>
+    </div>
     </section>
 
-    <footer>
-        <a th:href="@{/descubre-recetas}">Volver a Descubre Recetas</a>
-    </footer>
+   <!-- Footer -->
+<footer>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
+</footer>
 
 </body>
 </html>

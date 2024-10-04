@@ -7,17 +7,24 @@
     <!-- Bootstrap core css -->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<!-- Nav -->
-<nav fragment="barraNavegacion">
+
+   <!-- nav todo -->
+   <nav fragment="barraNavegacion">
     <div class="logo">
         <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+
+    </div>
+    <div class="barra-busqueda">
+        <input type="text" placeholder="¿Qué estás buscando?">
+        <button>Buscar</button>
     </div>
     <div class="enlaces-navegacion">
-        <a th:href="@{/descubre-recetas}" class="">Descubre recetas</a>
-        <a th:href="@{/mis-recetas}" class="activo">Mis Recetas</a>
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
         <a th:href="@{/crear-receta}" class="">Crear</a>
         <a th:href="@{/perfil}" class="">Perfil</a>
         <a th:href="@{/login}" class="">Cerrar Sesión</a>

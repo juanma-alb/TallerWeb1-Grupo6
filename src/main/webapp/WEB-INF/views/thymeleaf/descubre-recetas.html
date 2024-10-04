@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    
     <!-- nav todo -->
 <nav fragment="barraNavegacion">
     <div class="logo">
@@ -27,10 +28,10 @@
     </div>
     <div class="enlaces-navegacion">
         <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a href="#" class="misrecetas-boton">Mis Recetas</a>
-        
-        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
-        <a class="misrecetas-boton" th:href="@{/login}">Cerrar Sesión</a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
     </div>
 </nav>
 
@@ -39,8 +40,8 @@
         <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">
             <img th:src="${receta.foto}" alt="Receta" class="img-slide">
             <div class="info">
-                <h2 th:text="${receta.nombre}">Nombre de la receta</h2>
-                <p th:text="${receta.descripcion}">Descripción de la receta</p>
+                <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h2>
+                <p class="descripcion-carrusel" th:text="${receta.descripcion}">Descripción de la receta</p>
                 <a href="#" class="boton-receta">Ver Receta</a>
             </div>
         </div>
