@@ -18,6 +18,11 @@ public class ControladorHome {
     @Autowired
     private ServicioHome servicioHome;
 
+    @Autowired
+    public ControladorHome(ServicioHome servicioHome) {
+        this.servicioHome = servicioHome;
+    }
+
     @RequestMapping(path = "/home", method = RequestMethod.GET)
     public ModelAndView irAHome() {
         List<Receta> recetas = servicioHome.obtenerRecetasParaCarrusel();

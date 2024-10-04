@@ -18,6 +18,11 @@ public class ControladorDescubreRecetas {
     @Autowired
     private ServicioDescubreRecetas servicioDescubreRecetas;
 
+    @Autowired
+    public ControladorDescubreRecetas(ServicioDescubreRecetas servicioDescubreRecetas) {
+        this.servicioDescubreRecetas = servicioDescubreRecetas;
+    }
+
     @RequestMapping(path = "/descubre-recetas", method = RequestMethod.GET)
     public ModelAndView irADescubreRecetas() {
         List<Receta> recetas = servicioDescubreRecetas.obtenerRecetasParaCarrusel();
