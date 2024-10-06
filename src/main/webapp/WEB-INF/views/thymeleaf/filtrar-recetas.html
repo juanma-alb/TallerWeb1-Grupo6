@@ -1,19 +1,22 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Recetas - EasyCocina</title>
-    <!-- Bootstrap core css -->
+    <title>EasyCocina-Descubre Recetas</title>
+    <!-- Boostrap core css -->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<!-- estilos -->
+<link rel="stylesheet" th:href="@{/css/filtrar-recetas.css}"/>
 </head>
 
-<body>
-
-   <!-- nav todo -->
-   <nav fragment="barraNavegacion">
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
     <div class="logo">
         <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
 
@@ -31,35 +34,31 @@
     </div>
 </nav>
 
-<!-- Filtro de búsqueda -->
-<section class="filtro-recetas">
-    <h2>Mis Recetas</h2>
-    <form th:action="@{/misRecetas}" method="get">
-        <div class="barra-busqueda">
-            <input type="text" name="filtro" placeholder="Buscar por nombre de receta..." >
-            <button type="submit">Buscar</button>
+
+    <section class="filtro-info">
+        <h2 th:text="'Se muestran resultados para recetas de tipo: ' + ${subcategoria}"></h2>
+    </section>
+
+    <section class="lista-recetas">
+        <div th:if="${#lists.isEmpty(recetas)}">
+            <p>No se encontraron recetas en esta categoría.</p>
         </div>
-    </form>
-</section>
 
-<!-- Listado de Recetas -->
-<section class="mis-recetas">
-    <form th:action="@{/mis-recetas}" method="get">
-        <input type="text" name="filtro" th:value="${filtro}" placeholder="Filtrar recetas...">
-        <button type="submit">Filtrar</button>
-
-    <div>
-        </form>
-
-        <h2>Mis Recetas</h2>
-        <div th:each="receta : ${recetas}">
-            <p th:text="${receta.nombre}"></p>
-            <p th:text="${receta.descripcion}"></p>
+        
+        <div id="grilla-recetas" class="grilla-recetas">
+            <div class="tarjeta-receta" th:each="receta : ${recetas}">
+                <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de Espaguetis">
+                <div class="info-receta">
+                    <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
+                    <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
+    
+                </div>
+            </div>
         </div>
     </div>
-</section>
+    </section>
 
-<!-- Footer -->
+   <!-- Footer -->
 <footer>
     <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
     <div class="iconos-sociales">

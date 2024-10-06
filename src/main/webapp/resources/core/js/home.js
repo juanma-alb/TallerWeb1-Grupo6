@@ -8,7 +8,7 @@ const dots = document.querySelectorAll('.dot');
 let currentSlide = 0;
 
 function showSlide(index) {
-    // asegura que el índice no esté fuera de rango
+    // asegura que el índice no este fuera de rango
     if (index >= slides.length) {
         currentSlide = 0;
     } else if (index < 0) {
@@ -17,11 +17,11 @@ function showSlide(index) {
         currentSlide = index;
     }
 
-    // eliminar clases "active" de todos los slides y dots
+    //esto elimina las clases "active" de todos los slides y dots
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
 
-    // añadir la clase "active" al slide y dot actuales
+    //lo mismo pero las añade
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
 }
@@ -42,6 +42,5 @@ dots.forEach((dot, index) => {
         showSlide(index);
     });
 });
-
 // cambio automático
 setInterval(nextSlide, 4000);

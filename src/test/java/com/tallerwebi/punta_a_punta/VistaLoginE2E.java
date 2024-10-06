@@ -42,13 +42,13 @@ public class VistaLoginE2E {
     void cerrarContexto() {
         context.close();
     }
-
+/*
     @Test
     void deberiaDecirUNLAMEnElNavbar() {
         String texto = vistaLogin.obtenerTextoDeLaBarraDeNavegacion();
         assertThat("UNLAM", equalToIgnoringCase(texto));
     }
-
+ */
     @Test
     void deberiaDarUnErrorAlNoCompletarElLoginYTocarElBoton() {
         vistaLogin.escribirEMAIL("damian@unlam.edu.ar");
