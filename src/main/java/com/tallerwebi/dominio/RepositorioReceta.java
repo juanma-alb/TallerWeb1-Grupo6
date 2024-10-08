@@ -12,4 +12,7 @@ public interface RepositorioReceta {
 
     List<Receta> buscarRecetasPorNombreRecetas(String filtro);
 
+    Receta buscarRecetaPorId(Long id);
+
+
 }

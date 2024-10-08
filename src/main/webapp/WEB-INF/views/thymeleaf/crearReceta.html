@@ -15,13 +15,6 @@
 
     <form th:action="@{/crear-receta}" method="post" th:object="${receta}" enctype="multipart/form-data">
 
-        <!--
-        <section class="seccion-foto">
-            <h2>Foto de la Receta </h2>
-            <label for="foto">Sube la foto de la receta:</label>
-            <input type="file" id="foto" name="foto" accept="image/*" required>
-        </section>
-        -->
 
         <section class="seccion-info-basica">
             <h2>Información Básica</h2>
@@ -85,6 +78,7 @@
             </div>
             <button type="button" id="agregar-paso">Agregar Paso</button>
         </section>
+
 
         <section class="seccion-boton">
             <button type="submit">Publicar Receta</button>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comentarios - EasyCocina</title>
+  <!-- Bootstrap core css -->
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+  <link th:rel="stylesheet" th:href="@{/css/comentario.css}"/>
+</head>
+
+<body>
+<!-- Contenedor principal -->
+<div class="container receta-comentarios">
+  <!-- Información de la Receta -->
+  <div class="receta-info">
+    <h2 class="receta-titulo">Nombre: <span th:text="${receta.nombre}"></span></h2>
+    <h2 class="receta-titulo">Descripción: <span th:text="${receta.descripcion}"></span></h2>
+    <h2 class="receta-titulo">Comensales: <span th:text="${receta.comensales}"></span></h2>
+
+
+  </div>
+
+  <!-- Sección de Comentarios -->
+  <div class="comentarios-seccion">
+    <h3>Comentarios</h3>
+    <div th:each="comentario : ${receta.comentarios}" class="comentario card mb-3">
+      <div class="card-body">
+        <h5 th:text="${comentario.usuario.nombre}" class="nombre-usuario card-title"></h5>
+        <p th:text="${comentario.contenido}" class="contenido-comentario card-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario para agregar un comentario -->
+  <form th:action="@{/mis-recetas/comentario}" method="post" class="form-comentario">
+    <input type="hidden" name="recetaId" th:value="${receta.id}" />
+    <div class="form-group">
+      <textarea name="contenido" placeholder="Escribe un comentario..." required class="input-comentario"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Comentar</button>
+  </form>
+</div>
+</body>
+</html>

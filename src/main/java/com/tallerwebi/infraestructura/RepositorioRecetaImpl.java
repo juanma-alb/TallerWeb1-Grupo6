@@ -50,6 +50,10 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
                 .setParameter("filtro", "%" + filtro + "%")
                 .getResultList();
     }
+    @Override
+    public Receta buscarRecetaPorId(Long id) {
+        return sessionFactory.getCurrentSession().get(Receta.class, id);
+    }
 
 
 }
