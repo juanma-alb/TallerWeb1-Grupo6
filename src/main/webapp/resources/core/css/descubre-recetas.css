@@ -217,6 +217,9 @@ nav {
     font-size: 20px !important;
     letter-spacing: 1.2px;
     word-spacing: 1.5;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -07px;
 }
 
 /* carrusel con slides, grid de info, y detalles del carru */
@@ -233,6 +236,11 @@ nav {
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+}
+
+.descripcion-carrusel {
+    font-size: 15px;
+    color: #777;
 }
 
 .slide {

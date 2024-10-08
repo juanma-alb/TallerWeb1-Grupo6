@@ -12,10 +12,10 @@
 
 <!-- estilos -->
 <link rel="stylesheet" th:href="@{/css/descubre-recetas.css}"/>
-
 </head>
-<body>
 
+<body>
+    
     <!-- nav todo -->
 <nav fragment="barraNavegacion">
     <div class="logo">
@@ -28,76 +28,31 @@
     </div>
     <div class="enlaces-navegacion">
         <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a href="#" class="misrecetas-boton">Mis Recetas</a>
-        
-        <a th:href="@{/perfil}" class="perfil-boton">Perfil</a>
-        <a class="misrecetas-boton" th:href="@{/login}">Cerrar Sesión</a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
     </div>
 </nav>
 
 <div class="carrusel">
-    
     <div class="slides">
-        <div class="slide active">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta1.jpeg}" alt="Receta 1" class="img-slide">
+        <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">
+            <img th:src="${receta.foto}" alt="Receta" class="img-slide">
             <div class="info">
-                <h2 class="grids-estilos">Pozole Rojo </h2>
-                <p>¡Te damos la mejor receta de todos los tiempos!</p>
+                <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h2>
+                <p class="descripcion-carrusel" th:text="${receta.descripcion}">Descripción de la receta</p>
                 <a href="#" class="boton-receta">Ver Receta</a>
             </div>
         </div>
-        <div class="slide">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta2.jpg}" alt="Receta 2" class="img-slide">
-            <div class="info">
-                <h2 class="grids-estilos">Pavo a la Hawaiana</h2>
-                <p>¡Irresistible por donde lo veas!</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
-            </div>
-        </div>
-
-        <div class="slide">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta3.jpg}" alt="Receta 3" class="img-slide">
-            <div class="info">
-                <h2 class="grids-estilos">Pan de zanahoria</h2>
-                <p>Dulzura natural de las zanahorias.</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
-            </div>
-        </div>
-
-        <div class="slide">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta4.jpg}" alt="Receta 4" class="img-slide">
-            <div class="info">
-                <h2 class="grids-estilos">Ají de calabaza</h2>
-                <p>Plato tradicional de la cocina arequipeña.</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
-            </div>
-        </div>
-
-        <div class="slide">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta5.jpg}" alt="Receta 5" class="img-slide">
-            <div class="info">
-                <h2 class="grids-estilos">Bacalao a la vazcaína</h2>
-                <p>Receta con un toque especial al estilo mexicano.</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
-            </div>
-        </div>
-
-        <div class="slide">
-            <img th:src="@{/imagenes/descubre-recetas-slides/receta6.jpg}" alt="Receta 6" class="img-slide">
-            <div class="info">
-                <h2 class="grids-estilos">Sukiyaki</h2>
-                <p>Estofado japonés que combina múltiples sabores.</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
-            </div>
-        </div>
-        
     </div>
+    
         
-        <!-- Botones de navegacion -->
+        <!-- botones de navegacion (carrusel) -->
         <button class="prev"><</button>
         <button class="next">></button>
         
-        <!-- Puntos indicadores -->
+        <!-- puntos indicadores (carrusel) -->
         <div class="dots">
             <span class="dot active"></span>
             <span class="dot"></span>
@@ -107,266 +62,168 @@
             <span class="dot"></span>
         </div>
     </div>
-    
 
-    <section class="menu-categorias">
-        <div class="categoria-menu">
-            <h4 class="titulos-categoria">Recetas de Pasta</h4>
+<section class="menu-categorias">
+    <div class="categoria-menu">
+        <h4 class="titulos-categoria">Recetas de Pasta</h4>
             <ul>
-                <li><button onclick="filtrarRecetas('espaguetis')">Espaguetis</button></li>
-                <li><button onclick="filtrarRecetas('pizza')">Pizza</button></li>
-                <li><button onclick="filtrarRecetas('macarrones')">Macarrones</button></li>
-                <li><button onclick="filtrarRecetas('lasaña')">Lasaña</button></li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="espaguetis">
+                        <button type="submit">Espaguetis</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="pizza">
+                        <button type="submit">Pizza</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="macarrones">
+                        <button type="submit">Macarrones</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="lasaña">
+                        <button type="submit">Lasaña</button>
+                    </form>
+                </li>
             </ul>
         </div>
         <div class="categoria-menu">
             <h4 class="titulos-categoria">Recetas de Pescado</h4>
             <ul>
-                <li><button onclick="filtrarRecetas('salmon')">Salmón</button></li>
-                <li><button onclick="filtrarRecetas('bacalao')">Bacalao</button></li>
-                <li><button onclick="filtrarRecetas('merluza')">Merluza</button></li>
-                <li><button onclick="filtrarRecetas('atun')">Atún</button></li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="salmon">
+                        <button type="submit">Salmón</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="bacalao">
+                        <button type="submit">Bacalao</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="merluza">
+                        <button type="submit">Merluza</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="atun">
+                        <button type="submit">Atún</button>
+                    </form>
+                </li>
             </ul>
         </div>
         <div class="categoria-menu">
             <h4 class="titulos-categoria">Recetas de Caza</h4>
             <ul>
-                <li><button onclick="filtrarRecetas('pollo')">Pollo</button></li>
-                <li><button onclick="filtrarRecetas('pavo')">Pavo</button></li>
-                <li><button onclick="filtrarRecetas('conejo')">Conejo</button></li>
-                <li><button onclick="filtrarRecetas('pato')">Pato</button></li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="pollo">
+                        <button type="submit">Pollo</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="pavo">
+                        <button type="submit">Pavo</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="conejo">
+                        <button type="submit">Conejo</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="pato">
+                        <button type="submit">Pato</button>
+                    </form>
+                </li>
             </ul>
         </div>
-        <div class="categoria-menu">
-            <h4 class="titulos-categoria">Recetas de Carne</h4>
+        
+    <div class="categoria-menu">
+        <h4 class="titulos-categoria">Recetas de Carne</h4>
             <ul>
-                <li><button onclick="filtrarRecetas('cerdo')">Cerdo</button></li>
-                <li><button onclick="filtrarRecetas('ternera')">Ternera</button></li>
-                <li><button onclick="filtrarRecetas('vaca')">Vaca</button></li>
-                <li><button onclick="filtrarRecetas('lomo')">Lomo</button></li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="cerdo">
+                        <button type="submit">Cerdo</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="ternera">
+                        <button type="submit">Ternera</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="vaca">
+                        <button type="submit">Vaca</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="lomo">
+                        <button type="submit">Lomo</button>
+                    </form>
+                </li>
             </ul>
-        </div>
-        <div class="categoria-menu">
-            <h4 class="titulos-categoria">Cócteles y Bebidas</h4>
+    </div>
+    <div class="categoria-menu">
+        <h4 class="titulos-categoria">Cócteles y bebidas</h4>
             <ul>
-                <li><button onclick="filtrarRecetas('batidos')">Batidos</button></li>
-                <li><button onclick="filtrarRecetas('jugos')">Jugos y Zumos</button></li>
-                <li><button onclick="filtrarRecetas('cocteles')">Cócteles</button></li>
-                <li><button onclick="filtrarRecetas('ponche')">Ponche</button></li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="batidos">
+                        <button type="submit">Batidos</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="jugos">
+                        <button type="submit">Jugos y Zumos</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="cocteles">
+                        <button type="submit">Cócteles</button>
+                    </form>
+                </li>
+                <li>
+                    <form th:action="@{/filtrar-recetas}" method="get">
+                        <input type="hidden" name="subcategoria" value="ponche">
+                        <button type="submit">Ponche</button>
+                    </form>
+                </li>
             </ul>
-        </div>
+    </div>
     </section>
     
 
+    <div id="grilla-recetas" class="grilla-recetas">
+        <div class="tarjeta-receta" th:each="receta : ${recetas}">
+            <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de Espaguetis">
+            <div class="info-receta">
+                <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
+                <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
 
-    <!-- Sección de recetas -->
-<section class="grilla-recetas">
-    
-    <!-- Receta 1 -->
-    <div class="tarjeta-receta">
-    <div class="etiqueta">Nuevo</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec1.jpg}" class="img-receta-tarjeta" alt="Receta de Espaguetis">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pasta.png}" alt="Icono pasta"></div>
-    <div class="subcategoria">Espaguetis</div> 
-    <h3 class="grids-estilos">Espagueti a la amatriciana</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+            </div>
+        </div>
     </div>
     
-    <!-- Receta 9 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Destacada</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec9.jpg}" class="img-receta-tarjeta" alt="Receta de Pollo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pollo.png}" alt="Icono aves"></div>
-    <div class="subcategoria">Pollo</div> 
-    <h3 class="grids-estilos">Pollo con panko</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-<!-- Receta 15 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec15.jpg}" class="img-receta-tarjeta" alt="Receta de Vaca">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/carne.png}" alt="Icono carnes"></div>
-    <div class="subcategoria">Vaca</div> 
-    <h3 class="grids-estilos">Bife con Vino Blanco</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>            
-
-<!-- Receta 4 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec4.jpg}" class="img-receta-tarjeta" alt="Receta de Lasaña">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pasta.png}" alt="Icono pasta"></div>
-    <div class="subcategoria">Lasaña</div> 
-    <h3 class="grids-estilos">Lasaña Keto</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-
-<!-- Receta 12 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec12.jpg}" class="img-receta-tarjeta" alt="Receta de Pato">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pollo.png}" alt="Icono aves"></div>
-    <div class="subcategoria">Pato</div> 
-    <h3 class="grids-estilos">Pato a la naranja</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9734; &#9734</div>
-</div>
-
-<!-- Receta 6 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Más visto</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec6.jpg}" class="img-receta-tarjeta" alt="Receta de Bacalao">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pescado.png}" alt="Icono pescado"></div>
-    <div class="subcategoria">Bacalao</div> 
-    <h3 class="grids-estilos">Bacalao espiritual</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-<!-- Receta 18 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec18.jpg}" class="img-receta-tarjeta" alt="Receta de Jugo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/coctel.png}" alt="Icono coctel"></div>
-    <div class="subcategoria">Jugos y Zumos</div> 
-    <h3 class="grids-estilos">Jugo de apio y nopal</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-
-<!-- Receta 8 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Nuevo</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec8.jpg}" class="img-receta-tarjeta" alt="Receta de Atún">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pescado.png}" alt="Icono pescado"></div>
-    <div class="subcategoria">Atun</div> 
-    <h3 class="grids-estilos">Canastitas de atún</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-
-<!-- Receta 10 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec10.jpg}" class="img-receta-tarjeta" alt="Receta de Pavo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pollo.png}" alt="Icono aves"></div>
-    <div class="subcategoria">Pavo</div> 
-    <h3 class="grids-estilos">Pepián de pavo</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9734; &#9734</div>
-</div>
-
-<!-- Receta 2 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Nuevo</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec2.jpg}" class="img-receta-tarjeta" alt="Receta de Pizza">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pasta.png}" alt="Icono pasta"></div>
-    <div class="subcategoria">Pizza</div> 
-    <h3 class="grids-estilos">Pizza porteña</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-<!-- Receta 5 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec5.jpg}" class="img-receta-tarjeta" alt="Receta de Salmon">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pescado.png}" alt="Icono pescado"></div>
-    <div class="subcategoria">Salmon</div> 
-    <h3 class="grids-estilos">Salmón con alcaparras</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-<!-- Receta 13 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Destacada</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec13.jpg}" class="img-receta-tarjeta" alt="Receta de Cerdo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/carne.png}" alt="Icono carnes"></div>
-    <div class="subcategoria">Cerdo</div> 
-    <h3 class="grids-estilos">Arrollado de cerdo</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-<!-- Receta 14 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Destacada</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec14.jpg}" class="img-receta-tarjeta" alt="Receta de Ternera">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/carne.png}" alt="Icono carnes"></div>
-    <div class="subcategoria">Ternera</div> 
-    <h3 class="grids-estilos">Osobuco de ternera</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-<!-- Receta 3 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec3.jpg}" class="img-receta-tarjeta" alt="Receta de Macarrones">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pasta.png}" alt="Icono pasta"></div>
-    <div class="subcategoria">Macarrones</div> 
-    <h3 class="grids-estilos">Macarrones chistorra</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-
-<!-- Receta 16 -->
-<div class="tarjeta-receta">
-    <div class="etiqueta">Más visto</div>
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec16.jpg}" class="img-receta-tarjeta" alt="Receta de lomo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/carne.png}" alt="Icono carnes"></div>
-    <div class="subcategoria">Lomo</div> 
-    <h3 class="grids-estilos">Lomo strogonoff</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-<!-- Receta 19 -->
-<div class="tarjeta-receta">
-    
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec19.jpg}" class="img-receta-tarjeta" alt="Receta de Coctel">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/coctel.png}" alt="Icono coctel"></div>
-    <div class="subcategoria">cocteles</div> 
-    <h3 class="grids-estilos">Cóctel de algarrobina</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-    </div>
-
-<!-- Receta 7 -->
-<div class="tarjeta-receta">
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec7.jpg}" class="img-receta-tarjeta" alt="Receta de Merluza">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pescado.png}" alt="Icono pescado"></div>
-    <div class="subcategoria">Merluza</div> 
-    <h3 class="grids-estilos">Caldillo de merluza</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9734</div>
-</div>
-
-<!-- Receta 17 -->
-<div class="tarjeta-receta">
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec17.jpg}" class="img-receta-tarjeta" alt="Receta de Batido">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/coctel.png}" alt="Icono coctel"></div>
-    <div class="subcategoria">Batidos</div> 
-    <h3 class="grids-estilos">Batido de mango</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-</div>
-
-<!-- Receta 11 -->
-<div class="tarjeta-receta">
-    <img th:src="@{/imagenes/descubre-recetas-recetas/rec11.jpg}" class="img-receta-tarjeta" alt="Receta de Conejo">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/pollo.png}" alt="Icono aves"></div>
-    <div class="subcategoria">Conejo</div> 
-    <h3 class="grids-estilos">Conejo con cebolla</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9734; &#9734</div>
-</div>
-
-<!-- Receta 20 -->
-    <div class="tarjeta-receta">
-            
-        <img th:src="@{/imagenes/descubre-recetas-recetas/rec20.jpg}" class="img-receta-tarjeta" alt="Receta de Ponche">
-    <div class="icono-categoria"><img th:src="@{/imagenes/descubre-recetas-icons/coctel.png}" alt="Icono coctel"></div>
-    <div class="subcategoria">Ponche</div> 
-    <h3 class="grids-estilos">Ponche a la romana</h3>
-    <div class="calificacion">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-    </div>
-
-    </section>
-
-
-    <!-- Footer -->
     <footer>
         <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
         <div class="iconos-sociales">

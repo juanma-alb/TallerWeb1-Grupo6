@@ -2,20 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Página cargada y lista.');
 });
 
-//script filtrar recetas
-function filtrarRecetas(categoria) {
-    const recetas = document.querySelectorAll('.tarjeta-receta');
-    
-    recetas.forEach(receta => {
-        // oculta todas las recetas primero
-        receta.style.display = 'none';
 
-        // verifica si la receta pertenece a la categoría seleccionada
-        if (receta.querySelector('.subcategoria').textContent.toLowerCase().includes(categoria)) {
-            receta.style.display = 'block';  // Mostramos la receta si coincide
-        }
-    });
-}
 
 //script carrusel
 const slides = document.querySelectorAll('.slide');
@@ -23,7 +10,7 @@ const dots = document.querySelectorAll('.dot');
 let currentSlide = 0;
 
 function showSlide(index) {
-    // asegura que el índice no esté fuera de rango
+    // esto asegura que el índice no este fuera de rango
     if (index >= slides.length) {
         currentSlide = 0;
     } else if (index < 0) {
@@ -32,11 +19,11 @@ function showSlide(index) {
         currentSlide = index;
     }
 
-    // eliminar clases "active" de todos los slides y dots
+    //esto elimina las clases "active" de todos los slides y dots
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
 
-    // añadir la clase "active" al slide y dot actuales
+    //lo mismo pero las añade
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
 }

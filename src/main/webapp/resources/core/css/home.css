@@ -397,8 +397,8 @@ h3 {
     margin: 10px 0;
 }
 
-p {
-    font-size: 14px;
+.descripcion-carrusel {
+    font-size: 15px;
     color: #777;
 }
 
