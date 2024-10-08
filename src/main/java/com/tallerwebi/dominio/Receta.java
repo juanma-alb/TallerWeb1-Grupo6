@@ -40,6 +40,19 @@ public class Receta {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    // Relación con Comentario
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comentario> comentarios;
+
+    // Getters y setters
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -142,4 +155,13 @@ public class Receta {
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
 }
+
+
+
+    public void agregarComentario(Comentario comentario) {
+        comentarios.add(comentario);
+        comentario.setReceta(this);
+    }
+
+
 }

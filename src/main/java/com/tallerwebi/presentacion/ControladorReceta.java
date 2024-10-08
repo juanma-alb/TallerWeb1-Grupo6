@@ -34,9 +34,10 @@ public class ControladorReceta {
         return modelAndView;
     }
 
-    @PostMapping("/crear-receta")
-    public ModelAndView crearReceta(@ModelAttribute Receta receta /*,@RequestParam("foto") MultipartFile archivoFoto*/, HttpServletRequest request) {
 
+    @PostMapping("/crear-receta")
+    public ModelAndView crearReceta(@ModelAttribute Receta receta,
+                                    HttpServletRequest request) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
 
         if (usuarioActual == null) {
@@ -45,22 +46,21 @@ public class ControladorReceta {
 
         try {
             receta.setUsuario(usuarioActual);
-            /*
-            if (!archivoFoto.isEmpty()) {
-                String nombreFoto = servicioReceta.guardarFoto(archivoFoto);
-                receta.setFoto(nombreFoto);
-            }
-            */
-            servicioReceta.crearReceta(receta);
 
+            // Llamamos al servicio para guardar la receta sin manejar fotos
+            servicioReceta.crearReceta(receta);
             return new ModelAndView("redirect:/home");
 
         } catch (Exception e) {
+            // Agregamos el objeto receta en caso de que se necesite para mantener los datos en el formulario
             ModelAndView model = new ModelAndView("crearReceta");
-            model.addObject("error", e.getMessage());
+            model.addObject("receta", receta); // Se mantiene la receta en el formulario de creación
+            model.addObject("error", "Error al crear la receta: " + e.getMessage()); // Se muestra un mensaje de error más claro
+            e.printStackTrace(); // Esto ayudará a identificar la causa del error en la consola
             return model;
         }
     }
+
 
 
 }
