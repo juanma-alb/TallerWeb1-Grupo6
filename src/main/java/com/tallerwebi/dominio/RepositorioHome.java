@@ -5,5 +5,5 @@ import java.util.List;
 public interface RepositorioHome {
     void save2(Receta receta);
     List<Receta> listarRecetas();  
-    
+    List<Receta> buscarPorCriterio(String query);
 }

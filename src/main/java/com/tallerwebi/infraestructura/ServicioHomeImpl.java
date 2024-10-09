@@ -28,4 +28,8 @@ public class ServicioHomeImpl implements ServicioHome {
         return repositorioHome.listarRecetas();  
     }
     
+    public List<Receta> buscarRecetas(String query) {
+        return repositorioHome.buscarPorCriterio(query);
+    }
+
 }
