@@ -30,16 +30,27 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new Exception("La contraseña actual no es válida.");
         }
 
-        if (newPassword != null && !newPassword.isEmpty()) {
-            if (!newPassword.equals(confirmPassword)) {
-                throw new Exception("Las nuevas contraseñas no coinciden.");
-            }
-            if (newPassword.equals(currentPassword)) {
-                throw new Exception("La nueva contraseña no puede ser la misma que la contraseña actual.");
-            }
-            usuarioActual.setPassword(newPassword);
+        if (newPassword == null || newPassword.isEmpty()) {
+            throw new Exception("Debe ingresar una nueva contraseña.");
         }
 
+        if (!newPassword.equals(confirmPassword)) {
+            throw new Exception("Las nuevas contraseñas no coinciden.");
+        }
+
+        if (newPassword.equals(usuarioActual.getPassword())) {
+            throw new Exception("La nueva contraseña no puede ser la misma que la contraseña actual.");
+        }
+
+        if (newPassword.length() < 5) {
+            throw new Exception("La nueva contraseña debe tener al menos 5 caracteres.");
+        }
+
+        if (!newPassword.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
+            throw new Exception("La nueva contraseña debe contener al menos una letra y un número.");
+        }
+
+        usuarioActual.setPassword(newPassword);
         repositorioUsuario.modificar(usuarioActual);
     }
 

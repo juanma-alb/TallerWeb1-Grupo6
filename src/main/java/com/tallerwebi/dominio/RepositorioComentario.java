@@ -6,6 +6,6 @@ public interface RepositorioComentario {
     void guardar(Comentario comentario);
 
     List<Comentario> buscarPorRecetaId(Long recetaId);
-
+    List<Comentario> buscarUsuarioPorId(Long usuarioId);
 
 }

@@ -1,5 +1,7 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Comentario;
+import com.tallerwebi.dominio.ServicioComentario;
 import com.tallerwebi.dominio.ServicioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +15,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 public class ControladorPerfil {
 
-
+    @Autowired
     private ServicioUsuario servicioUsuario;
-
+    @Autowired
+    private ServicioComentario servicioComentario;
 
     @Autowired
     public ControladorPerfil(ServicioUsuario servicioUsuario) {
@@ -33,6 +37,9 @@ public class ControladorPerfil {
         if (usuario == null) {
             return new ModelAndView("redirect:/login");
         }
+
+        List<Comentario> comentarios = servicioComentario.listarComentariosPorUsuario(usuario.getId());
+        usuario.setComentarios(comentarios);
 
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
@@ -62,14 +69,8 @@ public class ControladorPerfil {
         ModelMap model = new ModelMap();
 
         try {
-            if (usuario.getNewPassword() != null && !usuario.getNewPassword().isEmpty()) {
-                servicioUsuario.modificarContraseniaUsuario(usuarioActual, usuario.getCurrentPassword(), usuario.getNewPassword(), usuario.getConfirmPassword());
-            }
-
             servicioUsuario.modificarDatosPerfil(usuarioActual, usuario);
-
             request.getSession().setAttribute("usuario", usuarioActual);
-
             return new ModelAndView("redirect:/perfil");
         } catch (Exception e) {
             model.put("usuario", usuario);
@@ -77,6 +78,34 @@ public class ControladorPerfil {
             return new ModelAndView("editarPerfil", model);
         }
     }
+
+
+
+    @PostMapping("/cambiar-contrasenia")
+    public ModelAndView cambiarContrasenia(@ModelAttribute Usuario usuario, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuarioActual == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        ModelMap model = new ModelMap();
+
+        try {
+            servicioUsuario.modificarContraseniaUsuario(usuarioActual, usuario.getCurrentPassword(), usuario.getNewPassword(), usuario.getConfirmPassword());
+            return new ModelAndView("redirect:/perfil");
+        } catch (Exception e) {
+            model.put("usuario", usuario);
+            model.put("error", e.getMessage());
+            return new ModelAndView("editarPerfil", model);
+        }
+
+    }
+
+
+
+
+
+
 }
         /*
         if (!foto.isEmpty()) {

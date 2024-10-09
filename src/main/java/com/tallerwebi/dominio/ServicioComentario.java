@@ -6,4 +6,6 @@ public interface ServicioComentario {
     void agregarComentario(Long recetaId, Long usuarioId, String contenido);
 
     List<Comentario> listarComentariosPorReceta(Long recetaId);
+
+    List<Comentario> listarComentariosPorUsuario(Long id);
 }

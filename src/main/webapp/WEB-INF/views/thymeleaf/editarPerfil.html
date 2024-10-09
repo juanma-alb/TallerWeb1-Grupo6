@@ -18,6 +18,22 @@
     </div>
 
     <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" th:field="*{descripcion}"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="ciudad">Ciudad:</label>
+      <input type="text" id="ciudad" name="ciudad" th:field="*{ciudad}">
+    </div>
+
+    <button type="submit" class="guardar-cambios">Guardar cambios</button>
+  </form>
+
+
+  <form id="form-cambiar-contrasenia" th:action="@{/cambiar-contrasenia}" th:object="${usuario}" method="post">
+    <h1>Cambiar contraseña </h1> <br><br>
+    <div class="form-group">
       <label for="currentPassword">Contraseña Actual:</label>
       <input type="password" id="currentPassword" name="currentPassword">
     </div>
@@ -32,59 +48,30 @@
       <input type="password" id="confirmPassword" name="confirmPassword">
     </div>
 
-    <div class="error-message" id="error-message" style="display: none;">
-      <p id="error-text"></p>
-    </div>
-    <div class="form-group">
-      <label for="descripcion">Descripción:</label>
-      <textarea id="descripcion" name="descripcion" th:field="*{descripcion}"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="ciudad">Ciudad:</label>
-      <input type="text" id="ciudad" name="ciudad" th:field="*{ciudad}">
-    </div>
-    <!--<div class="form-group">
-      <label for="foto">Foto de Perfil:</label>
-      <input type="file" id="foto" name="foto">
-    </div>-->
-    <button type="submit" class="guardar-cambios">Guardar cambios</button>
+  <button type="submit" class="guardar-cambios">Guardar contraseña</button>
   </form>
+
+  <div class="error-message" th:if="${error != null}">
+    <p th:text="${error}" id="error-message" style="display: none;"></p>
+  </div>
+
+  <!--
+      <div class="error-message" th:if="${error}" id="error-message" style="display: none;">
+        <p th:text="${error}"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="foto">Foto de Perfil:</label>
+        <input type="file" id="foto" name="foto">
+      </div>-->
+
 </div>
-
 <script>
-  document.querySelector('form').addEventListener('submit', function(event) {
-    const currentPassword = document.getElementById('currentPassword').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const errorMessage = document.getElementById('error-message');
-    const errorText = document.getElementById('error-text');
-
-    errorMessage.style.display = 'none';
-
-    if (password || confirmPassword) {
-      if (!currentPassword) {
-        errorText.textContent = 'Debe ingresar la contraseña actual.';
-        errorMessage.style.display = 'block';
-        event.preventDefault();
-        return;
-      }
-
-      if (!password) {
-        errorText.textContent = 'Debe ingresar una nueva contraseña.';
-        errorMessage.style.display = 'block';
-        event.preventDefault();
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        errorText.textContent = 'Las nuevas contraseñas no coinciden.';
-        errorMessage.style.display = 'block';
-        event.preventDefault();
-        return;
-      }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var errorMessage = document.getElementById('error-message');
+    if (errorMessage && errorMessage.textContent.trim() !== '') {
+      alert(errorMessage.textContent);
     }
-
-    console.log('Formulario validado correctamente.');
   });
 </script>
 
