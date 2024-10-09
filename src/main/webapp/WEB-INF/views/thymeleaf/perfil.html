@@ -6,8 +6,42 @@
   <title>Perfil de Usuario</title>
   <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/home.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <script>
+    function toggleSection(section) {
+      document.getElementById("comentarios").style.display = section === 'comentarios' ? 'block' : 'none';
+      document.getElementById("favoritos").style.display = section === 'favoritos' ? 'block' : 'none';
+    }
+  </script>
+
 </head>
 <body>
+
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
+  <div class="logo">
+      <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+  </div>
+      <div class="barra-busqueda">
+          <form th:action="@{/buscar}" method="get">
+              <input type="text" name="query" placeholder="¿Qué estás buscando?">
+              <button type="submit">Buscar</button>
+          </form>
+      </div>
+
+  <div class="enlaces-navegacion">
+      <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+      <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+      <a th:href="@{/crear-receta}" class="">Crear</a>
+      <a th:href="@{/perfil}" class="">Perfil</a>
+      <a th:href="@{/login}" class="">Cerrar Sesión</a>
+  </div>
+</nav>
+
 
 <div class="perfil-container">
   <div class="perfil-header">
@@ -35,7 +69,44 @@
     <p><strong>Ciudad:</strong> <span th:text="${usuario.ciudad != null ? usuario.ciudad : 'Añadir ciudad...'}"></span></p>
     <p><strong>Descripción:</strong> <span th:text="${usuario.descripcion != null ? usuario.descripcion : 'Añadir descripción...'}"></span></p>
   </div>
+
+  <div class="perfil-botones">
+    <button onclick="toggleSection('comentarios')">Comentarios</button>
+    <button class="editar-perfil">
+      <a th:href="@{/favoritos}">Favoritos</a>
+    </button>
+  </div>
+
+  <!-- Sección de Comentarios -->
+  <div id="comentarios" style="display: none;">
+    <h3>Comentarios Realizados</h3>
+    <div th:if="${usuario.comentarios.size() > 0}">
+      <ul class="comentarios-lista">
+        <li th:each="comentario : ${usuario.comentarios}">
+          <a th:href="@{/misRecetas}">
+            <div class="comentario-item">
+              <p class="comentario-texto" th:text="${comentario.contenido}"></p>
+              <p class="comentario-fecha">Publicado el: <span th:text="${comentario.fecha}"></span></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${usuario.comentarios.size() == 0}">
+      <p>No has hecho ningún comentario.</p>
+    </div>
+  </div>
 </div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+  <div class="iconos-sociales">
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+  </div>
+</footer>
 
 </body>
 </html>

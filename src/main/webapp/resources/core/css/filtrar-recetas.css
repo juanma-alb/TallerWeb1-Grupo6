@@ -163,7 +163,7 @@ footer {
     color: white;
     padding: 10px 0;
     text-align: center;
-    margin-top: 280px;
+    margin-top: 500px;
     
 }
 
@@ -179,6 +179,4 @@ footer {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-
 }

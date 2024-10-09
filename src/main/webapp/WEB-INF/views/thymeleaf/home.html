@@ -21,12 +21,14 @@
 <nav fragment="barraNavegacion">
     <div class="logo">
         <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+    </div>
+        <div class="barra-busqueda">
+            <form th:action="@{/buscar}" method="get">
+                <input type="text" name="query" placeholder="¿Qué estás buscando?">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
 
-    </div>
-    <div class="barra-busqueda">
-        <input type="text" placeholder="¿Qué estás buscando?">
-        <button>Buscar</button>
-    </div>
     <div class="enlaces-navegacion">
         <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
         <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
@@ -68,7 +70,7 @@
 <!-- texto bienvenida -->
 <section class="bienvenida">
     <div class="contenedor-bienvenida">
-    <h1 class="titulo-principal"><span> ¡Convertite en chef!</h1>
+        <h1 class="titulo-principal"><span> ¡Convertite en chef! </span></h1>
     <p class="texto-bienvenida">
         Aquí en <strong>EASYCOCINA.NET</strong>, estamos comprometidos a hacer que la experiencia de cocinar sea más accesible y divertida para todos. Descubrí recetas inspiradoras, sencillas y deliciosas para cada ocasión.
     </p>

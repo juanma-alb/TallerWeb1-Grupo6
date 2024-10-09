@@ -1,9 +1,12 @@
 package com.tallerwebi.infraestructura;
 
 
+import com.tallerwebi.dominio.Comentario;
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioReceta;
+import com.tallerwebi.dominio.Usuario;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -52,7 +55,11 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
     }
     @Override
     public Receta buscarRecetaPorId(Long id) {
-        return sessionFactory.getCurrentSession().get(Receta.class, id);
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Receta r WHERE r.id = :id", Receta.class)
+                .setParameter("id", id)
+                .getSingleResult();
+       // return sessionFactory.getCurrentSession().get(Receta.class, id);
     }
 
 

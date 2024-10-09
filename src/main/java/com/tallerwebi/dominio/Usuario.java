@@ -27,8 +27,14 @@ public class Usuario {
     @Transient
     private String currentPassword;
 
-    @Transient
     private String newPassword; // Nueva contraseña (para actualización)
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private List<Comentario> comentarios;
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
 
     public List<Receta> getRecetas() {
         return recetas;
@@ -114,6 +120,10 @@ public class Usuario {
     }
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public boolean activo() {
