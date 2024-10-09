@@ -6,18 +6,42 @@
   <title>Comentarios - EasyCocina</title>
   <!-- Bootstrap core css -->
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-  <link th:rel="stylesheet" th:href="@{/css/comentario.css}"/>
+  <link rel="stylesheet" th:href="@{/css/comentario.css}"/>
+  <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+<!-- Navegación -->
+<nav>
+  <div class="logo">
+    <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+  </div>
+  <div class="barra-busqueda">
+    <form th:action="@{/buscar}" method="get">
+      <input type="text" name="query" placeholder="¿Qué estás buscando?">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
+  <div class="enlaces-navegacion">
+    <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+    <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+    <a th:href="@{/crear-receta}" class="">Crear</a>
+    <a th:href="@{/perfil}" class="">Perfil</a>
+    <a th:href="@{/login}" class="">Cerrar Sesión</a>
+  </div>
+</nav>
+
 <!-- Contenedor principal -->
-<div class="container receta-comentarios">
+<div class="receta-comentarios">
   <!-- Información de la Receta -->
   <div class="receta-info">
     <h2 class="receta-titulo">Nombre: <span th:text="${receta.nombre}"></span></h2>
     <h2 class="receta-titulo">Descripción: <span th:text="${receta.descripcion}"></span></h2>
-    <h2 class="receta-titulo">Comensales: <span th:text="${receta.comensales}"></span></h2>
-
 
   </div>
 
@@ -38,8 +62,9 @@
     <div class="form-group">
       <textarea name="contenido" placeholder="Escribe un comentario..." required class="input-comentario"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Comentar</button>
+    <button type="submit" class="btn">Comentar</button>
   </form>
 </div>
+
 </body>
 </html>

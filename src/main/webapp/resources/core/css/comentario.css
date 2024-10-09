@@ -1,10 +1,10 @@
 .receta-comentarios {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: cornsilk;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -15,7 +15,7 @@
 
 .receta-titulo {
     font-size: 2.5em;
-    color: #333;
+    color: #7c4e4e;
     margin-bottom: 10px;
 }
 
@@ -31,7 +31,7 @@
 
 .comentarios-seccion h3 {
     font-size: 1.8em;
-    color: #555;
+    color: #7c4e4e;
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -50,7 +50,7 @@
 
 .nombre-usuario {
     font-weight: bold;
-    color: #007bff;
+    color: darkorange;
 }
 
 .contenido-comentario {
@@ -73,7 +73,7 @@
 }
 
 .btn {
-    background-color: #007bff;
+    background-color: darkorange;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -82,5 +82,77 @@
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: cornsilk;
+}
+
+nav {
+    background-color: #ffaa01;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-height: 45px;
+}
+
+.titulo {
+    font-family: "Bebas Neue", sans-serif;
+    color: #e50914;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.enlace-titulo-home{
+    text-decoration: none;
+    color: #c44004;
+
+}
+
+.enlace-titulo-home:hover {
+    color: #f6d5d5;
+    transform: scale(5.5);
+    box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+    transition: transform 0.3s ease, 0.3s ease;
+
+}
+
+.barra-busqueda input {
+    padding: 3px;
+    border-radius: 4px;
+    border: none;
+}
+
+.barra-busqueda button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #c44004;
+    color: white;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    margin-bottom: 2px;
+
+}
+
+.barra-busqueda button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enlaces-navegacion a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.enlaces-navegacion a:hover {
+    text-decoration: none;
+    color:  #c44004;
+    transform: scale(2.2);
+    box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+    transition: transform 0.3s ease, 0.3s ease;
 }
