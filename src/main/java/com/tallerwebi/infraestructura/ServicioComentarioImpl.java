@@ -44,4 +44,9 @@ public class ServicioComentarioImpl implements ServicioComentario {
     public List<Comentario> listarComentariosPorReceta(Long recetaId) {
         return repositorioComentario.buscarPorRecetaId(recetaId);
     }
+
+    @Override
+    public List<Comentario> listarComentariosPorUsuario(Long id) {
+        return repositorioComentario.buscarUsuarioPorId(id);
+    }
 }

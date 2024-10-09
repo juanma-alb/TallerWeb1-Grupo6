@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
@@ -16,6 +15,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
 .perfil-header {
@@ -127,6 +127,35 @@ body {
     top: 20px;
     right: 20px;
 }
+
+.comentarios-lista {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comentario-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.comentario-item:hover {
+    background-color: #e6e6e6;
+}
+
+.comentario-texto {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.comentario-fecha {
+    font-size: 0.9em;
+    color: #888;
+}
+
 
 .editar-perfil {
     background: none;

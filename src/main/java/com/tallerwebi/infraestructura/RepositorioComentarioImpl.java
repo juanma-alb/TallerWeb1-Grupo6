@@ -30,4 +30,14 @@ public class RepositorioComentarioImpl implements RepositorioComentario {
                 .setParameter("recetaId", recetaId)
                 .getResultList();
     }
+
+    @Override
+    public List<Comentario> buscarUsuarioPorId(Long usuarioId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Comentario c WHERE c.usuario.id = :usuarioId", Comentario.class)
+                .setParameter("usuarioId", usuarioId)
+                .getResultList();
+    }
+
+
 }

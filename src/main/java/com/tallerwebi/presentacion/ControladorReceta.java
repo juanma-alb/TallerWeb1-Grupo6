@@ -6,6 +6,7 @@ import com.tallerwebi.dominio.ServicioReceta;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,5 +63,15 @@ public class ControladorReceta {
     }
 
 
+    @GetMapping("/{id}")
+    public String verReceta(@PathVariable("id") Long id, Model model) {
+        Receta receta = servicioReceta.buscarRecetaPorId(id);
+        if (receta!=null) {
+            model.addAttribute("receta", receta);
+            return "ver-receta";
+        } else{
+            return "redirect:/login";
+        }
+    }
 
 }
