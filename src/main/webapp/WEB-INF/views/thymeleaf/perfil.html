@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil de Usuario</title>
   <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" th:href="@{/css/home.css}"/>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
 
 </head>
@@ -15,16 +17,25 @@
 <!-- nav todo -->
 <nav fragment="barraNavegacion">
   <div class="logo">
-    <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+      <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
   </div>
+      <div class="barra-busqueda">
+          <form th:action="@{/buscar}" method="get">
+              <input type="text" name="query" placeholder="¿Qué estás buscando?">
+              <button type="submit">Buscar</button>
+          </form>
+      </div>
+
   <div class="enlaces-navegacion">
-    <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-    <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
-    <a th:href="@{/crear-receta}" class="">Crear</a>
-    <a th:href="@{/perfil}" class="">Perfil</a>
-    <a th:href="@{/login}" class="">Cerrar Sesión</a>
+      <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+      <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+      <a th:href="@{/crear-receta}" class="">Crear</a>
+      <a th:href="@{/perfil}" class="">Perfil</a>
+      <a th:href="@{/login}" class="">Cerrar Sesión</a>
   </div>
 </nav>
+
+
 <div class="perfil-container">
   <div class="perfil-header">
     <div class="foto-usuario">
@@ -114,6 +125,16 @@
 
 
 </div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+  <div class="iconos-sociales">
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+      <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+  </div>
+</footer>
 
 
 <script>

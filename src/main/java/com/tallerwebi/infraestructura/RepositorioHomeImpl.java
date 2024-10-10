@@ -29,6 +29,14 @@ public class RepositorioHomeImpl implements RepositorioHome {
         return jdbcTemplate.query(sql, this::mapRowToReceta);
     }
 
+     // metodo para buscar recetas en la barra del nav
+     @Override
+     public List<Receta> buscarPorCriterio(String query) {
+         String sql = "SELECT * FROM receta WHERE lower(nombre) LIKE ? OR lower(descripcion) LIKE ? OR lower(categoria) LIKE ? OR lower(subcategoria) LIKE ?";
+         String formattedQuery = "%" + query.toLowerCase() + "%";
+         return jdbcTemplate.query(sql, this::mapRowToReceta, formattedQuery, formattedQuery, formattedQuery, formattedQuery);
+     }
+
     private Receta mapRowToReceta(ResultSet rs, int rowNum) throws SQLException {
         Receta receta = new Receta();
         receta.setId(rs.getLong("id"));
