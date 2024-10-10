@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,8 +30,8 @@ public class Usuario {
 
     private String newPassword; // Nueva contraseña (para actualización)
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
-    private List<Comentario> comentarios;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios = new ArrayList<>();
 
     public List<Comentario> getComentarios() {
         return comentarios;

@@ -50,29 +50,16 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
 
     @Override
-    public void borrarTodo() {
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.createQuery("DELETE FROM Usuario").executeUpdate();
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            throw e;
-        } finally {
-            session.close();
-        }
-
-    }
-
-
-    @Override
     public Usuario buscarPorId(Long usuarioId) {
         return (Usuario) sessionFactory.getCurrentSession()
                 .createCriteria(Usuario.class)
                 .add(Restrictions.eq("id", usuarioId))
                 .uniqueResult();
+    }
+
+    @Override
+    public void eliminar(Usuario usuario) {
+        sessionFactory.getCurrentSession().delete(usuario);
     }
 
     //CONSULTAS POSIBLES PARA USUARIOS

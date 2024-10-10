@@ -77,7 +77,7 @@ nav {
     text-decoration: none;
     color:  #c44004;
     transform: scale(2.2);
-    box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
         transition: transform 0.3s ease, 0.3s ease;
 }
 

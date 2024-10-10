@@ -14,7 +14,7 @@ public class Comentario {
     private Receta receta;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     private String contenido;
