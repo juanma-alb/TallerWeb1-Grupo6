@@ -7,5 +7,5 @@ public interface RepositorioComentario {
 
     List<Comentario> buscarPorRecetaId(Long recetaId);
     List<Comentario> buscarUsuarioPorId(Long usuarioId);
-
+    void eliminar(Comentario comentario);
 }

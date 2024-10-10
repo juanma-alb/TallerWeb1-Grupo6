@@ -8,8 +8,7 @@ public interface RepositorioUsuario {
     void guardar(Usuario usuario);
     Usuario buscar(String email);
     void modificar(Usuario usuario);
-    void borrarTodo();
-
     Usuario buscarPorId(Long usuarioId);
+    void eliminar(Usuario usuario);
 }
 
