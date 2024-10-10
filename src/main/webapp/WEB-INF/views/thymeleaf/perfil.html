@@ -8,12 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" th:href="@{/css/home.css}"/>
 
-  <script>
-    function toggleSection(section) {
-      document.getElementById("comentarios").style.display = section === 'comentarios' ? 'block' : 'none';
-      document.getElementById("favoritos").style.display = section === 'favoritos' ? 'block' : 'none';
-    }
-  </script>
 
 </head>
 <body>
@@ -45,9 +39,22 @@
         <a th:href="@{/editar-perfil}"><i class="fas fa-pencil-alt"></i></a>
       </button>
 
-      <button class="btn-ajustes">
+      <button class="btn-ajustes" onclick="mostrarModalEliminar()">
         <i class="fas fa-cog"></i>
       </button>
+
+      <div id="modal-eliminar" class="modal" style="display: none;">
+        <div class="modal-contenido">
+          <h2>¿Estás seguro de que deseas eliminar tu cuenta?</h2>
+          <p>Esta acción no se puede deshacer.</p>
+
+          <form th:action="@{/eliminar-cuenta}" method="post">
+            <button type="submit">Aceptar</button>
+            <button type="button" onclick="cerrarModal()">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -59,20 +66,40 @@
   </div>
 
   <div class="perfil-botones">
+
+    <button onclick="toggleSection('recetas')">Mis Recetas</button>
     <button onclick="toggleSection('comentarios')">Comentarios</button>
     <button class="editar-perfil">
       <a th:href="@{/favoritos}">Favoritos</a>
     </button>
   </div>
 
-  <!-- Sección de Comentarios -->
+  <div id="recetas" style="display: none;">
+    <h3>Recetas Creadas</h3>
+    <div th:if="${not #lists.isEmpty(usuario.recetas)}">
+      <ul class="recetas-lista">
+        <li th:each="receta : ${usuario.recetas}">
+          <a th:href="@{/recetas/{id}(id=${receta.id})}">
+            <div class="receta-item">
+              <p class="receta-nombre">Receta: <span th:text="${receta.nombre}"></span></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${#lists.isEmpty(usuario.recetas)}">
+      <p>No has creado ninguna receta.</p>
+    </div>
+  </div>
+
   <div id="comentarios" style="display: none;">
     <h3>Comentarios Realizados</h3>
     <div th:if="${usuario.comentarios.size() > 0}">
       <ul class="comentarios-lista">
         <li th:each="comentario : ${usuario.comentarios}">
-          <a th:href="@{/misRecetas}">
+          <a th:href="@{/comentarios/{id}(id=${comentario.receta.id})}">
             <div class="comentario-item">
+              <p class="receta-nombre">Receta: <span th:text="${comentario.receta.nombre}"></span></p>
               <p class="comentario-texto" th:text="${comentario.contenido}"></p>
               <p class="comentario-fecha">Publicado el: <span th:text="${comentario.fecha}"></span></p>
             </div>
@@ -87,6 +114,27 @@
 
 
 </div>
+
+
+<script>
+  function toggleSection(section) {
+    document.getElementById("comentarios").style.display = section === 'comentarios' ? 'block' : 'none';
+    document.getElementById("favoritos").style.display = section === 'favoritos' ? 'block' : 'none';
+    document.getElementById("recetas").style.display = section === 'recetas' ? 'block' : 'none';
+  }
+
+  function mostrarModalEliminar() {
+    document.getElementById('modal-eliminar').style.display = 'block';
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-eliminar').style.display = 'none';
+  }
+
+  function confirmarEliminar() {
+    window.location.href = '/eliminar-cuenta';
+  }
+</script>
 
 </body>
 </html>
