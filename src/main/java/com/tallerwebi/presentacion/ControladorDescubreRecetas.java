@@ -43,7 +43,7 @@ public class ControladorDescubreRecetas {
         modelAndView.addObject("subcategoria", ""); 
         
         
-        Usuario usuarioActual = (Usuario) session.getAttribute("usuarioActual");
+        Usuario usuarioActual = (Usuario) session.getAttribute("usuario");
 
         System.out.println("Método irADescubreRecetas ejecutado.");
         if (usuarioActual != null) {
@@ -117,7 +117,7 @@ public class ControladorDescubreRecetas {
 
     //obtener el usuario actual de la sesion (no esta listo todavia)
     private Usuario obtenerUsuarioActual(HttpSession session) {
-        return (Usuario) session.getAttribute("usuarioActual");
+        return (Usuario) session.getAttribute("usuario");
     }
 
     
