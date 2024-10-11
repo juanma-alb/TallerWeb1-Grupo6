@@ -47,7 +47,9 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
         if (usuarioBuscado != null) {
-            request.getSession().setAttribute("usuario", usuarioBuscado); //se guarda al usuario
+
+            //cambié el nombre de "usuario" a "usuarioActual" en la sesion de login (juanma)
+            request.getSession().setAttribute("usuarioActual", usuarioBuscado); //se guarda al usuario 
             request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
         } else {

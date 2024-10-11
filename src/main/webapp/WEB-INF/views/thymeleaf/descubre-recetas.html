@@ -221,7 +221,14 @@
             <div class="info-receta">
                 <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
                 <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
-
+    
+                <!-- BOTONES CRUD SOLO VISIBLES PARA ADMIN -->
+                <div th:block th:if="${esAdmin}">
+                    <a th:href="@{'/editar-receta/' + ${receta.id}}" class="boton-editar">Editar</a>
+                    <form th:action="@{'/eliminar-receta/' + ${receta.id}}" method="post" style="display: inline;">
+                        <button type="submit" class="boton-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta receta?')">Eliminar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
