@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioDescubreRecetas;
 
+
 @Repository
 public class RepositorioDescubreRecetasImpl implements RepositorioDescubreRecetas {
 
@@ -28,6 +29,24 @@ public class RepositorioDescubreRecetasImpl implements RepositorioDescubreReceta
     public List<Receta> listarRecetas() {
         String sql = "SELECT * FROM receta";
         return jdbcTemplate.query(sql, this::mapRowToReceta);
+    }
+
+    @Override
+    public Receta obtenerRecetaPorId(Long id) {
+        String sql = "SELECT * FROM receta WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RecetaRowMapper());
+    }
+
+    @Override
+    public void eliminarReceta(Long id) {
+        String sql = "DELETE FROM receta WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    @Override
+    public void actualizar(Receta receta) {
+        String sql = "UPDATE receta SET nombre = ?, descripcion = ?, calorias = ?, comensales = ?, tiempoPreparacion = ?, calificacion = ?, categoria = ?, subcategoria = ?, foto = ? WHERE id = ?";
+        jdbcTemplate.update(sql, receta.getNombre(), receta.getDescripcion(), receta.getCalorias(), receta.getComensales(), receta.getTiempoPreparacion(), receta.getCalificacion(), receta.getCategoria(), receta.getSubcategoria(), receta.getFoto(), receta.getId());
     }
 
     
@@ -62,6 +81,8 @@ public class RepositorioDescubreRecetasImpl implements RepositorioDescubreReceta
         receta.setCalificacion(rs.getInt("calificacion"));      
         return receta;
     }
+
+    
 }
 
 
