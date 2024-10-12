@@ -24,13 +24,11 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
 
     @Override
     public void save(Receta receta) {
-        sessionFactory.getCurrentSession().save(receta);
+        sessionFactory.getCurrentSession().saveOrUpdate(receta); // Cambiado a saveOrUpdate para que sirva también para actualizar
     }
-
 
     @Override
     public List<Receta> findByUsuarioId(Long usuarioId) {
-        // Consulta HQL para obtener recetas por el id de usuario
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId", Receta.class)
                 .setParameter("usuarioId", usuarioId)
@@ -39,7 +37,6 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
 
     @Override
     public List<Receta> listarTodasLasRecetas() {
-        // Consulta HQL para listar todas las recetas
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Receta", Receta.class)
                 .getResultList();
@@ -47,20 +44,31 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
 
     @Override
     public List<Receta> buscarRecetasPorNombreRecetas(String filtro) {
-        // Consulta HQL para buscar recetas cuyo nombre coincida con el filtro
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Receta r WHERE r.nombre LIKE :filtro", Receta.class)
                 .setParameter("filtro", "%" + filtro + "%")
                 .getResultList();
     }
+
     @Override
     public Receta buscarRecetaPorId(Long id) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Receta r WHERE r.id = :id", Receta.class)
                 .setParameter("id", id)
                 .getSingleResult();
-       // return sessionFactory.getCurrentSession().get(Receta.class, id);
     }
 
+    @Override
+    public void actualizar(Receta receta) {
+        sessionFactory.getCurrentSession().update(receta);
+    }
 
+    @Override
+    public void eliminar(Long id) {
+        Receta receta = buscarRecetaPorId(id);
+        if (receta != null) {
+            sessionFactory.getCurrentSession().delete(receta);
+        }
+    }
 }
+

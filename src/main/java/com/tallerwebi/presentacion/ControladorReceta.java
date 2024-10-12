@@ -10,10 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+/*
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption; */
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
+
 
 @Controller
 public class ControladorReceta {
@@ -21,7 +28,7 @@ public class ControladorReceta {
     @Autowired
     private ServicioReceta servicioReceta;
 
-
+    // Mostrar el formulario de crear receta
     @GetMapping("/crear-receta")
     public ModelAndView mostrarFormularioCrearReceta(HttpServletRequest request) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
@@ -35,10 +42,9 @@ public class ControladorReceta {
         return modelAndView;
     }
 
-
+    // Crear una receta
     @PostMapping("/crear-receta")
-    public ModelAndView crearReceta(@ModelAttribute Receta receta,
-                                    HttpServletRequest request) {
+    public ModelAndView crearReceta(@ModelAttribute Receta receta, HttpServletRequest request) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
 
         if (usuarioActual == null) {
@@ -47,31 +53,107 @@ public class ControladorReceta {
 
         try {
             receta.setUsuario(usuarioActual);
-
-            // Llamamos al servicio para guardar la receta sin manejar fotos
             servicioReceta.crearReceta(receta);
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/misRecetas");
 
         } catch (Exception e) {
-            // Agregamos el objeto receta en caso de que se necesite para mantener los datos en el formulario
             ModelAndView model = new ModelAndView("crearReceta");
-            model.addObject("receta", receta); // Se mantiene la receta en el formulario de creación
-            model.addObject("error", "Error al crear la receta: " + e.getMessage()); // Se muestra un mensaje de error más claro
-            e.printStackTrace(); // Esto ayudará a identificar la causa del error en la consola
+            model.addObject("receta", receta);
+            model.addObject("error", "Error al crear la receta: " + e.getMessage());
+            e.printStackTrace();
             return model;
         }
     }
 
-
+    // ver una receta
     @GetMapping("/{id}")
     public String verReceta(@PathVariable("id") Long id, Model model) {
         Receta receta = servicioReceta.buscarRecetaPorId(id);
-        if (receta!=null) {
+        if (receta != null) {
             model.addAttribute("receta", receta);
             return "ver-receta";
-        } else{
+        } else {
             return "redirect:/login";
         }
+    }
+
+    // mostrar el form para editar una receta + verificacion para que el propio usuario pueda hacerlo
+    @GetMapping("/editarReceta/{id}")
+    public String mostrarFormularioEditarReceta(@PathVariable Long id, Model model, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+
+        Receta receta = servicioReceta.buscarRecetaPorId(id);
+
+        if (usuarioActual == null || receta == null || !receta.getUsuario().getId().equals(usuarioActual.getId())) {
+            return "redirect:/login"; 
+        }
+
+        model.addAttribute("receta", receta);
+        return "editarReceta"; 
+    }
+
+    
+    @PostMapping("/editarReceta/{id}")
+public String editarReceta(@PathVariable Long id, 
+                           @ModelAttribute Receta recetaActualizada, 
+                           /*@RequestParam("foto") MultipartFile foto,*/ 
+                           HttpServletRequest request) {
+    Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+
+    Receta receta = servicioReceta.buscarRecetaPorId(id);
+
+    if (usuarioActual == null || receta == null || !receta.getUsuario().getId().equals(usuarioActual.getId())) {
+        return "redirect:/login";
+    }
+
+    
+    receta.setNombre(recetaActualizada.getNombre());
+    receta.setCategoria(recetaActualizada.getCategoria());
+    receta.setSubcategoria(recetaActualizada.getSubcategoria());
+    receta.setCalorias(recetaActualizada.getCalorias());
+    receta.setTiempoPreparacion(recetaActualizada.getTiempoPreparacion());
+    receta.setDescripcion(recetaActualizada.getDescripcion());
+    receta.setComensales(recetaActualizada.getComensales());
+
+    /* 
+    if (!foto.isEmpty()) {
+        try {
+            
+            
+            String rutaDirectorioImagenes = "/spring/imagenes/slides"; 
+            String nombreArchivo = foto.getOriginalFilename();
+            Path rutaCompleta = Paths.get(rutaDirectorioImagenes, nombreArchivo);
+            
+            
+            Files.copy(foto.getInputStream(), rutaCompleta, StandardCopyOption.REPLACE_EXISTING);
+            
+            
+            receta.setFoto(nombreArchivo); 
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/error"; 
+        }
+    } */
+
+    servicioReceta.actualizarReceta(receta);
+
+    return "redirect:/misRecetas"; 
+}
+
+    
+    @PostMapping("/eliminarReceta/{id}")
+    public String eliminarReceta(@PathVariable Long id, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+
+        Receta receta = servicioReceta.buscarRecetaPorId(id);
+
+        if (usuarioActual == null || receta == null || !receta.getUsuario().getId().equals(usuarioActual.getId())) {
+            return "redirect:/login";
+        }
+
+        servicioReceta.eliminarReceta(id);
+        return "redirect:/misRecetas"; 
     }
 
 }
