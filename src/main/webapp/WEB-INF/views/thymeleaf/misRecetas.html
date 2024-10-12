@@ -35,34 +35,23 @@
     </div>
 </nav>
 
-<!-- Filtro de búsqueda -->
-<section class="filtro-recetas">
-    <h2>Mis Recetas</h2>
-    <form th:action="@{/misRecetas}" method="get">
-        <div class="barra-busqueda-dos">
-            <input type="text" name="filtro" placeholder="Buscar por nombre de receta..." >
-            <button type="submit">Buscar</button>
-        </div>
-    </form>
-</section>
 
-<!-- Listado de Recetas -->
-<<section class="mis-recetas">
-    <table>
-        <thead>
-        <tr>
-            <th>Nombre de la Receta</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="receta : ${recetas}">
-            <td>
-                <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</section>
+<!-- crud para usuarios -->
+<div class="mis-recetas" th:each="receta : ${recetas}">
+    
+    <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}"></a>
+   
+    
+    <a th:href="@{/editarReceta/{id}(id=${receta.id})}" class="boton-editar">Editar</a>
+
+    
+    <form th:action="@{/eliminarReceta/{id}(id=${receta.id})}" method="POST" style="display:inline;">
+        <button type="submit" class="boton-eliminar">Eliminar</button>
+    </form>
+</div>
+
+
+
 
 
 </body>

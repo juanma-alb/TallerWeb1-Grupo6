@@ -1,8 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.RepositorioUsuario;
-import com.tallerwebi.dominio.ServicioUsuario;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -14,9 +12,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
     private RepositorioUsuario repositorioUsuario;
 
+    private RepositorioComentario repositorioComentario;
+
     @Autowired
-    public ServicioUsuarioImpl(RepositorioUsuario repositorioUsuario) {
+    public ServicioUsuarioImpl(RepositorioUsuario repositorioUsuario, RepositorioComentario repositorioComentario) {
         this.repositorioUsuario = repositorioUsuario;
+        this.repositorioComentario = repositorioComentario;
     }
 
     @Override
@@ -70,6 +71,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
         repositorioUsuario.modificar(usuarioActual);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Usuario usuario = repositorioUsuario.buscarPorId(id);
+        if (usuario != null) {
+            for (Comentario comentario : usuario.getComentarios()) {
+                repositorioComentario.eliminar(comentario);
+            }
+            repositorioUsuario.eliminar(usuario);
+        }
     }
 
 }

@@ -32,5 +32,21 @@ public class ServicioDescubreRecetasImpl implements ServicioDescubreRecetas {
     public List<Receta> filtrarPorCategoria(String categoria, String subcategoria) {
         return repositorioDescubreRecetas.filtrarPorCategoria(categoria, subcategoria);
     }
+
+    @Override
+    public Receta obtenerRecetaPorId(Long id) {
+        return repositorioDescubreRecetas.obtenerRecetaPorId(id);
+    }
+
+    @Override
+    public void eliminarReceta(Long id) {
+        repositorioDescubreRecetas.eliminarReceta(id);
+    }
+
+    @Override
+    public void actualizarReceta(Receta receta) {
+        
+        repositorioDescubreRecetas.actualizar(receta); 
+    }
 }
 

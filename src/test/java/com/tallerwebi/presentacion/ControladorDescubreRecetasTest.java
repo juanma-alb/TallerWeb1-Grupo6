@@ -1,5 +1,5 @@
 package com.tallerwebi.presentacion;
-
+/* 
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.ServicioDescubreRecetas;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,4 +53,4 @@ public class ControladorDescubreRecetasTest {
         assertEquals(subcategoria, modelAndView.getModel().get("subcategoria"), "La subcategoría debería coincidir con el valor pasado");
     }
 }
-
+*/

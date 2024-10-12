@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Comentario;
-import com.tallerwebi.dominio.ServicioComentario;
-import com.tallerwebi.dominio.ServicioUsuario;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +21,8 @@ public class ControladorPerfil {
     private ServicioUsuario servicioUsuario;
     @Autowired
     private ServicioComentario servicioComentario;
+    @Autowired
+    private ServicioReceta servicioReceta;
 
     @Autowired
     public ControladorPerfil(ServicioUsuario servicioUsuario) {
@@ -40,6 +39,8 @@ public class ControladorPerfil {
 
         List<Comentario> comentarios = servicioComentario.listarComentariosPorUsuario(usuario.getId());
         usuario.setComentarios(comentarios);
+        List<Receta> receta = servicioReceta.listarRecetasPorUsuario(usuario.getId());
+        usuario.setRecetas(receta);
 
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
@@ -102,30 +103,25 @@ public class ControladorPerfil {
     }
 
 
+    @RequestMapping(path = "/eliminar-cuenta", method = RequestMethod.GET)
+    public ModelAndView confirmarEliminacionCuenta(HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView("confirmarEliminacion");
+    }
 
-
+    @RequestMapping(path = "/eliminar-cuenta", method = RequestMethod.POST)
+    public ModelAndView eliminarCuenta(HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario != null) {
+            Long usuarioId = usuario.getId();
+            servicioUsuario.eliminar(usuarioId);
+            request.getSession().invalidate();
+        }
+        return new ModelAndView("redirect:/login");
+    }
 
 
 }
-        /*
-        if (!foto.isEmpty()) {
-            if (foto.getContentType().startsWith("image/") && foto.getSize() <= 5 * 1024 * 1024) {
-                String nombreArchivo = foto.getOriginalFilename();
-                String rutaRelativa = "core/imagenes/" + nombreArchivo;
-                Path rutaAbsoluta = Paths.get("src/main/webapp/resources/" + rutaRelativa);
-
-                try {
-                    Files.createDirectories(rutaAbsoluta.getParent());
-                    foto.transferTo(rutaAbsoluta.toFile());
-                    usuarioActual.setFoto(rutaRelativa);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ModelMap model = new ModelMap();
-                model.put("usuario", usuario);
-                model.put("error", "El archivo no es válido. Debe ser una imagen y no exceder los 5 MB.");
-                return new ModelAndView("editarPerfil", model);
-            }
-        }
-        */

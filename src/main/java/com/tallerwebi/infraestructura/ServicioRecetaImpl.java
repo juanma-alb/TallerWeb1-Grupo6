@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+/*
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
+*/
+import java.util.List; 
+
 
 @Service
 @Transactional
@@ -22,34 +25,14 @@ public class ServicioRecetaImpl implements ServicioReceta {
     @Autowired
     private RepositorioReceta repositorioReceta;
 
-    private static final String RUTA_IMAGENES = "src/main/webapp/resources/core/imagenes";
-
+    @Override
     public void crearReceta(Receta receta) {
         repositorioReceta.save(receta);
     }
 
-
-
-//    @Override
-//    public String guardarFoto(MultipartFile archivo) {
-//        if (archivo.isEmpty()) {
-//            throw new RuntimeException("El archivo está vacío");
-//        }
-//
-//        try {
-//            String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
-//            Path rutaDestino = Paths.get(RUTA_IMAGENES).resolve(nombreArchivo);
-//            Files.createDirectories(rutaDestino.getParent());
-//            Files.copy(archivo.getInputStream(), rutaDestino, StandardCopyOption.REPLACE_EXISTING);
-//            return nombreArchivo;
-//        } catch (IOException e) {
-//            throw new RuntimeException("Error al guardar la foto: " + e.getMessage(), e);
-//        }
-//    }
-
     @Override
     public List<Receta> listarRecetasPorUsuario(Long usuarioId) {
-        return repositorioReceta.findByUsuarioId(usuarioId); // Obtiene las recetas del usuario
+        return repositorioReceta.findByUsuarioId(usuarioId);
     }
 
     @Override
@@ -67,7 +50,13 @@ public class ServicioRecetaImpl implements ServicioReceta {
         return repositorioReceta.buscarRecetaPorId(recetaId);
     }
 
+    @Override
+    public void actualizarReceta(Receta receta) {
+        repositorioReceta.actualizar(receta); 
+    }
 
-
+    @Override
+    public void eliminarReceta(Long id) {
+        repositorioReceta.eliminar(id); 
+    }
 }
-

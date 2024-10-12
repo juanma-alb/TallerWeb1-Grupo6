@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCocina-Editar Receta</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+</head>
+
+<h1>Editar Receta (Falta CSS)</h1>
+
+<form th:action="@{/guardar-receta}" th:object="${receta}" method="post" accept-charset="UTF-8">
+    <input type="hidden" th:field="*{id}" />
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required />
+    </div>
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+    </div>
+    <div>
+        <label for="calorias">Calorías:</label>
+        <input type="number" id="calorias" th:field="*{calorias}" required />
+    </div>
+    <div>
+        <label for="comensales">Comensales:</label>
+        <input type="number" id="comensales" th:field="*{comensales}" required />
+    </div>
+    <div>
+        <label for="tiempoPreparacion">Tiempo de Preparación (minutos):</label>
+        <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" required />
+    </div>
+    <div>
+        <label for="calificacion">Calificación:</label>
+        <input type="number" id="calificacion" th:field="*{calificacion}" min="1" max="5" required />
+    </div>
+    <div>
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" th:field="*{categoria}" required />
+    </div>
+    <div>
+        <label for="subcategoria">Subcategoría:</label>
+        <input type="text" id="subcategoria" th:field="*{subcategoria}" required />
+    </div>
+    <div>
+        <label for="foto">Foto URL:</label>
+        <input type="text" id="foto" th:field="*{foto}" required />
+    </div>
+    <div>
+        <button type="submit">Guardar Cambios</button>
+    </div>
+</form>
+
+
+</body>
+</html>

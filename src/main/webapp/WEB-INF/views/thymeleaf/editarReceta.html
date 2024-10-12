@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Receta - EasyCocina</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <h2>Editar Receta (falta css y form con carga de archivos)</h2>
+
+    <form th:action="@{'/editarReceta/' + ${receta.id}}" th:object="${receta}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nombre">Nombre de la Receta:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" th:field="*{descripcion}" class="form-control" required></textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="calorias">Calorías:</label>
+            <input type="number" id="calorias" th:field="*{calorias}" class="form-control" min="0" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="tiempoPreparacion">Tiempo de Preparación (minutos):</label>
+            <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" class="form-control" min="0" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="comensales">Número de Comensales:</label>
+            <select id="comensales" th:field="*{comensales}" class="form-control" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    
+        <!-- <div class="form-group">
+            <label for="foto">Imagen Miniatura:</label>
+            <input type="file" id="foto" name="foto" class="form-control-file">
+        </div> -->
+    
+        <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" th:field="*{categoria}" class="form-control" required onchange="actualizarSubcategorias()">
+                <option value="pasta" th:selected="${receta.categoria == 'pasta'}">Pasta</option>
+                <option value="pescado" th:selected="${receta.categoria == 'pescado'}">Pescado</option>
+                <option value="caza" th:selected="${receta.categoria == 'caza'}">Caza</option>
+                <option value="carne" th:selected="${receta.categoria == 'carne'}">Carne</option>
+                <option value="bebidas" th:selected="${receta.categoria == 'bebidas'}">Bebidas</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="subcategoria">Subcategoría:</label>
+            <select id="subcategoria" th:field="*{subcategoria}" class="form-control" required>
+            </select>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+    
+    <script>
+        function actualizarSubcategorias() {
+            const categoria = document.getElementById("categoria").value;
+            const subcategoriaSelect = document.getElementById("subcategoria");
+    
+            
+            subcategoriaSelect.innerHTML = "";
+    
+            let subcategorias = [];
+    
+            if (categoria === "pasta") {
+                subcategorias = ["Espaguetis", "Pizza", "Macarrones", "Lasaña"];
+            } else if (categoria === "pescado") {
+                subcategorias = ["Salmón", "Bacalao", "Merluza", "Atún"];
+            } else if (categoria === "caza") {
+                subcategorias = ["Pollo", "Pavo", "Conejo", "Pato"];
+            } else if (categoria === "carne") {
+                subcategorias = ["Cerdo", "Ternera", "Vaca", "Lomo"];
+            } else if (categoria === "bebidas") {
+                subcategorias = ["Batidos", "Jugos y zumos", "Cocteles", "Ponche"];
+            }
+    
+            subcategorias.forEach(function(sub) {
+                let option = document.createElement("option");
+                option.value = sub;
+                option.text = sub;
+                subcategoriaSelect.appendChild(option);
+            });
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+    actualizarSubcategorias();
+
+    // Seleccionar la subcategoría si ya existe en la receta
+    const subcategoriaActual = /*[[${receta.subcategoria}]]*/ 'none';
+    const subcategoriaSelect = document.getElementById("subcategoria");
+    if (subcategoriaActual) {
+        subcategoriaSelect.value = subcategoriaActual;
+    }
+});
+    </script>    
+
+</body>
+</html>
