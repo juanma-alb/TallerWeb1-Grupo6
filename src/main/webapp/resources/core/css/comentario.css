@@ -156,3 +156,33 @@ nav {
     box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
     transition: transform 0.3s ease, 0.3s ease;
 }
+
+.calificacion {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.calificacion input[type="radio"] {
+    display: none;
+}
+
+.calificacion label {
+    font-size: 1.5rem;
+    color: gray;
+    cursor: pointer;
+}
+
+.calificacion input[type="radio"]:checked ~ label {
+    color: orange;
+}
+
+.calificacion label:hover,
+.calificacion label:hover ~ label {
+    color: orange;
+}
+
+.receta-titulo{
+    color: black;
+}
