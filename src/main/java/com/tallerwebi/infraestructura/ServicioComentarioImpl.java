@@ -22,22 +22,23 @@ public class ServicioComentarioImpl implements ServicioComentario {
     private RepositorioReceta repositorioReceta;
 
     @Override
-    public void agregarComentario(Long recetaId, Long usuarioId, String contenido) {
-        // Recupera el usuario de la base de datos
+    public void agregarComentario(Long recetaId, Long usuarioId, String contenido, Integer calificacion) {
         Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
-
-        // Recupera la receta de la base de datos (si es necesario)
         Receta receta = repositorioReceta.buscarRecetaPorId(recetaId);
 
-        // Crea el comentario
         Comentario comentario = new Comentario();
         comentario.setUsuario(usuario);
         comentario.setReceta(receta);
         comentario.setContenido(contenido);
+        comentario.setCalificacion(calificacion);
         comentario.setFecha(LocalDateTime.now());
 
-        // Guarda el comentario en el repositorio
         repositorioComentario.guardar(comentario);
+    }
+
+    @Override
+    public void agregarComentario(Long recetaId, Long usuarioId, String contenido) {
+
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Comentario;
-import com.tallerwebi.dominio.Receta;
-import com.tallerwebi.dominio.ServicioReceta;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +19,9 @@ public class ControladorComentario {
     @Autowired
     private ServicioReceta servicioReceta;
 
+    @Autowired
+    private ServicioComentario servicioComentario;
+
     @GetMapping("/comentarios/{id}")
     public ModelAndView mostrarComentario(@PathVariable("id") Long recetaId, HttpServletRequest request) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
@@ -36,6 +36,16 @@ public class ControladorComentario {
         modelAndView.addObject("receta", receta);
 
         return modelAndView;
+    }
+
+    @PostMapping("/mis-recetas/agregar-comentario")
+    public String agregarComentario(@RequestParam("recetaId") Long recetaId,
+                                    @RequestParam("contenido") String contenido,
+                                    @RequestParam("calificacion") Integer calificacion,
+                                    HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+        servicioComentario.agregarComentario(recetaId, usuarioActual.getId(), contenido, calificacion);
+        return "redirect:/misRecetas";
     }
 
 

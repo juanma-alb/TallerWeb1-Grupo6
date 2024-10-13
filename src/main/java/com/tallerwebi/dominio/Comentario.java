@@ -21,6 +21,18 @@ public class Comentario {
     private LocalDateTime fecha;
     private String texto;
 
+    private Integer calificacion;
+
+
+    public Integer getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Integer calificacion) {
+        this.calificacion = calificacion;
+    }
+
+
     public Receta getReceta() {
         return receta;
     }
