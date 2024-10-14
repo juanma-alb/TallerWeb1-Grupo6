@@ -36,23 +36,37 @@
 </nav>
 
 
-<!-- crud para usuarios -->
-<div class="mis-recetas" th:each="receta : ${recetas}">
-    
-    <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}"></a>
-   
+
+
+
+<div class="grilla-recetas">
+    <div class="tarjeta-receta" th:each="receta : ${recetas}">
+        <a th:href="@{/comentarios/{id}(id=${receta.id})}">
+            <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" class="img-receta-tarjeta" alt="Imagen de receta creada"></a>
+        <div class="info-receta">
+            <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}" class="grids-estilos"></a>
+            <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
+
+            <!-- crud para usuarios -->
     
     <a th:href="@{/editarReceta/{id}(id=${receta.id})}" class="boton-editar">Editar</a>
-
     
     <form th:action="@{/eliminarReceta/{id}(id=${receta.id})}" method="POST" style="display:inline;">
         <button type="submit" class="boton-eliminar">Eliminar</button>
     </form>
 </div>
+</div>
+</div>
 
-
-
-
+<footer>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
+</footer>
 
 </body>
+
 </html>

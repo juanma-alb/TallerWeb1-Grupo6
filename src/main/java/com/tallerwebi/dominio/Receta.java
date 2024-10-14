@@ -29,6 +29,9 @@ public class Receta {
 
     private int calificacion;
 
+    @Lob
+    private String contenidoReceta; 
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "receta_id")
     private List<Ingrediente> ingredientes = new ArrayList<>();
@@ -156,7 +159,13 @@ public class Receta {
         this.calificacion = calificacion;
 }
 
+public String getContenidoReceta() {
+    return contenidoReceta;
+}
 
+public void setContenidoReceta(String contenidoReceta) {
+    this.contenidoReceta = contenidoReceta;
+}
 
     public void agregarComentario(Comentario comentario) {
         comentarios.add(comentario);

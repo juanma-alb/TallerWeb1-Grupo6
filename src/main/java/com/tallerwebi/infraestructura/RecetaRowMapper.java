@@ -16,6 +16,7 @@ public class RecetaRowMapper implements RowMapper<Receta> {
         receta.setSubcategoria(rs.getString("subcategoria"));
         receta.setFoto(rs.getString("foto"));
         receta.setCalificacion(rs.getInt("calificacion"));
+        receta.setContenidoReceta(rs.getString("contenidoReceta"));
         return receta;
     }
 }
