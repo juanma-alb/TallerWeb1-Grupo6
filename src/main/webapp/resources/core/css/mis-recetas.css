@@ -146,32 +146,119 @@ footer {
 /* botones crud para usuarios */
 
 .boton-editar {
-    background-color: #007bff; 
+    background-color: green;  
     color: white; 
-    padding: 6px 12px; 
+    padding: 10.5px 14px; 
     text-decoration: none;
-    border-radius: 5px; 
-    transition: background-color 0.3s; 
-    margin-top: 50px;
-}
-
-.boton-editar:hover {
-    background-color: #0056b3; 
-}
-
-.boton-eliminar {
-    background-color: #dc3545; 
-    color: white; 
-    padding: 6px 12px; 
     border: none; 
     border-radius: 5px; 
     cursor: pointer; 
     transition: background-color 0.3s; 
-    margin-top: 50px;
+}
+
+.boton-editar:hover {
+    background-color: greenyellow; 
+}
+
+.boton-eliminar {
+    background-color: #c82333; 
+    color: white; 
+    padding: 8px 14px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 .boton-eliminar:hover {
-    background-color: #c82333; 
+    background-color: red; 
 }
 
+
+/* grids recetas */
+
+.grilla-recetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+
+.tarjeta-receta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.tarjeta-receta:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+.tarjeta-receta img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.etiqueta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #dd321e;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.icono-categoria {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent; 
+    width: 40px;
+    height: 40px;
+}
+
+.icono-categoria img {
+    width: 100%;
+    height: 100%;
+}
+
+.subcategoria {
+    visibility: hidden; 
+    height: 0;
+}
+
+.tarjeta-receta h3 {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.calificacion {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: -20px;
+}
+
+.grids-estilos{
+    font-family:"Bebas Neue", sans-serif; 
+    font-weight: bold;
+    font-size: 20px !important;
+    letter-spacing: 1.2px;
+    word-spacing: 1.5;
+    margin-left: 120px !important;
+    margin-top: 10px;
+    margin-bottom: -07px;
+}
 
