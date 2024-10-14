@@ -86,30 +86,18 @@
 
 <!-- Sección de Top 10 Recetas  (falta agregar slide)-->
 <section class="top-recetas">
-    <h2 class="titulos-notas"><br>TOP 10 RECETAS  <span>&#9733</span></h2>
+    <h2 class="titulos-notas">TOP 10 RECETAS <span>&#9733;</span></h2>
     <div class="recetas-grid">
-        <div class="receta">
-            <img th:src="@{/imagenes/home-imagenes/home-1.JPG}" alt="Corundas con Crema">
-            <h4 class="grids-estilos">Burritos Mexicanos</h4>
-            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-        </div>
-        <div class="receta">
-            <img th:src="@{/imagenes/home-imagenes/home-2.jpg}" alt="Receta de Chilaquiles para la Cruda">
-            <h4 class="grids-estilos">Ceviche Peruano</h4>
-            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-        </div>
-        <div class="receta">
-            <img th:src="@{/imagenes/home-imagenes/home-3.jpg}" alt="Carne al Pastor">
-            <h4 class="grids-estilos">Cocido Madrileño</h4>
-            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-        </div>
-        <div class="receta">
-            <img th:src="@{/imagenes/home-imagenes/home-4.jpg}" alt="Agua de Jamaica con Guayaba">
-            <h4 class="grids-estilos">Paella Valenciana</h4>
-            <p class="rating">5.0 &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-        </div>
+        <a th:each="receta : ${recetas}" th:href="@{/comentarios/{id}(id=${receta.id})}" class="receta">
+            <div>
+                <img th:src="${receta.foto}" alt="Receta" class="img-receta">
+                <h4 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h4>
+                <p class="rating" th:text="'Calificación: ' + ${receta.calificacion} + ' ★'"></p>
+            </div>
+        </a>
     </div>
 </section>
+
 
 <!-- seccion de tips y notas (falta agregar mas grids y un slide) -->
 <section class="tips-notas">

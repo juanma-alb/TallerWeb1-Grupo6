@@ -56,6 +56,17 @@ public class Receta {
         this.comentarios = comentarios;
     }
 
+    private double calificacionPromedio; // Campo para almacenar la calificación promedio
+
+    // Getters y Setters
+    public double getCalificacionPromedio() {
+        return calificacionPromedio;
+    }
+
+    public void setCalificacionPromedio(double calificacionPromedio) {
+        this.calificacionPromedio = calificacionPromedio;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

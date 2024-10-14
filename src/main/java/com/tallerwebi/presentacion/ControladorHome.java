@@ -27,11 +27,14 @@ public class ControladorHome {
     public ModelAndView irAHome() {
         List<Receta> recetas = servicioHome.obtenerRecetasParaCarrusel();
 
-        
+        List<Receta> recetasOrdenadas = servicioHome.obtenerRecetasOrdenadasPorCalificacion();
+
+
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("recetas", recetas);
-        
-        
+        modelAndView.addObject("recetasOrdenadas", recetasOrdenadas);
+
+
         return modelAndView;
     }
 

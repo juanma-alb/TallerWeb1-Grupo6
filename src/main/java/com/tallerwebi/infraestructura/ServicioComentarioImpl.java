@@ -33,7 +33,11 @@ public class ServicioComentarioImpl implements ServicioComentario {
         comentario.setCalificacion(calificacion);
         comentario.setFecha(LocalDateTime.now());
 
+        // Guardar el nuevo comentario
         repositorioComentario.guardar(comentario);
+
+        // Recalcular la calificación promedio de la receta
+        actualizarCalificacionPromedio(receta);
     }
 
     @Override
@@ -49,5 +53,20 @@ public class ServicioComentarioImpl implements ServicioComentario {
     @Override
     public List<Comentario> listarComentariosPorUsuario(Long id) {
         return repositorioComentario.buscarUsuarioPorId(id);
+    }
+    @Override
+    public void actualizarCalificacionPromedio(Receta receta) {
+        List<Comentario> comentarios = repositorioComentario.obtenerComentariosPorReceta(receta.getId());
+        int totalCalificacion = 0;
+
+        for (Comentario c : comentarios) {
+            totalCalificacion += c.getCalificacion();
+        }
+
+        int promedioCalificacion = comentarios.size() > 0 ? totalCalificacion / comentarios.size() : 0;
+        receta.setCalificacion(promedioCalificacion);
+
+        // Guardar la receta con la nueva calificación
+        repositorioReceta.save(receta);
     }
 }

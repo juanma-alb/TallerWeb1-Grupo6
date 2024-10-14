@@ -56,5 +56,10 @@ public class RepositorioComentarioImpl implements RepositorioComentario {
         }
     }
 
+    @Override
+    public List<Comentario> obtenerComentariosPorReceta(Long id) {
+        return buscarPorRecetaId(id);
+    }
+
 
 }
