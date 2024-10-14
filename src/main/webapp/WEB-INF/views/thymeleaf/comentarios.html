@@ -53,8 +53,8 @@
         <h5 th:text="${comentario.usuario.nombre}" class="nombre-usuario card-title"></h5>
         <p th:text="${comentario.contenido}" class="contenido-comentario card-text"></p>
         <div th:if="${comentario.calificacion}">
-          <span th:each="star : ${#numbers.sequence(1, comentario.calificacion)}" class="star">★</span>
-          <span th:each="star : ${#numbers.sequence(comentario.calificacion + 1, 5)}" class="star">☆</span>
+          <span th:each="star : ${#numbers.sequence(1, comentario.calificacion)}" class="star">&#9733;</span>
+          <span th:each="star : ${#numbers.sequence(comentario.calificacion + 1, 5)}" class="star">&#9734;</span>
         </div>
       </div>
     </div>

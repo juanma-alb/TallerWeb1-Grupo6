@@ -59,4 +59,5 @@ public class ServicioRecetaImpl implements ServicioReceta {
     public void eliminarReceta(Long id) {
         repositorioReceta.eliminar(id); 
     }
+
 }

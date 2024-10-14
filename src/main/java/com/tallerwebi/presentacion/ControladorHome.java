@@ -26,6 +26,7 @@ public class ControladorHome {
     @RequestMapping(path = "/home", method = RequestMethod.GET)
     public ModelAndView irAHome() {
         List<Receta> recetas = servicioHome.obtenerRecetasParaCarrusel();
+
         
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("recetas", recetas);
