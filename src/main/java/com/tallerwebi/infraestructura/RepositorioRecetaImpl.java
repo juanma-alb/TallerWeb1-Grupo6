@@ -70,5 +70,6 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
             sessionFactory.getCurrentSession().delete(receta);
         }
     }
+
 }
 

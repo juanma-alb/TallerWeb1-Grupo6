@@ -8,6 +8,6 @@ public interface RepositorioReceta {
     List<Receta> listarTodasLasRecetas();
     List<Receta> buscarRecetasPorNombreRecetas(String filtro);
     Receta buscarRecetaPorId(Long id);
-    void actualizar(Receta receta); // Nuevo método para actualizar recetas
-    void eliminar(Long id); // Nuevo método para eliminar recetas
+    void actualizar(Receta receta);
+    void eliminar(Long id);
 }
