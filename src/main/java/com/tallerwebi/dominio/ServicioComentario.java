@@ -10,4 +10,6 @@ public interface ServicioComentario {
     List<Comentario> listarComentariosPorReceta(Long recetaId);
 
     List<Comentario> listarComentariosPorUsuario(Long id);
+
+    void actualizarCalificacionPromedio(Receta receta);
 }

@@ -3,6 +3,8 @@ package com.tallerwebi.infraestructura;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.tallerwebi.dominio.Comentario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.tallerwebi.dominio.Receta;
@@ -19,8 +21,8 @@ public class RepositorioHomeImpl implements RepositorioHome {
 
     @Override
     public void save2(Receta receta) {
-        String sql = "INSERT INTO receta (nombre, descripcion, calorias, tiempoPreparacion, comensales, foto, categoria, subcategoria, calificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, receta.getNombre(), receta.getDescripcion(), receta.getCalorias(), receta.getTiempoPreparacion(), receta.getComensales(), receta.getFoto(), receta.getCategoria(), receta.getSubcategoria(), receta.getCalificacion());
+        String sql = "INSERT INTO receta (nombre, descripcion, calorias, tiempoPreparacion, comensales, foto, categoria, subcategoria, calificacion,calificacionPromedio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        jdbcTemplate.update(sql, receta.getNombre(), receta.getDescripcion(), receta.getCalorias(), receta.getTiempoPreparacion(), receta.getComensales(), receta.getFoto(), receta.getCategoria(), receta.getSubcategoria(), receta.getCalificacion(),receta.getCalificacionPromedio());
     }
 
     @Override
@@ -37,6 +39,7 @@ public class RepositorioHomeImpl implements RepositorioHome {
          return jdbcTemplate.query(sql, this::mapRowToReceta, formattedQuery, formattedQuery, formattedQuery, formattedQuery);
      }
 
+
     private Receta mapRowToReceta(ResultSet rs, int rowNum) throws SQLException {
         Receta receta = new Receta();
         receta.setId(rs.getLong("id"));
@@ -50,5 +53,21 @@ public class RepositorioHomeImpl implements RepositorioHome {
         receta.setSubcategoria(rs.getString("subcategoria"));   
         receta.setCalificacion(rs.getInt("calificacion"));      
         return receta;
+    }
+
+    @Override
+    public List<Comentario> obtenerComentariosPorReceta(Long id) {
+        String sql = "SELECT * FROM comentario WHERE receta_id = ?";
+        return jdbcTemplate.query(sql, this::mapRowToComentario, id);
+    }
+
+    private Comentario mapRowToComentario(ResultSet rs, int rowNum) throws SQLException {
+        Comentario comentario = new Comentario();
+        comentario.setId(rs.getLong("id"));
+        comentario.setContenido(rs.getString("contenido"));
+        comentario.setCalificacion(rs.getInt("calificacion"));
+        comentario.setRecetaId(rs.getLong("receta_id")); // Asumiendo que tienes este campo
+        // Asigna otros campos según sea necesario
+        return comentario;
     }
 }

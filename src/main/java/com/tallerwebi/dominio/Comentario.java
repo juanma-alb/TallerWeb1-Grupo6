@@ -22,7 +22,16 @@ public class Comentario {
     private String texto;
 
     private Integer calificacion;
+    private Integer estrellas;
 
+
+    public Integer getEstrellas() {
+        return estrellas;
+    }
+
+    public void setEstrellas(Integer estrellas) {
+        this.estrellas = estrellas;
+    }
 
     public Integer getCalificacion() {
         return calificacion;
