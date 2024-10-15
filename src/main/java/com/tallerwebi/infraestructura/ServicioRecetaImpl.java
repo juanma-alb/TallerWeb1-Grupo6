@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+
 import java.util.List; 
 
 
@@ -23,10 +24,9 @@ public class ServicioRecetaImpl implements ServicioReceta {
         repositorioReceta.save(receta);
     }
 
-    @Override
     public List<Receta> listarRecetasPorUsuario(Long usuarioId) {
-        return repositorioReceta.findByUsuarioId(usuarioId);
-    }
+    return repositorioReceta.findByUsuarioIdAndNoPredefinidas(usuarioId);
+}
 
     @Override
     public List<Receta> listarTodasLasRecetas(long l) {
@@ -54,3 +54,4 @@ public class ServicioRecetaImpl implements ServicioReceta {
     }
 
 }
+
