@@ -124,4 +124,13 @@ public class ControladorPerfil {
     }
 
 
+    /* para mis recetas perfil
+    @GetMapping("/receta/{id}")
+    public String verReceta(@PathVariable Long id, Model model) {
+    Receta receta = recetaService.findById(id);
+    model.addAttribute("receta", receta);
+    return "receta"; // nombre de la vista para mostrar la receta
+}
+     */
+
 }

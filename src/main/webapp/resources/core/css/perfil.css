@@ -288,6 +288,26 @@ nav {
     color: #333;
 }
 
+.perfil-botones button {
+    background-color: #ffaa01;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.perfil-botones button:hover {
+    background-color: #ff6b01;
+}
+
+.favoritos{
+    text-decoration: none;
+}
+
 .acciones-perfil {
     display: flex;
     justify-content: space-between;
@@ -298,6 +318,24 @@ nav {
     padding: 15px;
     background-color: #f1f1f1;
     border-radius: 8px;
+}
+
+.receta-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.receta-item:hover {
+    background-color: #e6e6e6;
+}
+
+.recetas-lista {
+    list-style-type: none;
+    padding: 0;
 }
 
 .recetas-lista, .comentarios-lista {
