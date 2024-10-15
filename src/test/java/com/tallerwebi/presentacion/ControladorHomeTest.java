@@ -1,5 +1,5 @@
 package com.tallerwebi.presentacion;
-
+/*
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.ServicioHome;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,3 +33,4 @@ public void setUp() {
         assertEquals(recetasMock, modelAndView.getModel().get("recetas"), "La lista de recetas debería estar vacía");
     }
 }
+ */

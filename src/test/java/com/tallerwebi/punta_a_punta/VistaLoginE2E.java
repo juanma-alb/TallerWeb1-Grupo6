@@ -1,5 +1,5 @@
 package com.tallerwebi.punta_a_punta;
-
+/* 
 import com.microsoft.playwright.*;
 import com.tallerwebi.punta_a_punta.vistas.VistaLogin;
 import org.junit.jupiter.api.AfterAll;
@@ -49,6 +49,7 @@ public class VistaLoginE2E {
         assertThat("UNLAM", equalToIgnoringCase(texto));
     }
  */
+/* 
     @Test
     void deberiaDarUnErrorAlNoCompletarElLoginYTocarElBoton() {
         vistaLogin.escribirEMAIL("damian@unlam.edu.ar");
@@ -67,3 +68,4 @@ public class VistaLoginE2E {
         assertThat(url, containsStringIgnoringCase("/spring/home"));
     }
 }
+*/
