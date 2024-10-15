@@ -20,12 +20,13 @@ public class ServicioDescubreRecetasImpl implements ServicioDescubreRecetas {
 
     @Override
     public List<Receta> listarRecetas() {
-        return repositorioDescubreRecetas.listarRecetas(); 
+    return repositorioDescubreRecetas.listarRecetasPredefinidas();  
     }
+
 
     @Override
     public List<Receta> obtenerRecetasParaCarrusel() {
-        return repositorioDescubreRecetas.listarRecetas();  
+        return repositorioDescubreRecetas.listarRecetasPredefinidas();  
     }
 
     @Override
@@ -48,5 +49,5 @@ public class ServicioDescubreRecetasImpl implements ServicioDescubreRecetas {
         
         repositorioDescubreRecetas.actualizar(receta); 
     }
-}
 
+}

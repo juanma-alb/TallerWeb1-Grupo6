@@ -29,6 +29,12 @@ public class Receta {
 
     private int calificacion;
 
+    private boolean predefinida;
+
+    public Receta() {
+        this.predefinida = false;  // receta predefinida=true--> las recetas que ya vienen con la pagina. =false--> creada por usuario 
+    }
+
     @Lob
     private String contenidoReceta; 
 
@@ -181,6 +187,16 @@ public void setContenidoReceta(String contenidoReceta) {
     public void agregarComentario(Comentario comentario) {
         comentarios.add(comentario);
         comentario.setReceta(this);
+    }
+
+     
+     public boolean isPredefinida() {
+        return predefinida;
+    }
+
+    
+    public void setPredefinida(boolean predefinida) {
+        this.predefinida = predefinida;
     }
 
 
