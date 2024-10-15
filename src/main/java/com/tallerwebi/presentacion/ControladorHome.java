@@ -11,6 +11,7 @@ import java.util.List;
 import com.tallerwebi.dominio.Receta;
 
 import com.tallerwebi.dominio.ServicioHome;
+import com.tallerwebi.dominio.ServicioDescubreRecetas;
 
 @Controller
 public class ControladorHome {
@@ -19,13 +20,17 @@ public class ControladorHome {
     private ServicioHome servicioHome;
 
     @Autowired
+    private ServicioDescubreRecetas servicioDescubreRecetas;
+
+    @Autowired
     public ControladorHome(ServicioHome servicioHome) {
         this.servicioHome = servicioHome;
     }
 
     @RequestMapping(path = "/home", method = RequestMethod.GET)
     public ModelAndView irAHome() {
-        List<Receta> recetas = servicioHome.obtenerRecetasParaCarrusel();
+        
+        List<Receta> recetas = servicioDescubreRecetas.obtenerRecetasParaCarrusel();
 
         List<Receta> recetasOrdenadas = servicioHome.obtenerRecetasOrdenadasPorCalificacion();
 
