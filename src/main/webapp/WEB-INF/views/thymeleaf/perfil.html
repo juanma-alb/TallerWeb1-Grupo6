@@ -91,11 +91,7 @@
     <div th:if="${not #lists.isEmpty(usuario.recetas)}">
       <ul class="recetas-lista">
         <li th:each="receta : ${usuario.recetas}">
-          <a th:href="@{/recetas/{id}(id=${receta.id})}">
-            <div class="receta-item">
-              <p class="receta-nombre">Receta: <span th:text="${receta.nombre}"></span></p>
-            </div>
-          </a>
+          <p th:text="${receta.nombre}">Nombre de la receta</p>
         </li>
       </ul>
     </div>
@@ -141,7 +137,6 @@
 <script>
   function toggleSection(section) {
     document.getElementById("comentarios").style.display = section === 'comentarios' ? 'block' : 'none';
-    document.getElementById("favoritos").style.display = section === 'favoritos' ? 'block' : 'none';
     document.getElementById("recetas").style.display = section === 'recetas' ? 'block' : 'none';
   }
 
