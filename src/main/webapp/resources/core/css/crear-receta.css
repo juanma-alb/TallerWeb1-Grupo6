@@ -5,16 +5,92 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #faf5ee;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    padding-top: 40px;
+    
+    background-color: #f8f8f8;
+    font-family: 'Open Sans', sans-serif;
 }
+
+/* nav todo */
+nav {
+    background-color: #ffaa01;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-height: 45px;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+}
+
+.titulo {
+    font-family: "Bebas Neue", sans-serif;
+    color: #e50914;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.enlace-titulo-home{
+    text-decoration: none;
+    color: #c44004;
+
+}
+
+
+.enlace-titulo-home:hover{
+    color: #f6d5d5;
+    transform: scale(5.5);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
+}
+
+.barra-busqueda{
+    margin-left: 150px;
+    }
+
+
+.barra-busqueda input {
+    padding: 3px;
+    border-radius: 4px;
+    border: none;
+}
+
+.barra-busqueda-boton {
+    padding: 5px 10px;
+    border: none;
+    background-color: #c44004;
+    color: white;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    margin-bottom: 2px;
+    
+}
+
+.barra-busqueda-boton:hover{
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enlaces-navegacion a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.enlaces-navegacion a:hover {
+    text-decoration: none;
+    color:  #c44004;
+    transform: scale(2.2);
+        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
+        transition: transform 0.3s ease, 0.3s ease;
+}
+
+/* ----------------------------------------------------- */
 
 .contenedor-crear {
     background-color: #fff;
@@ -23,6 +99,20 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
+    margin: auto; 
+    flex-grow: 1; 
+    display: grid;
+    grid-template-columns: 1fr; 
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
 }
 
 .titulo-crear h1 {
@@ -51,7 +141,7 @@ label {
     color: #333;
 }
 
-input[type="text"],
+.contenedor-crear input[type="text"],
 input[type="number"],
 textarea {
     width: 100%;
@@ -72,7 +162,7 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-button[type="submit"] {
+.contenedor-crear button[type="submit"] {
     background-color: #ffaa01;
     color: white;
     padding: 10px 15px;
@@ -83,9 +173,13 @@ button[type="submit"] {
     width: 100%;
 }
 
-button[type="submit"]:hover {
+.contenedor-crear button[type="submit"]:hover {
     background-color: #ff6b01;
+    transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 button.eliminar-paso,
 button.eliminar-ingrediente{
@@ -116,6 +210,30 @@ input:focus,
 textarea:focus {
     outline: none;
     border-color: #ffaa01;
+}
+
+
+/* footer todo */
+
+footer {
+    background-color: #ffaa01;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.iconos-sociales img {
+    width: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.img-icon:hover{
+
+    
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /*
