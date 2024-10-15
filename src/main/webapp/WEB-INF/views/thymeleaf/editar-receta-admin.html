@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCocina-Editar Recetas</title>
+    <!-- Boostrap core css -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/editar-receta.css}"/>
+</head>
+
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+    </div>
+        <div class="barra-busqueda">
+            <form th:action="@{/buscar}" method="get">
+                <input type="text" name="query" placeholder="¿Qué estás buscando?">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+    <div class="enlaces-navegacion">
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
+    </div>
+</nav>
+
+
+<div class="contenedor-editar">
+    <div class="titulo-editar">
+        <h1> Editar Receta (ADMIN) </h1>
+    </div>
+
+<form th:action="@{/guardar-receta-admin}" th:object="${receta}" method="post" accept-charset="UTF-8">
+    <input type="hidden" th:field="*{id}" />
+
+    <section class="seccion-info-basica">
+        <h2>Información Básica</h2>
+
+        <label for="nombre">Nombre de la receta:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required/>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+    </section>
+
+    <section class="seccion-info-nutricional">
+        <h2>Información Nutricional</h2>
+        <label for="calorias">Calorías:</label>
+        <input type="number" id="calorias" th:field="*{calorias}" class="form-control" min="0" required>
+    </section>
+
+    <section class="seccion-comensales">
+        <h2> Cantidad de Comensales </h2>
+        <label for="comensales"></label>
+        <select id="comensales" th:field="*{comensales}" class="form-control" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </section>
+
+    <section class="seccion-preparacion">
+            <h2>Tiempo de Preparación</h2>
+            <label for="tiempoPreparacion">(En minutos):</label>
+            <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" class="form-control" min="0" required>
+        </section>
+
+        <section class="seccion-categoria">
+            <h2>Categoria</h2>
+            <label for="categoria"></label>
+            <select id="categoria" th:field="*{categoria}" class="form-control" required onchange="actualizarSubcategorias()">
+                <option value="pasta" th:selected="${receta.categoria == 'pasta'}">Pasta</option>
+                <option value="pescado" th:selected="${receta.categoria == 'pescado'}">Pescado</option>
+                <option value="caza" th:selected="${receta.categoria == 'caza'}">Caza</option>
+                <option value="carne" th:selected="${receta.categoria == 'carne'}">Carne</option>
+                <option value="bebidas" th:selected="${receta.categoria == 'bebidas'}">Bebidas</option>
+            </select>
+        </section>
+
+        <section class="seccion-subcategoria">
+            <h2>Subcategoria</h2>
+            <label for="subcategoria"></label>
+            <select id="subcategoria" th:field="*{subcategoria}" class="form-control" required>
+            </select>
+        </section>
+
+        <section class="seccion-foto">
+            <h2>Imagen Miniatura</h2>
+            <label for="foto">Foto URL:</label>
+            <input type="text" id="foto" th:field="*{foto}" required />
+        </section>
+    
+        <button type="submit" class="boton-guardar">Guardar Cambios</button>
+    </form>
+
+</div>
+    
+    
+    <script>
+        function actualizarSubcategorias() {
+            const categoria = document.getElementById("categoria").value;
+            const subcategoriaSelect = document.getElementById("subcategoria");
+    
+            
+            subcategoriaSelect.innerHTML = "";
+    
+            let subcategorias = [];
+    
+            if (categoria === "pasta") {
+                subcategorias = ["Espaguetis", "Pizza", "Macarrones", "Lasaña"];
+            } else if (categoria === "pescado") {
+                subcategorias = ["Salmón", "Bacalao", "Merluza", "Atún"];
+            } else if (categoria === "caza") {
+                subcategorias = ["Pollo", "Pavo", "Conejo", "Pato"];
+            } else if (categoria === "carne") {
+                subcategorias = ["Cerdo", "Ternera", "Vaca", "Lomo"];
+            } else if (categoria === "bebidas") {
+                subcategorias = ["Batidos", "Jugos y zumos", "Cocteles", "Ponche"];
+            }
+    
+            subcategorias.forEach(function(sub) {
+                let option = document.createElement("option");
+                option.value = sub;
+                option.text = sub;
+                subcategoriaSelect.appendChild(option);
+            });
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+    actualizarSubcategorias();
+
+    // Seleccionar la subcategoría si ya existe en la receta
+    const subcategoriaActual = /*[[${receta.subcategoria}]]*/ "[[${receta.subcategoria}]]" ;
+    const subcategoriaSelect = document.getElementById("subcategoria");
+    if (subcategoriaActual) {
+        subcategoriaSelect.value = subcategoriaActual;
+    }
+});
+    </script>    
+
+
+<footer>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
+</footer>
+
+</body>
+</html>
