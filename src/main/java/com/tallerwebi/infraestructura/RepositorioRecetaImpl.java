@@ -30,7 +30,7 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
     @Override
     public List<Receta> findByUsuarioId(Long usuarioId) {
         return sessionFactory.getCurrentSession()
-                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId", Receta.class)
+                .createNativeQuery("SELECT * FROM receta WHERE usuario_id = :usuarioId", Receta.class)
                 .setParameter("usuarioId", usuarioId)
                 .getResultList();
     }
