@@ -85,7 +85,7 @@ public String verReceta(@PathVariable("id") Long id, Model model) {
 }
 
 // mostrar el form para editar una receta + verificacion para que el propio usuario pueda hacerlo
-@GetMapping("/editarReceta/{id}")
+@GetMapping("/editar-receta-user/{id}")
 public String mostrarFormularioEditarReceta(@PathVariable Long id, Model model, HttpServletRequest request) {
     Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
 
@@ -96,12 +96,12 @@ public String mostrarFormularioEditarReceta(@PathVariable Long id, Model model, 
     }
 
     model.addAttribute("receta", receta);
-    return "editarReceta"; 
+    return "editar-receta-user"; 
 }
 
 
-@PostMapping("/editarReceta/{id}")
-public String editarReceta(@PathVariable Long id, 
+@PostMapping("/editar-receta-user/{id}")
+public String editarRecetaUser(@PathVariable Long id, 
                        @ModelAttribute Receta recetaActualizada,  
                        HttpServletRequest request) {
 Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
@@ -129,8 +129,8 @@ return "redirect:/misRecetas";
 }
 
 
-@PostMapping("/eliminarReceta/{id}")
-public String eliminarReceta(@PathVariable Long id, HttpServletRequest request) {
+@PostMapping("/eliminarRecetaUser/{id}")
+public String eliminarRecetaUser(@PathVariable Long id, HttpServletRequest request) {
     Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
 
     Receta receta = servicioReceta.buscarRecetaPorId(id);
@@ -145,22 +145,3 @@ public String eliminarReceta(@PathVariable Long id, HttpServletRequest request) 
 }
 
 
-
-
-
-
-//    @GetMapping("/mis-recetas")
-//    public ModelAndView mostrarMisRecetas(@RequestParam(required = false) String filtro, Model model, ModelMap modelMap) {
-//        List<Receta> recetas;
-//        ModelMap modelMap2 = new ModelMap();
-//
-//        if (filtro != null && !filtro.trim().isEmpty()) {
-//            recetas = servicioReceta.buscarRecetasPorNombreRecetas(filtro);
-//        } else {
-//            recetas = servicioReceta.listarTodasLasRecetas(); // O la lógica que tengas para listar todas las recetas
-//        }
-//
-//        modelMap2.put("recetas", recetas);
-//        modelMap2.put("filtro", filtro);
-//        return new ModelAndView("misRecetas" , modelMap2 ); // Nombre de tu vista
-//    }
