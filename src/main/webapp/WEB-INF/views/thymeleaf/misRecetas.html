@@ -37,8 +37,6 @@
 
 
 
-
-
 <div class="grilla-recetas">
     <div class="tarjeta-receta" th:each="receta : ${recetas}">
         <a th:href="@{/comentarios/{id}(id=${receta.id})}">
@@ -49,9 +47,9 @@
 
             <!-- crud para usuarios -->
     
-    <a th:href="@{/editarReceta/{id}(id=${receta.id})}" class="boton-editar">Editar</a>
+    <a th:href="@{/editar-receta-user/{id}(id=${receta.id})}" class="boton-editar">Editar</a>
     
-    <form th:action="@{/eliminarReceta/{id}(id=${receta.id})}" method="POST" style="display:inline;">
+    <form th:action="@{/eliminarRecetaUser/{id}(id=${receta.id})}" method="POST" style="display:inline;">
         <button type="submit" class="boton-eliminar">Eliminar</button>
     </form>
 </div>

@@ -25,11 +25,12 @@ public class RepositorioDescubreRecetasImpl implements RepositorioDescubreReceta
         jdbcTemplate.update(sql, receta.getNombre(), receta.getDescripcion(), receta.getCalorias(), receta.getTiempoPreparacion(), receta.getComensales(), receta.getFoto(), receta.getCategoria(), receta.getSubcategoria(), receta.getCalificacion());
     }
 
+ 
     @Override
-    public List<Receta> listarRecetas() {
-        String sql = "SELECT * FROM receta";
-        return jdbcTemplate.query(sql, this::mapRowToReceta);
-    }
+public List<Receta> listarRecetasPredefinidas() {
+    String sql = "SELECT * FROM receta WHERE predefinida = true";  // Solo recetas predefinidas
+    return jdbcTemplate.query(sql, this::mapRowToReceta);
+}
 
     @Override
     public Receta obtenerRecetaPorId(Long id) {

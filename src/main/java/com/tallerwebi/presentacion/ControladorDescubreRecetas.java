@@ -71,8 +71,8 @@ public class ControladorDescubreRecetas {
     }
 
     // redirigir a la vista de edicion de receta
-    @RequestMapping(path = "/editar-receta/{id}", method = RequestMethod.GET)
-    public ModelAndView editarReceta(@PathVariable("id") Long id, HttpSession session) {
+    @RequestMapping(path = "/editar-receta-admin/{id}", method = RequestMethod.GET)
+    public ModelAndView editarRecetaAdmin(@PathVariable("id") Long id, HttpSession session) {
         Usuario usuarioActual = obtenerUsuarioActual(session);
         Receta receta = servicioDescubreRecetas.obtenerRecetaPorId(id);
 
@@ -81,13 +81,13 @@ public class ControladorDescubreRecetas {
             return new ModelAndView("redirect:/acceso-denegado");
         }
 
-        ModelAndView modelAndView = new ModelAndView("editar-receta");
+        ModelAndView modelAndView = new ModelAndView("editar-receta-admin");
         modelAndView.addObject("receta", receta);
         return modelAndView;
     }
 
     //guardar los cambios de la receta editada
-    @RequestMapping(value = "/guardar-receta", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    @RequestMapping(value = "/guardar-receta-admin", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded;charset=UTF-8")
     public String actualizarReceta(@ModelAttribute Receta receta, HttpSession session) {
         Usuario usuarioActual = obtenerUsuarioActual(session);
         Receta recetaExistente = servicioDescubreRecetas.obtenerRecetaPorId(receta.getId());
@@ -101,7 +101,7 @@ public class ControladorDescubreRecetas {
     }
 
     //eliminar una receta
-    @RequestMapping(path = "/eliminar-receta/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/eliminarRecetaAdmin/{id}", method = RequestMethod.POST)
     public String eliminarReceta(@PathVariable("id") Long id, HttpSession session) {
         Usuario usuarioActual = obtenerUsuarioActual(session);
         Receta receta = servicioDescubreRecetas.obtenerRecetaPorId(id);
@@ -125,5 +125,6 @@ public class ControladorDescubreRecetas {
         return usuario != null && (usuario.getRol().equals("ADMIN") || receta.getUsuario().getId().equals(usuario.getId()));
     }
 }
+
 
 

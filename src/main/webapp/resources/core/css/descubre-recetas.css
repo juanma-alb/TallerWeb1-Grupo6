@@ -41,9 +41,13 @@ nav {
     transform: scale(5.5);
         box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
         transition: transform 0.3s ease, 0.3s ease;
-
-
 }
+
+.barra-busqueda{
+    margin-left: 150px;
+    }
+    
+
 .barra-busqueda input {
     padding: 3px;
     border-radius: 4px;

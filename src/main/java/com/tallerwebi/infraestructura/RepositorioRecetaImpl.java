@@ -28,12 +28,22 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
     }
 
     @Override
-    public List<Receta> findByUsuarioId(Long usuarioId) {
+    public List<Receta> findByUsuarioIdAndNoPredefinidas(Long usuarioId) {
         return sessionFactory.getCurrentSession()
-                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId", Receta.class)
+                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId AND r.predefinida = false", Receta.class)
                 .setParameter("usuarioId", usuarioId)
                 .getResultList();
     }
+
+    @Override
+    public List<Receta> findByUsuarioId(Long usuarioId) {
+        return sessionFactory.getCurrentSession()
+                
+                .createNativeQuery("SELECT * FROM receta WHERE usuario_id = :usuarioId", Receta.class)
+                .setParameter("usuarioId", usuarioId)
+                .getResultList();
+    }
+    
 
     @Override
     public List<Receta> listarTodasLasRecetas() {
