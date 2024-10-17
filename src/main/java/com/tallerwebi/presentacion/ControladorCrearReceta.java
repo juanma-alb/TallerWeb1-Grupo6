@@ -6,18 +6,17 @@ import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.ServicioReceta;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-/*
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption; */
+import java.util.HashMap;
+import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,33 +49,33 @@ import javax.servlet.http.HttpServletRequest;
     @PostMapping("/crear-receta")
     public ModelAndView crearReceta(@ModelAttribute Receta receta, 
                                     @RequestParam("file") MultipartFile file, 
+                                    @RequestParam("contenido") String contenido, 
                                     HttpServletRequest request) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
-
+    
         if (usuarioActual == null) {
             return new ModelAndView("redirect:/login");
         }
-
+    
         try {
-            // subida de archivo
             String fileUploadResult = uploadFilesService.handleFileUpload(file);
             if (fileUploadResult.startsWith("Error")) {
                 ModelAndView model = new ModelAndView("crearReceta");
                 model.addObject("receta", receta);
-                model.addObject("error", fileUploadResult); 
+                model.addObject("error", fileUploadResult);
                 return model;
             }
-
-            
+    
             receta.setFoto(file.getOriginalFilename());
-
-            
+    
+            receta.setContenido(contenido);  
+    
             receta.setUsuario(usuarioActual);
-
-            
+    
             servicioReceta.crearReceta(receta);
+    
             return new ModelAndView("redirect:/misRecetas");
-
+    
         } catch (Exception e) {
             ModelAndView model = new ModelAndView("crearReceta");
             model.addObject("receta", receta);
@@ -85,4 +84,18 @@ import javax.servlet.http.HttpServletRequest;
             return model;
         }
     }
+
+
+@PostMapping("/upload-editor-image")
+@ResponseBody
+public Map<String, String> uploadEditorImage(@RequestParam("file") MultipartFile file) {
+    Map<String, String> response = new HashMap<>();
+    try {
+        String fileUrl = uploadFilesService.handleFileUpload(file);
+        response.put("location", fileUrl);  // La ubicación de la imagen que se usará en el editor
+    } catch (Exception e) {
+        response.put("error", "Error al subir la imagen: " + e.getMessage());
+    }
+    return response;
+}
     }

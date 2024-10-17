@@ -120,7 +120,7 @@ receta.setCalorias(recetaActualizada.getCalorias());
 receta.setTiempoPreparacion(recetaActualizada.getTiempoPreparacion());
 receta.setDescripcion(recetaActualizada.getDescripcion());
 receta.setComensales(recetaActualizada.getComensales());
-receta.setContenidoReceta(recetaActualizada.getContenidoReceta());
+receta.setContenido(recetaActualizada.getContenido());
 
 
 servicioReceta.actualizarReceta(receta);
