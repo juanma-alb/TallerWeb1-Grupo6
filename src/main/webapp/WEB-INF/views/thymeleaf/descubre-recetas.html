@@ -221,7 +221,11 @@
             <div class="info-receta">
                 <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
                 <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
-    
+                
+                <form th:action="@{'/favorito/agregar/' + ${receta.id}}" method="post">
+                    <button type="submit" class="btn btn-favoritos">Agregar a Favoritos</button>
+                </form>
+
                 <!-- BOTONES CRUD SOLO VISIBLES PARA ADMIN -->
                 <div th:block th:if="${esAdmin}">
                     <a th:href="@{'/editar-receta-admin/' + ${receta.id}}" class="boton-editar">Editar</a>

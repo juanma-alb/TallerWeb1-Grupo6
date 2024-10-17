@@ -33,6 +33,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comentario> comentarios = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Receta> recetasFavoritas = new ArrayList<>();
+    
+
     public List<Comentario> getComentarios() {
         return comentarios;
     }

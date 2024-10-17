@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.ServicioDescubreRecetas;
+import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.ServicioUsuario;
 
 @Controller
@@ -26,6 +27,9 @@ public class ControladorDescubreRecetas {
 
     @Autowired
     private ServicioUsuario servicioUsuario;
+
+     @Autowired
+    private ServicioFavorito servicioFavorito;
 
     @Autowired
     public ControladorDescubreRecetas(ServicioDescubreRecetas servicioDescubreRecetas, ServicioUsuario servicioUsuario) {
@@ -124,7 +128,29 @@ public class ControladorDescubreRecetas {
     private boolean tienePermisoParaModificarOEliminar(Usuario usuario, Receta receta) {
         return usuario != null && (usuario.getRol().equals("ADMIN") || receta.getUsuario().getId().equals(usuario.getId()));
     }
+
+
+
+    @RequestMapping(path = "/favorito/agregar/{recetaId}", method = RequestMethod.POST)
+    public String agregarAFavoritos(@PathVariable Long recetaId, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Receta receta = servicioDescubreRecetas.obtenerRecetaPorId(recetaId);
+
+        if (usuario != null && receta != null) {
+            servicioFavorito.agregarAFavoritos(usuario, receta);
+        }
+
+        return "redirect:/descubre-recetas";
+    }
+
+    @RequestMapping(path = "/favorito/eliminar/{recetaId}", method = RequestMethod.POST)
+    public String eliminarDeFavoritos(@PathVariable Long recetaId, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            servicioFavorito.eliminarDeFavoritos(usuario.getId(), recetaId);
+        }
+
+        return "redirect:/descubre-recetas";
+    }
 }
-
-
-
