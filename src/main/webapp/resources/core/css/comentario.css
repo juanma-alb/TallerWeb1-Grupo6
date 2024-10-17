@@ -1,11 +1,27 @@
+html, body{
+    height: 100%
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 .receta-comentarios {
-    max-width: 900px;
+    width: 900px;
     margin: 0 auto;
     padding: 50px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: cornsilk;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .receta-info {
@@ -14,9 +30,22 @@
 }
 
 .receta-titulo {
-    font-size: 2.5em;
+    font-size: 25px;
     color: #7c4e4e;
     margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.grids-estilos{
+    font-family:"Bebas Neue", sans-serif; 
+    font-weight: bold;
+    font-size: 40px !important;
+    letter-spacing: 1.2px;
+    word-spacing: 1.5;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -07px;
+    color: #e50914;
 }
 
 .receta-imagen {
@@ -162,6 +191,7 @@ nav {
     gap: 0.5rem;
     flex-direction: row-reverse;
     justify-content: flex-start;
+    margin-top: 10px;
 }
 
 .calificacion input[type="radio"] {
@@ -185,6 +215,33 @@ nav {
 
 .receta-titulo{
     color: black;
+}
+
+.titulo-comentario{
+    margin-top: 50px;
+}
+
+footer {
+    background-color: #ffaa01;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: relative; 
+    margin-top: auto;
+}
+
+.iconos-sociales img {
+    width: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.img-icon:hover{
+
+    
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
