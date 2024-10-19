@@ -7,7 +7,7 @@
   <!-- Bootstrap core css -->
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/comentario.css}"/>
-  <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -37,17 +37,25 @@
   </div>
 </nav>
 
+
+
+
 <!-- Contenedor principal -->
 <div class="receta-comentarios">
-  <!-- Información de la Receta -->
+
   <div class="receta-info">
-    <h2 class="receta-titulo">Nombre: <span th:text="${receta.nombre}"></span></h2>
-    <h2 class="receta-titulo">Descripción: <span th:text="${receta.descripcion}"></span></h2>
+    <h2 class="grids-estilos" th:text="${receta.nombre}"></h2>
+    <h2 class="receta-titulo" th:text="${receta.descripcion}"></h2>
   </div>
+
+  <div th:utext="${receta.contenido}"></div>
+
+  <!-- Información de la Receta -->
+  
 
   <!-- Sección de Comentarios -->
   <div class="comentarios-seccion">
-    <h3>Comentarios</h3>
+    <h3 class="titulo-comentario">Comentarios</h3>
     <div th:each="comentario : ${receta.comentarios}" class="comentario card mb-3">
       <div class="card-body">
         <h5 th:text="${comentario.usuario.nombre}" class="nombre-usuario card-title"></h5>
@@ -82,6 +90,15 @@
     <button type="submit" class="btn">Comentar</button>
   </form>
 </div>
+
+<footer>
+  <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+  <div class="iconos-sociales">
+      <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+      <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+      <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+  </div>
+</footer>
 
 </body>
 </html>

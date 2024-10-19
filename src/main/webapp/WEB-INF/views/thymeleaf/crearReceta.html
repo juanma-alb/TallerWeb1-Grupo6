@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/crear-receta.css}"/>
+    <script src="https://cdn.tiny.cloud/1/ht2ixdk86ellkbw1p2oy2ty9bip3cbmlc8psnykqdqawy1gc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 
 
@@ -93,23 +95,16 @@
             <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" required/>
         </section>
 
-        <section id="pasos">
-            <h2> Pasos </h2>
-            <div id="paso-container">
 
-                <div class="paso">
-                    <label for="pasos[0]">Paso 1:</label>
-                    <textarea id="pasos[0]" th:field="*{pasos[0]}" required></textarea>
-                    <button type="button" class="eliminar-paso">Eliminar Paso</button>
-                </div>
-            </div>
-            <button type="button" id="agregar-paso">Agregar Paso</button>
-        </section>
-
-        <section class="seccion-subir-foto">
+        <section class="seccion-subir-foto"> 
             <h2>Subir Foto</h2>
             <label for="file">Imagen de la receta:</label>
             <input type="file" id="file" name="file" accept=".jpg,.jpeg,.png" required/>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2>Contenido de la Receta</h2>
+            <textarea id="contenidoReceta" name="contenido"></textarea>
         </section>
 
         <section class="seccion-boton">
@@ -146,43 +141,39 @@
         button.parentElement.remove();
     }
 
-    let pasoCount = 1;
 
-    document.getElementById("agregar-paso").addEventListener("click", function() {
-        const pasoContainer = document.getElementById("paso-container");
-        pasoCount++;
+    
+</script>
 
-        const nuevoPasoDiv = document.createElement("div");
-        nuevoPasoDiv.classList.add("paso");
-        nuevoPasoDiv.innerHTML = `
-        <label for="pasos[${pasoCount}]">Paso ${pasoCount}:</label>
-        <textarea id="pasos[${pasoCount}]" th:field="*{pasos[${pasoCount}]}" required></textarea>
-        <button type="button" class="eliminar-paso">Eliminar Paso</button>
-    `;
-        pasoContainer.appendChild(nuevoPasoDiv);
-    });
 
-    document.getElementById("paso-container").addEventListener("click", function(event) {
-        if (event.target.classList.contains("eliminar-paso")) {
-            const pasoDiv = event.target.parentElement;
-            pasoDiv.remove();
-            pasoCount--;
-            actualizarIndicesPasos();
+<script>
+    tinymce.init({
+        selector: '#contenidoReceta',
+        plugins: 'image code',
+        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image code',
+        image_title: true,
+        automatic_uploads: true,
+        images_upload_url: '/upload-editor-image',
+        file_picker_types: 'image',
+        images_upload_handler: function (blobInfo, success, failure) {
+            var formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+            fetch('/upload-editor-image', {
+                method: 'POST',
+                body: formData
+            }).then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                success(json.location);
+            }).catch(function (error) {
+                failure('Error al subir la imagen: ' + error);
+            });
         }
     });
-
-    function actualizarIndicesPasos() {
-        const pasos = document.querySelectorAll(".paso");
-        pasos.forEach((paso, index) => {
-            const label = paso.querySelector("label");
-            const textarea = paso.querySelector("textarea");
-            label.setAttribute("for", `pasos[${index}]`);
-            label.textContent = `Paso ${index + 1}:`;
-            textarea.id = `pasos[${index}]`;
-            textarea.setAttribute("th:field", `*{pasos[${index}]}`);
-        });
-    }
 </script>
+
+
 
 <footer>
     <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>

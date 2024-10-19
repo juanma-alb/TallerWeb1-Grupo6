@@ -37,26 +37,24 @@ public class ControladorMisRecetas {
     @Autowired
     private ServicioComentario servicioComentario;
 
-    @GetMapping("/misRecetas")
-    public String listarRecetas(HttpServletRequest request,
-                                @RequestParam(value = "filtro", required = false) String filtro,
-                                Model model) {
-        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
-        List<Receta> recetas;
+    @Autowired
+    private ServicioFavorito servicioFavorito;
 
+    @GetMapping("/misRecetas")
+    public String listarRecetas(HttpServletRequest request, Model model) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
         if (usuarioActual == null) {
             return "redirect:/login";
         }
 
-        if (filtro != null && !filtro.isEmpty()) {
-            recetas = servicioReceta.buscarRecetasPorNombreRecetas(filtro);
-        } else {
-            recetas = servicioReceta.listarRecetasPorUsuario(usuarioActual.getId());
-        }
+        List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuarioActual.getId());
+        List<Receta> recetasFavoritas = servicioFavorito.obtenerRecetasFavoritas(usuarioActual.getId());
 
         model.addAttribute("recetas", recetas);
+        model.addAttribute("recetasFavoritas", recetasFavoritas);
         return "misRecetas";
     }
+
 
     @PostMapping("/mis-recetas/comentario")
     public String agregarComentario(@RequestParam Long recetaId, @RequestParam String contenido, HttpSession session) {
@@ -120,7 +118,7 @@ receta.setCalorias(recetaActualizada.getCalorias());
 receta.setTiempoPreparacion(recetaActualizada.getTiempoPreparacion());
 receta.setDescripcion(recetaActualizada.getDescripcion());
 receta.setComensales(recetaActualizada.getComensales());
-receta.setContenidoReceta(recetaActualizada.getContenidoReceta());
+receta.setContenido(recetaActualizada.getContenido());
 
 
 servicioReceta.actualizarReceta(receta);
