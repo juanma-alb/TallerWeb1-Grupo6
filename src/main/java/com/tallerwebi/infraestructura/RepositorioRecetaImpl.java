@@ -1,12 +1,9 @@
 package com.tallerwebi.infraestructura;
 
 
-import com.tallerwebi.dominio.Comentario;
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioReceta;
-import com.tallerwebi.dominio.Usuario;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,12 +35,17 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
     @Override
     public List<Receta> findByUsuarioId(Long usuarioId) {
         return sessionFactory.getCurrentSession()
-                
+
                 .createNativeQuery("SELECT * FROM receta WHERE usuario_id = :usuarioId", Receta.class)
                 .setParameter("usuarioId", usuarioId)
                 .getResultList();
     }
-    
+
+//    @Override
+//    public List<Receta> listarRecetasGuardas(Long usuarioId) {
+//        return List.of();
+//    }
+
 
     @Override
     public List<Receta> listarTodasLasRecetas() {
@@ -79,6 +81,26 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
         if (receta != null) {
             sessionFactory.getCurrentSession().delete(receta);
         }
+    }
+
+    @Override
+    public List<Receta> listarRecetasGuardadasPorUsuario(Long usuarioId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId AND r.guardada = true", Receta.class)
+                .setParameter("usuarioId", usuarioId)
+                .getResultList();
+
+
+    }
+
+    @Override
+    public int contarRecetasGuardadasPorUsuarioYTipo(Long usuarioId, String tipoComida) {
+        Long count = sessionFactory.getCurrentSession()
+                .createQuery("SELECT COUNT(r) FROM Receta r WHERE r.usuario.id = :usuarioId AND r.tipoComida = :tipoComida AND r.guardada = true", Long.class)
+                .setParameter("usuarioId", usuarioId)
+                .setParameter("tipoComida", tipoComida)
+                .getSingleResult();
+        return count.intValue();
     }
 
 }

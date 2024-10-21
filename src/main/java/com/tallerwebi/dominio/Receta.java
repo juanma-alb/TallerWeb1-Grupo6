@@ -31,8 +31,19 @@ public class Receta {
 
     private boolean predefinida;
 
+    private String tipoComida;
+
+    // Getters y Setters
+    public String getTipoComida() {
+        return tipoComida;
+    }
+
+    public void setTipoComida(String tipoComida) {
+        this.tipoComida = tipoComida;
+    }
+
     public Receta() {
-        this.predefinida = false;  // receta predefinida=true--> las recetas que ya vienen con la pagina. =false--> creada por usuario 
+        this.predefinida = false;  // receta predefinida=true--> las recetas que ya vienen con la pagina. =false--> creada por usuario
     }
 
     @Lob
@@ -52,6 +63,18 @@ public class Receta {
     // Relación con Comentario
     @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comentario> comentarios;
+
+    @Column(nullable = false)
+    private boolean guardada = false;
+
+    // Getters y setters para "guardada"
+    public boolean isGuardada() {
+        return guardada;
+    }
+
+    public void setGuardada(boolean guardada) {
+        this.guardada = guardada;
+    }
 
     // Getters y setters
     public List<Comentario> getComentarios() {

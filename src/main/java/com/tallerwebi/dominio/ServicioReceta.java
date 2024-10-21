@@ -11,5 +11,19 @@ public interface ServicioReceta {
     List<Receta> buscarRecetasPorNombreRecetas(String filtro);
     Receta buscarRecetaPorId(Long recetaId);
     void actualizarReceta(Receta receta); 
-    void eliminarReceta(Long id); 
+    void eliminarReceta(Long id);
+
+    List<Receta> listarRecetasGuardadasPorUsuario(Long id);
+
+
+    void guardarReceta(Long recetaId, Long usuarioId);
+
+    // Método para contar recetas guardadas por tipo de comida
+    int contarRecetasGuardadasPorTipo(Long usuarioId, String tipoComida);
+
+    String calcularNivelInteres(int cantidad);
+
+    int calcularPorcentaje(int cantidad);
+
+    void eliminarRecetaGuardada(Long id, Long id1);
 }

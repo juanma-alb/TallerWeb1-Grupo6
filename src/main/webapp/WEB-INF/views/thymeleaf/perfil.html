@@ -107,6 +107,25 @@
     </div>
   </div>
 
+  <!-- Progreso de interés por tipo de comida -->
+  <div class="interes-tipo-comida">
+    <h3>Interés en Tipos de Comida</h3>
+    <div th:each="interes : ${usuario.interesComidas}">
+      <div class="tipo-comida">
+        <span th:text="${interes.tipo}"></span>
+        <div class="barra-progreso">
+          <div class="progreso" th:style="'width:' + ${interes.porcentaje} + '%'"></div>
+        </div>
+        <span th:text="${interes.porcentaje} + '%'"></span> <!-- Mostrar porcentaje -->
+      </div>
+    </div>
+  </div>
+
+      </li>
+    </ul>
+  </div>
+</div>
+
               <div id="comentarios" style="display: none;">
                 <h3>Comentarios Realizados</h3>
                 <div th:if="${usuario.comentarios.size() > 0}">

@@ -95,6 +95,19 @@
             <input type="number" id="tiempoPreparacion" th:field="*{tiempoPreparacion}" required/>
         </section>
 
+        <section class="seccion-tipo-comida">
+            <h2>Tipo de Comida</h2>
+
+            <label for="tipoComida">Selecciona el tipo de comida:</label>
+            <select id="tipoComida" th:field="*{tipoComida}" required>
+                <option value="">Seleccione una opción</option>
+                <option value="vegano">Vegano</option>
+                <option value="ovolactovegetariano">Ovolactovegetariano</option>
+                <option value="flexitariano">Flexitariano</option>
+                <option value="basica">Básica</option>
+            </select>
+        </section>
+
 
         <section class="seccion-subir-foto"> 
             <h2>Subir Foto</h2>

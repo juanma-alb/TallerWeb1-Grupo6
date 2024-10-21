@@ -11,4 +11,9 @@ public interface RepositorioReceta {
     void actualizar(Receta receta);
     void eliminar(Long id);
     public List<Receta> findByUsuarioId(Long usuarioId);
+
+
+    List<Receta> listarRecetasGuardadasPorUsuario(Long usuarioId);
+
+    int contarRecetasGuardadasPorUsuarioYTipo(Long usuarioId, String tipoComida);
 }

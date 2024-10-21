@@ -139,7 +139,7 @@ footer {
     color: white;
     padding: 10px 0;
     text-align: center;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
@@ -190,17 +190,27 @@ footer {
 }
 
 
-/* grids recetas */
+.titulos {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    letter-spacing: 1.2px;
+    margin: 35px 0 -10px 20px; /* Ajustado el margen superior e inferior */
+}
 
 .grilla-recetas {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 30px; /* Aumentado el espacio */
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 40px;
-    margin-left: 30px;
+}
+
+.recetas-guardadas {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .tarjeta-receta {
@@ -209,71 +219,32 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
+    transition: transform 0.3s;
 }
 
-.tarjeta-receta:hover{
+.tarjeta-receta:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+}
 
-.tarjeta-receta img {
+.img-receta-tarjeta {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
-.etiqueta {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #dd321e;
+.boton-guardar {
+    background-color: #ffaa01;
     color: white;
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 10px 14px;
+    text-decoration: none;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.icono-categoria {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: transparent; 
-    width: 40px;
-    height: 40px;
+.boton-guardar:hover {
+    background-color: #e50914;
 }
-
-.icono-categoria img {
-    width: 100%;
-    height: 100%;
-}
-
-.subcategoria {
-    visibility: hidden; 
-    height: 0;
-}
-
-.tarjeta-receta h3 {
-    padding: 10px;
-    font-size: 18px;
-    text-align: center;
-}
-
-.calificacion {
-    padding: 10px;
-    font-size: 16px;
-    text-align: center;
-    margin-top: -20px;
-}
-
-.grids-estilos{
-    font-family:"Bebas Neue", sans-serif; 
-    font-weight: bold;
-    font-size: 20px !important;
-    letter-spacing: 1.2px;
-    word-spacing: 1.5;
-    margin-left: 120px !important;
-    margin-top: 10px;
-    margin-bottom: -07px;
-}
-

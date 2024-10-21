@@ -62,6 +62,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         sessionFactory.getCurrentSession().delete(usuario);
     }
 
+
     //CONSULTAS POSIBLES PARA USUARIOS
 
 
