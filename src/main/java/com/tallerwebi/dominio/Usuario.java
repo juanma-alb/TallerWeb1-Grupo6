@@ -1,8 +1,12 @@
 package com.tallerwebi.dominio;
 
+import org.springframework.beans.MutablePropertyValues;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Usuario {
@@ -35,7 +39,30 @@ public class Usuario {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Receta> recetasFavoritas = new ArrayList<>();
-    
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_recetas_guardadas",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "receta_id")
+    )
+    private List<Receta> recetasGuardadas = new ArrayList<>();
+
+    @ElementCollection
+    private Map<String, Integer> contadorPorTipoComida = new HashMap<>();
+
+    // Asegúrate de que esto exista
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<InteresComida> interesComidas = new ArrayList<>();
+
+    public List<InteresComida> getInteresComidas() {
+        return interesComidas;
+    }
+
+    public void setInteresComidas(List<InteresComida> interesComidas) {
+        this.interesComidas = interesComidas;
+    }
+
 
     public List<Comentario> getComentarios() {
         return comentarios;
@@ -137,5 +164,13 @@ public class Usuario {
 
     public void activar() {
         activo = true;
+    }
+
+    public List<Receta> getRecetasGuardadas() {
+        return recetasGuardadas;
+    }
+
+    public void setRecetasGuardadas(List<Receta> recetasGuardadas) {
+        this.recetasGuardadas = recetasGuardadas;
     }
 }

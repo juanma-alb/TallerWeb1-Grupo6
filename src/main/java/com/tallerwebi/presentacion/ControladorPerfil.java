@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ControladorPerfil {
@@ -30,22 +33,54 @@ public class ControladorPerfil {
     }
 
 
+
     @RequestMapping(path = "/perfil", method = RequestMethod.GET)
     public ModelAndView verPerfil(HttpServletRequest request) {
+        // Obtener el usuario de la sesión
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         if (usuario == null) {
             return new ModelAndView("redirect:/login");
         }
 
+        // Obtener comentarios y recetas del usuario
         List<Comentario> comentarios = servicioComentario.listarComentariosPorUsuario(usuario.getId());
         usuario.setComentarios(comentarios);
-        List<Receta> receta = servicioReceta.listarRecetasPorUsuario(usuario.getId());
-        usuario.setRecetas(receta);
 
+        List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuario.getId());
+        usuario.setRecetas(recetas);
+
+        // Asegurarse de que la lista de interesComidas esté inicializada
+        if (usuario.getInteresComidas() == null) {
+            usuario.setInteresComidas(new ArrayList<>());
+        }
+
+        // Agregar el cálculo de intereses de tipos de comida
+        String[] tiposComida = {"Vegano", "Ovolactovegetariano", "Flexitariano", "Básica"};
+        List<InteresComida> listaIntereses = new ArrayList<>();
+
+        for (String tipo : tiposComida) {
+            int cantidad = servicioReceta.contarRecetasGuardadasPorTipo(usuario.getId(), tipo);
+            String nivel = servicioReceta.calcularNivelInteres(cantidad);
+            int porcentaje = servicioReceta.calcularPorcentaje(cantidad); // Método para calcular el porcentaje
+
+            // Crear un nuevo objeto InteresComida y añadirlo a la lista
+            InteresComida interesComida = new InteresComida(tipo, nivel, porcentaje);
+            listaIntereses.add(interesComida);
+        }
+
+        // Establecer la lista de intereses en el usuario
+        usuario.setInteresComidas(listaIntereses);
+
+        // Preparar el modelo para la vista
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
         return new ModelAndView("perfil", model);
     }
+
+
+
+
+
 
     @RequestMapping(path = "/editar-perfil", method = RequestMethod.GET)
     public ModelAndView editarPerfil(HttpServletRequest request) {
@@ -132,5 +167,7 @@ public class ControladorPerfil {
     return "receta"; // nombre de la vista para mostrar la receta
 }
      */
+
+
 
 }

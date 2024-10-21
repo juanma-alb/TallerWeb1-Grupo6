@@ -395,3 +395,46 @@ footer {
     margin: 10px;
     padding: 10px;
 }
+.interes-tipo-comida {
+    margin-top: 60px; /* Espacio superior */
+    padding: 15px;
+    background-color: #f1f1f1; /* Fondo claro */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tipo-comida {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.barra-progreso-container {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.barra-progreso {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.progreso {
+    height: 100%;
+    background-color: #76c7c0;
+    transition: width 0.3s ease;
+}
+
+.tipo-comida-nombre {
+    font-weight: bold;
+}
+
+.porcentaje {
+    font-weight: bold;
+    margin-left: 10px;
+}

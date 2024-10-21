@@ -37,9 +37,6 @@ public class ControladorMisRecetas {
     @Autowired
     private ServicioComentario servicioComentario;
 
-    @Autowired
-    private ServicioFavorito servicioFavorito;
-
     @GetMapping("/misRecetas")
     public String listarRecetas(HttpServletRequest request, Model model) {
         Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
@@ -47,14 +44,17 @@ public class ControladorMisRecetas {
             return "redirect:/login";
         }
 
-        List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuarioActual.getId());
-        List<Receta> recetasFavoritas = servicioFavorito.obtenerRecetasFavoritas(usuarioActual.getId());
+        // Obtener las recetas creadas por el usuario
+        List<Receta> recetasCreadas = servicioReceta.listarRecetasPorUsuario(usuarioActual.getId());
 
-        model.addAttribute("recetas", recetas);
-        model.addAttribute("recetasFavoritas", recetasFavoritas);
-        return "misRecetas";
+        // Obtener las recetas guardadas por el usuario (suponiendo que se implementa un método similar)
+        List<Receta> recetasGuardadas = servicioReceta.listarRecetasGuardadasPorUsuario(usuarioActual.getId());
+
+        // Agregar las listas al modelo
+        model.addAttribute("recetasCreadas", recetasCreadas);
+        model.addAttribute("recetasGuardadas", recetasGuardadas);
+        return "misRecetas"; // Debes asegurarte de que tu vista `misRecetas.html` soporte ambas listas
     }
-
 
     @PostMapping("/mis-recetas/comentario")
     public String agregarComentario(@RequestParam Long recetaId, @RequestParam String contenido, HttpSession session) {
@@ -140,6 +140,42 @@ public String eliminarRecetaUser(@PathVariable Long id, HttpServletRequest reque
     servicioReceta.eliminarReceta(id);
     return "redirect:/misRecetas"; 
 }
+
+    @PostMapping("/guardarReceta/{id}")
+    public String guardarReceta(@PathVariable Long id, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+
+        if (usuarioActual == null) {
+            return "redirect:/login";
+        }
+
+        Receta receta = servicioReceta.buscarRecetaPorId(id);
+        if (receta == null) {
+            return "redirect:/misRecetas"; // Manejar el caso en que la receta no existe
+        }
+
+        // Marcar la receta como guardada y actualizarla
+        receta.setGuardada(true); // Suponiendo que tienes este campo en la entidad Receta
+        servicioReceta.actualizarReceta(receta);
+
+        return "redirect:/misRecetas";
+    }
+
+    @PostMapping("/eliminarRecetaGuardada/{id}")
+    public String eliminarRecetaGuardada(@PathVariable Long id, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+
+        if (usuarioActual == null) {
+            return "redirect:/login";
+        }
+
+        // Aquí deberías implementar la lógica para eliminar la receta de los guardados
+        servicioReceta.eliminarRecetaGuardada(id, usuarioActual.getId());
+        return "redirect:/misRecetas";
+    }
+
+
+
 }
 
 
