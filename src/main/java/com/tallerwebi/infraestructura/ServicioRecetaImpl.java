@@ -110,6 +110,7 @@ public class ServicioRecetaImpl implements ServicioReceta {
             actualizarReceta(receta); // Guarda los cambios
         }
     }
+    }
 
-}
+
 

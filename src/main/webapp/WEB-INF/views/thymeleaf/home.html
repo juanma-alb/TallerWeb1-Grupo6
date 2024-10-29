@@ -134,6 +134,17 @@
     </div>
 </section>
 
+<h2>Recetas Recomendadas para Ti</h2>
+<div>
+    <ul>
+        <th:block th:each="receta : ${recetasRecomendadas}">
+            <li>
+                <img th:src="${receta.foto}" alt="Imagen de [[${receta.nombre}]]" />
+                <h3 th:text="${receta.nombre}">Nombre de la receta</h3>
+            </li>
+        </th:block>
+    </ul>
+</div>
 
 
 
@@ -151,5 +162,6 @@
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/home.js}"></script>
+
 </body>
 </html>

@@ -1,16 +1,15 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
+import java.util.List;
 
 @Repository("repositorioUsuario")
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
@@ -65,6 +64,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     //CONSULTAS POSIBLES PARA USUARIOS
 
-
-
+    @Override
+    public List<Receta> obtenerRecetasGuardadas(Long usuarioId) {
+        // Consulta para obtener recetas guardadas por el usuario
+        final Session session = sessionFactory.getCurrentSession();
+        Usuario usuario = buscarPorId(usuarioId);
+        return usuario.getRecetasGuardadas();
+    }
 }
+
+

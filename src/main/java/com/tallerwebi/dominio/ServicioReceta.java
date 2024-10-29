@@ -18,7 +18,7 @@ public interface ServicioReceta {
 
     void guardarReceta(Long recetaId, Long usuarioId);
 
-    // Método para contar recetas guardadas por tipo de comida
+
     int contarRecetasGuardadasPorTipo(Long usuarioId, String tipoComida);
 
     String calcularNivelInteres(int cantidad);
@@ -26,4 +26,5 @@ public interface ServicioReceta {
     int calcularPorcentaje(int cantidad);
 
     void eliminarRecetaGuardada(Long id, Long id1);
+
 }

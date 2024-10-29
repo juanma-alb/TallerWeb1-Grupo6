@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RepositorioUsuario {
@@ -11,6 +12,7 @@ public interface RepositorioUsuario {
     Usuario buscarPorId(Long usuarioId);
     void eliminar(Usuario usuario);
 
+    List<Receta> obtenerRecetasGuardadas(Long usuarioId);
 
 
     ;

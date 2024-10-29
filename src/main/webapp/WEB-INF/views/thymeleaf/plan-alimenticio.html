@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Alimenticio</title>
+    <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
+    <div class="logo">
+        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+    </div>
+    <div class="barra-busqueda">
+        <form th:action="@{/buscar}" method="get">
+            <input type="text" name="query" placeholder="¿Qué estás buscando?">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="enlaces-navegacion">
+        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+        <a th:href="@{/crear-receta}" class="">Crear</a>
+        <a th:href="@{/perfil}" class="">Perfil</a>
+        <a th:href="@{/login}" class="">Cerrar Sesión</a>
+    </div>
+</nav>
+
+
+
+<h1>Plan Alimenticio</h1>
+<div class="plan-alimenticio-container">
+    <div th:if="${tipoComida == 'Vegano'}">
+        <h2>Plan Alimenticio Vegano</h2>
+        <!-- Día 1 -->
+        <div class="dia">
+            <h3>Día 1</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Plátano y Espinacas</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Quinoa</strong></p>
+                <p>Merienda: <strong>Hummus con Verduras</strong></p>
+                <p>Cena: <strong>Tacos Veganos</strong></p>
+                <p>Snack: <strong>Frutas Frescas</strong></p>
+            </div>
+        </div>
+        <!-- Día 2 -->
+        <div class="dia">
+            <h3>Día 2</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Porridge de Avena</strong></p>
+                <p>Almuerzo: <strong>Wrap de Verduras</strong></p>
+                <p>Merienda: <strong>Batido de Mango</strong></p>
+                <p>Cena: <strong>Chili Vegano</strong></p>
+                <p>Snack: <strong>Frutos Secos</strong></p>
+            </div>
+        </div>
+        <!-- Día 3 -->
+        <div class="dia">
+            <h3>Día 3</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Tostadas con Mantequilla de Almendra</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Lentejas</strong></p>
+                <p>Merienda: <strong>Barra de Granola</strong></p>
+                <p>Cena: <strong>Ratatouille</strong></p>
+                <p>Snack: <strong>Palomitas de Maíz</strong></p>
+            </div>
+        </div>
+        <!-- Día 4 -->
+        <div class="dia">
+            <h3>Día 4</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido Verde</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Garbanzos</strong></p>
+                <p>Merienda: <strong>Fruta de Temporada</strong></p>
+                <p>Cena: <strong>Pizza Vegana</strong></p>
+                <p>Snack: <strong>Nueces</strong></p>
+            </div>
+        </div>
+        <!-- Día 5 -->
+        <div class="dia">
+            <h3>Día 5</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Chía Pudding</strong></p>
+                <p>Almuerzo: <strong>Tabulé</strong></p>
+                <p>Merienda: <strong>Yogur Vegano</strong></p>
+                <p>Cena: <strong>Stir Fry de Tofu</strong></p>
+                <p>Snack: <strong>Frutos Rojos</strong></p>
+            </div>
+        </div>
+        <!-- Día 6 -->
+        <div class="dia">
+            <h3>Día 6</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Pancakes de Avena</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Espinacas</strong></p>
+                <p>Merienda: <strong>Batido de Frutas</strong></p>
+                <p>Cena: <strong>Hamburguesas Veganas</strong></p>
+                <p>Snack: <strong>Chips de Verdura</strong></p>
+            </div>
+        </div>
+        <!-- Día 7 -->
+        <div class="dia">
+            <h3>Día 7</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Granola con Leche Vegetal</strong></p>
+                <p>Almuerzo: <strong>Falafel con Ensalada</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Guiso de Verduras</strong></p>
+                <p>Snack: <strong>Chocolate Negro</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${tipoComida == 'Ovolactovegetariano'}">
+        <h2>Plan Alimenticio Ovolactovegetariano</h2>
+        <!-- Día 1 -->
+        <div class="dia">
+            <h3>Día 1</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Yogur con Frutas</strong></p>
+                <p>Almuerzo: <strong>Pasta con Verduras</strong></p>
+                <p>Merienda: <strong>Batido de Frutas</strong></p>
+                <p>Cena: <strong>Omelette de Espinacas</strong></p>
+                <p>Snack: <strong>Nueces</strong></p>
+            </div>
+        </div>
+        <!-- Día 2 -->
+        <div class="dia">
+            <h3>Día 2</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Tostadas con Mermelada</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Pasta</strong></p>
+                <p>Merienda: <strong>Fruta de Temporada</strong></p>
+                <p>Cena: <strong>Quiche de Verduras</strong></p>
+                <p>Snack: <strong>Galletas de Avena</strong></p>
+            </div>
+        </div>
+        <!-- Día 3 -->
+        <div class="dia">
+            <h3>Día 3</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Yogur y Frutas</strong></p>
+                <p>Almuerzo: <strong>Risotto de Champiñones</strong></p>
+                <p>Merienda: <strong>Barra de Cereales</strong></p>
+                <p>Cena: <strong>Frittata de Verduras</strong></p>
+                <p>Snack: <strong>Palomitas de Maíz</strong></p>
+            </div>
+        </div>
+        <!-- Día 4 -->
+        <div class="dia">
+            <h3>Día 4</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Panqueques con Miel</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Garbanzos</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Espaguetis a la Boloñesa</strong></p>
+                <p>Snack: <strong>Yogur</strong></p>
+            </div>
+        </div>
+        <!-- Día 5 -->
+        <div class="dia">
+            <h3>Día 5</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Huevos Revueltos</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Atún</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Pollo al Horno</strong></p>
+                <p>Snack: <strong>Galletas</strong></p>
+            </div>
+        </div>
+        <!-- Día 6 -->
+        <div class="dia">
+            <h3>Día 6</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Plátano</strong></p>
+                <p>Almuerzo: <strong>Sopa de Verduras</strong></p>
+                <p>Merienda: <strong>Frutos Secos</strong></p>
+                <p>Cena: <strong>Pollo al Curry</strong></p>
+                <p>Snack: <strong>Yogur</strong></p>
+            </div>
+        </div>
+        <!-- Día 7 -->
+        <div class="dia">
+            <h3>Día 7</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Cereal con Leche</strong></p>
+                <p>Almuerzo: <strong>Ensalada César</strong></p>
+                <p>Merienda: <strong>Batido de Frutas</strong></p>
+                <p>Cena: <strong>Pizza Casera</strong></p>
+                <p>Snack: <strong>Fruta</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${tipoComida == 'Flexitariano'}">
+        <h2>Plan Alimenticio Flexitariano</h2>
+        <!-- Día 1 -->
+        <div class="dia">
+            <h3>Día 1</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Tostadas con Aguacate</strong></p>
+                <p>Almuerzo: <strong>Ensalada César con Pollo</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Pescado al Horno con Verduras</strong></p>
+                <p>Snack: <strong>Galletas integrales</strong></p>
+            </div>
+        </div>
+        <!-- Día 2 -->
+        <div class="dia">
+            <h3>Día 2</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Avena con Frutas</strong></p>
+                <p>Almuerzo: <strong>Quinoa con Verduras</strong></p>
+                <p>Merienda: <strong>Yogur Natural</strong></p>
+                <p>Cena: <strong>Pasta Integral con Salsa de Tomate</strong></p>
+                <p>Snack: <strong>Nueces</strong></p>
+            </div>
+        </div>
+        <!-- Día 3 -->
+        <div class="dia">
+            <h3>Día 3</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Plátano</strong></p>
+                <p>Almuerzo: <strong>Wrap de Pollo</strong></p>
+                <p>Merienda: <strong>Barra de Cereales</strong></p>
+                <p>Cena: <strong>Tofu Salteado</strong></p>
+                <p>Snack: <strong>Frutos Secos</strong></p>
+            </div>
+        </div>
+        <!-- Día 4 -->
+        <div class="dia">
+            <h3>Día 4</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Huevos Revueltos con Espinacas</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Garbanzos</strong></p>
+                <p>Merienda: <strong>Batido de Frutas</strong></p>
+                <p>Cena: <strong>Salmón a la Plancha</strong></p>
+                <p>Snack: <strong>Palomitas</strong></p>
+            </div>
+        </div>
+        <!-- Día 5 -->
+        <div class="dia">
+            <h3>Día 5</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Pancakes de Avena</strong></p>
+                <p>Almuerzo: <strong>Pizza Integral de Verduras</strong></p>
+                <p>Merienda: <strong>Hummus con Verduras</strong></p>
+                <p>Cena: <strong>Pollo al Horno</strong></p>
+                <p>Snack: <strong>Fruta Fresca</strong></p>
+            </div>
+        </div>
+        <!-- Día 6 -->
+        <div class="dia">
+            <h3>Día 6</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Yogur con Granola</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Espinacas</strong></p>
+                <p>Merienda: <strong>Batido de Plátano</strong></p>
+                <p>Cena: <strong>Filete de Pescado</strong></p>
+                <p>Snack: <strong>Galletas Integrales</strong></p>
+            </div>
+        </div>
+        <!-- Día 7 -->
+        <div class="dia">
+            <h3>Día 7</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Granola con Leche</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Pollo</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Guiso de Verduras</strong></p>
+                <p>Snack: <strong>Chocolate Negro</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${tipoComida == 'Básica'}">
+        <h2>Plan Alimenticio Básico</h2>
+        <!-- Día 1 -->
+        <div class="dia">
+            <h3>Día 1</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Cereal con Leche</strong></p>
+                <p>Almuerzo: <strong>Sándwich de Jamón y Queso</strong></p>
+                <p>Merienda: <strong>Yogur</strong></p>
+                <p>Cena: <strong>Pollo Asado con Arroz</strong></p>
+                <p>Snack: <strong>Galletas</strong></p>
+            </div>
+        </div>
+        <!-- Día 2 -->
+        <div class="dia">
+            <h3>Día 2</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Huevos Revueltos</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Atún</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Carne Asada con Verduras</strong></p>
+                <p>Snack: <strong>Palomitas</strong></p>
+            </div>
+        </div>
+        <!-- Día 3 -->
+        <div class="dia">
+            <h3>Día 3</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Frutas</strong></p>
+                <p>Almuerzo: <strong>Ensalada César</strong></p>
+                <p>Merienda: <strong>Yogur con Mermelada</strong></p>
+                <p>Cena: <strong>Pizza Casera</strong></p>
+                <p>Snack: <strong>Fruta</strong></p>
+            </div>
+        </div>
+        <!-- Día 4 -->
+        <div class="dia">
+            <h3>Día 4</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Cereal con Leche</strong></p>
+                <p>Almuerzo: <strong>Sopa de Verduras</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Pollo al Horno</strong></p>
+                <p>Snack: <strong>Galletas</strong></p>
+            </div>
+        </div>
+        <!-- Día 5 -->
+        <div class="dia">
+            <h3>Día 5</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Huevos Revueltos</strong></p>
+                <p>Almuerzo: <strong>Ensalada de Pollo</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Carne Asada con Verduras</strong></p>
+                <p>Snack: <strong>Frutos Secos</strong></p>
+            </div>
+        </div>
+        <!-- Día 6 -->
+        <div class="dia">
+            <h3>Día 6</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Plátano</strong></p>
+                <p>Almuerzo: <strong>Sopa de Pollo</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Pasta con Salsa</strong></p>
+                <p>Snack: <strong>Frutos Secos</strong></p>
+            </div>
+        </div>
+
+        <div class="dia">
+            <h3>Día 7</h3>
+            <div class="comida">
+                <p>Desayuno: <strong>Batido de Plátano</strong></p>
+                <p>Almuerzo: <strong>Sopa de Pollo</strong></p>
+                <p>Merienda: <strong>Fruta</strong></p>
+                <p>Cena: <strong>Pasta con Salsa</strong></p>
+                <p>Snack: <strong>Frutos Secos</strong></p>
+            </div>
+        </div>
+
+    <div th:if="${tipoComida == null}">
+        <p>No hay un plan disponible para este tipo de comida.</p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+    <div class="iconos-sociales">
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+    </div>
+</footer>
+
+</body>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .plan-alimenticio-container {
+        max-width: 800px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+    }
+    .dia {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    h3 {
+        color: #34495e;
+    }
+    .comida p {
+        margin: 5px 0;
+    }
+    strong {
+        color: #e74c3c;
+    }
+</style>
+
+</html>

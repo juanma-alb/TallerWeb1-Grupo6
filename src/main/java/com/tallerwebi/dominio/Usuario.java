@@ -64,6 +64,7 @@ public class Usuario {
     }
 
 
+
     public List<Comentario> getComentarios() {
         return comentarios;
     }
@@ -173,4 +174,13 @@ public class Usuario {
     public void setRecetasGuardadas(List<Receta> recetasGuardadas) {
         this.recetasGuardadas = recetasGuardadas;
     }
+
+    public String obtenerTipoComidaFavorito() {
+        return contadorPorTipoComida.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
+
 }
