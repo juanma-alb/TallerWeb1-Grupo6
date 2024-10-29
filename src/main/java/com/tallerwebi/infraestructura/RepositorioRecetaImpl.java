@@ -3,7 +3,9 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioReceta;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

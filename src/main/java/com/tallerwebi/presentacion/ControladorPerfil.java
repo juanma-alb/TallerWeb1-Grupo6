@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ControladorPerfil {
@@ -168,6 +165,28 @@ public class ControladorPerfil {
 }
      */
 
+    @RequestMapping(path = "/plan-alimenticio", method = RequestMethod.GET)
+    public ModelAndView mostrarPlanAlimenticio(HttpServletRequest request) {
 
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+
+        String tipoComida = obtenerTipoComidaMayor(usuario.getInteresComidas());
+
+
+        ModelMap model = new ModelMap();
+        model.put("tipoComida", tipoComida);
+        return new ModelAndView("plan-alimenticio", model);
+    }
+
+    private String obtenerTipoComidaMayor(List<InteresComida> interesComidas) {
+        return interesComidas.stream()
+                .max(Comparator.comparingInt(InteresComida::getPorcentaje))
+                .map(InteresComida::getTipo)
+                .orElse(null);
+    }
 
 }
