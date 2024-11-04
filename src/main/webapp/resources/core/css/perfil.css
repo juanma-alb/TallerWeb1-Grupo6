@@ -438,3 +438,21 @@ footer {
     font-weight: bold;
     margin-left: 10px;
 }
+
+.botonPlan {
+    display: inline-block;
+    padding: 3px 6px;
+    background-color: #FFA500;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+.botonPlan:hover {
+    background-color: #ff8c00;
+
+}
+
+
+
+}

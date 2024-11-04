@@ -27,4 +27,7 @@ public interface ServicioReceta {
 
     void eliminarRecetaGuardada(Long id, Long id1);
 
+    String obtenerTipoComidaFavorito(Long usuarioId);
+
+    List<Receta> recomendarRecetasPorTipo(String tipoComida);
 }

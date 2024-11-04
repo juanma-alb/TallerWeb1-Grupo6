@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Recomendaciones</title>
+  <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+
+<body>
+<!-- nav todo -->
+<nav fragment="barraNavegacion">
+  <div class="logo">
+    <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+  </div>
+  <div class="barra-busqueda">
+    <form th:action="@{/buscar}" method="get">
+      <input type="text" name="query" placeholder="¿Qué estás buscando?">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
+  <div class="enlaces-navegacion">
+    <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
+    <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
+    <a th:href="@{/crear-receta}" class="">Crear</a>
+    <a th:href="@{/perfil}" class="">Perfil</a>
+    <a th:href="@{/login}" class="">Cerrar Sesión</a>
+  </div>
+</nav>
+
+
+<h1>Recomendaciones para ti</h1>
+<h2>Basado en tu interés por el tipo de comida: <span th:text="${tipoComida}"></span></h2>
+
+<div class="grilla-recetas">
+    <div th:each="receta : ${recetasRecomendadas}" class="tarjeta-receta">
+      <a th:href="@{/comentarios/{id}(id=${receta.id})}">
+      <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" class="img-receta-tarjeta" alt="Imagen de receta creada">
+      <h3 th:text="${receta.nombre}"></h3>
+    </div>
+  </div>
+
+
+<footer>
+  <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
+  <div class="iconos-sociales">
+    <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
+    <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
+    <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
+  </div>
+</footer>
+
+
+</body>
+
+<style>
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  .grilla-recetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+padding: 20px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+
+.tarjeta-receta {
+background-color: white;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+position: relative;
+transition: transform 0.3s;
+}
+
+.tarjeta-receta:hover {
+transform: scale(1.05);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.img-receta-tarjeta {
+width: 100%;
+height: 200px;
+object-fit: cover;
+border-radius: 8px;
+}
+
+  h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+  }
+
+        </style>
+</html>

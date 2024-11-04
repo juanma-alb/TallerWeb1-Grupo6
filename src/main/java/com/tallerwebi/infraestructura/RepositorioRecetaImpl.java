@@ -105,5 +105,33 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
         return count.intValue();
     }
 
+    @Override
+    public String encontrarTipoComidaFavorito(Long usuarioId) {
+        String query = "SELECT r.tipoComida, COUNT(r) AS total FROM Receta r " +
+                "WHERE r.usuario.id = :usuarioId AND r.guardada = true " +
+                "GROUP BY r.tipoComida " +
+                "ORDER BY total DESC";
+        List<Object[]> result = sessionFactory.getCurrentSession()
+                .createQuery(query, Object[].class)
+                .setParameter("usuarioId", usuarioId)
+                .setMaxResults(1)
+                .getResultList();
+
+        if (!result.isEmpty()) {
+            return (String) result.get(0)[0];
+        } else {
+            return "No se encontraron recetas";
+        }
+    }
+
+    @Override
+    public List<Receta> encontrarRecetasPorTipo(String tipoComida) {
+        String query = "FROM Receta r WHERE r.tipoComida = :tipoComida";
+        return sessionFactory.getCurrentSession()
+                .createQuery(query, Receta.class)
+                .setParameter("tipoComida", tipoComida)
+                .getResultList();
+    }
+
 }
 

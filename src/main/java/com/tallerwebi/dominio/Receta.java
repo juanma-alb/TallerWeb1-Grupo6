@@ -33,6 +33,7 @@ public class Receta {
 
     private String tipoComida;
 
+
     // Getters y Setters
     public String getTipoComida() {
         return tipoComida;
@@ -43,7 +44,7 @@ public class Receta {
     }
 
     public Receta() {
-        this.predefinida = false;  // receta predefinida=true--> las recetas que ya vienen con la pagina. =false--> creada por usuario
+        this.predefinida = false;// receta predefinida=true--> las recetas que ya vienen con la pagina. =false--> creada por usuario
     }
 
     @Lob
