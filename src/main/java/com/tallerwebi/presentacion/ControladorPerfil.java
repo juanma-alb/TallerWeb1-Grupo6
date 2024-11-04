@@ -3,11 +3,13 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,29 +48,27 @@ public class ControladorPerfil {
         List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuario.getId());
         usuario.setRecetas(recetas);
 
-        // Asegurarse de que la lista de interesComidas esté inicializada
+
         if (usuario.getInteresComidas() == null) {
             usuario.setInteresComidas(new ArrayList<>());
         }
 
-        // Agregar el cálculo de intereses de tipos de comida
         String[] tiposComida = {"Vegano", "Ovolactovegetariano", "Flexitariano", "Básica"};
         List<InteresComida> listaIntereses = new ArrayList<>();
 
         for (String tipo : tiposComida) {
             int cantidad = servicioReceta.contarRecetasGuardadasPorTipo(usuario.getId(), tipo);
             String nivel = servicioReceta.calcularNivelInteres(cantidad);
-            int porcentaje = servicioReceta.calcularPorcentaje(cantidad); // Método para calcular el porcentaje
+            int porcentaje = servicioReceta.calcularPorcentaje(cantidad);
 
-            // Crear un nuevo objeto InteresComida y añadirlo a la lista
             InteresComida interesComida = new InteresComida(tipo, nivel, porcentaje);
             listaIntereses.add(interesComida);
         }
 
-        // Establecer la lista de intereses en el usuario
+
         usuario.setInteresComidas(listaIntereses);
 
-        // Preparar el modelo para la vista
+
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
         return new ModelAndView("perfil", model);
@@ -188,5 +188,27 @@ public class ControladorPerfil {
                 .map(InteresComida::getTipo)
                 .orElse(null);
     }
+
+
+    private Usuario obtenerUsuarioDeSesion(HttpServletRequest request) {
+        return (Usuario) request.getSession().getAttribute("usuario");
+    }
+
+    @GetMapping("/recomendacion")
+    public String recomendarRecetas(Model model, HttpServletRequest request) {
+        Usuario usuario = obtenerUsuarioDeSesion(request);
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+
+        String tipoComidaFavorito = servicioReceta.obtenerTipoComidaFavorito(usuario.getId());
+        List<Receta> recetasRecomendadas = servicioReceta.recomendarRecetasPorTipo(tipoComidaFavorito);
+
+        model.addAttribute("recetasRecomendadas", recetasRecomendadas);
+        model.addAttribute("tipoComida", tipoComidaFavorito);
+
+        return "recomendacion";
+    }
+
 
 }

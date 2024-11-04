@@ -79,6 +79,12 @@
 
   <div class="perfil-botones">
 
+    <div class="botonPlan">
+      <a th:href="@{/plan-alimenticio}" class="botonPlan">Ver Plan Alimenticio</a>
+    </div>
+    <div class="botonPlan">
+      <a th:href="@{/recomendacion}" class="botonPlan">Ver Recomendacion</a>
+    </div>
     <button onclick="toggleSection('recetas')">Recetas</button>
     <button onclick="toggleSection('comentarios')">Comentarios</button>
     <button class="favoritos">
@@ -146,9 +152,6 @@
                 </div>
               </div>
 
-<div>
-  <a th:href="@{/plan-alimenticio}" class="btn btn-primary">Ver Plan Alimenticio</a>
-</div>
 
             </div>
 

@@ -110,7 +110,19 @@ public class ServicioRecetaImpl implements ServicioReceta {
             actualizarReceta(receta); // Guarda los cambios
         }
     }
+
+    @Override
+    public String obtenerTipoComidaFavorito(Long usuarioId) {
+        return repositorioReceta.encontrarTipoComidaFavorito(usuarioId);
     }
+
+    @Override
+    public List<Receta> recomendarRecetasPorTipo(String tipoComida) {
+        return repositorioReceta.encontrarRecetasPorTipo(tipoComida);
+    }
+
+
+}
 
 
 

@@ -24,5 +24,7 @@ public interface RepositorioReceta {
 
     int contarRecetasGuardadasPorUsuarioYTipo(Long usuarioId, String tipoComida);
 
+    String encontrarTipoComidaFavorito(Long usuarioId);
 
+    List<Receta> encontrarRecetasPorTipo(String tipoComida);
 }

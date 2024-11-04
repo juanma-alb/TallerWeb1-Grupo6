@@ -64,6 +64,9 @@ public class Usuario {
     }
 
 
+    public Map<String, Integer> getContadorPorTipoComida() {
+        return contadorPorTipoComida;
+    }
 
     public List<Comentario> getComentarios() {
         return comentarios;
