@@ -99,7 +99,7 @@
 </section>
 
 
-<!-- seccion de tips y notas (falta agregar mas grids y un slide) -->
+<!-- seccion de tips y notas -->
 <section class="tips-notas">
     <h2 class="titulos-notas">TIPS Y NOTAS</h2>
     <div class="tips-grid">
@@ -107,7 +107,19 @@
             <img th:src="@{/imagenes/home-imagenes/carbon.jpg}" class="tip-img" alt="Cómo se prende el carbón">
             <h3 class="titulos-normales">¿Cómo se prende el carbón?</h3>
             <p>En EasyCocina te enseñamos cómo prender el carbón de tres maneras diferentes...</p>
-            <a href="#">Ver el tip </a>
+            <a href="#" id="verTip">Ver el tip</a>
+
+            <div id="tip-detalle" style="display: none; margin-top: 10px;">
+                <p>
+                    Existen varias formas de encender el carbón: usando papel periódico, con líquido para encendedores o con una chimenea de encendido.
+                    Asegúrate de usar el método que mejor se adapte a tus necesidades y seguridad.
+                </p>
+                <ul>
+                    <li>Método 1: Con papel periódico</li>
+                    <li>Método 2: Con líquido para encendedores</li>
+                    <li>Método 3: Con chimenea de encendido</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
