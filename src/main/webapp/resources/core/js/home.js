@@ -44,3 +44,21 @@ dots.forEach((dot, index) => {
 });
 // cambio automático
 setInterval(nextSlide, 4000);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const verTipLink = document.getElementById('verTip');
+    const tipDetalle = document.getElementById('tip-detalle');
+
+    verTipLink.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (tipDetalle.style.display === "none" || tipDetalle.style.display === "") {
+            tipDetalle.style.display = "block";
+            verTipLink.textContent = "Ocultar el tip";
+        } else {
+            tipDetalle.style.display = "none";
+            verTipLink.textContent = "Ver el tip";
+        }
+    });
+});

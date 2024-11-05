@@ -455,3 +455,7 @@ footer {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     
 }
+
+#tip-detalle ul {
+    list-style-type: none;
+}
