@@ -12,7 +12,7 @@ VALUES
     (true, 244, 2, 'Plato tradicional de la cocina arequipeña.', '/spring/imagenes/slides/slide4.jpg', 'Ají de calabaza', 74, 2, 'pasta', 'espaguetis', 1, 0.0, false,'vegano'),
     (true, 243, 1, 'Receta con un toque especial al estilo mexicano.', '/spring/imagenes/slides/slide5.jpg', 'Bacalao a la vazcaína', 73, 1, 'cocteles', 'ponche', 1, 0.0, false,'vegano'),
     (true, 242, 5, 'Estofado japonés que combina múltiples sabores.', '/spring/imagenes/slides/slide6.jpg', 'Sukiyaki', 72, 5, 'pasta', 'pizza', 1, 0.0, false,'vegano'),
-    (true, 241, 5, 'Tacos de Pescado, una receta muy rica para compartir entre amigos.', '/spring/imagenes/slides/slide7.jpg', 'Tacos de Pescado', 72, 4, 'pasta', 'pescado', 1, 0.0, false,'basica'),
-    (true, 240, 5, 'Brownies caseros muy ricos.', '/spring/imagenes/slides/slide8.jpg', 'Brownie', 50, 5, 'postre', 'postre', 1, 4, false,'vegetariano'),
-    (true, 239, 5, 'Tacos Veganos de Garbanzos.', '/spring/imagenes/slides/slide9.jpg', 'Tacos Veganos de Garbanzos', 72, 3, 'pasta', 'pasta', 1, 0.0, false,'vegano'),
-    (true, 239, 2, 'Hamburguesas de Lentejas.', '/spring/imagenes/slides/slide10.jpg', 'Hamburguesas de Lentejas', 72, 3, 'pasta', 'pasta', 1, 0.0, false,'vegano');
+    (true, 241, 5, 'Tacos de Pescado, una receta muy rica para compartir entre amigos.', '/spring/imagenes/slides/slide7.jpg', 'Tacos de Pescado', 72, 4, 'carne', 'cerdo', 1, 0.0, false,'basica'),
+    (true, 240, 5, 'Brownies caseros muy ricos.', '/spring/imagenes/slides/slide8.jpg', 'Brownie', 50, 5, 'pasta', 'espaguetis', 1, 4, false,'vegetariano'),
+    (true, 239, 5, 'Tacos Veganos de Garbanzos.', '/spring/imagenes/slides/slide9.jpg', 'Tacos Veganos de Garbanzos', 72, 3, 'pasta', 'pizza', 1, 0.0, false,'vegano'),
+    (true, 239, 2, 'Hamburguesas de Lentejas.', '/spring/imagenes/slides/slide10.jpg', 'Hamburguesas de Lentejas', 72, 3, 'pasta', 'pizza', 1, 0.0, false,'vegano');

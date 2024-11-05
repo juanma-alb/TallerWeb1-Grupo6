@@ -36,19 +36,19 @@
         <a th:href="@{/login}" class="">Cerrar Sesión</a>
     </div>
 </nav>
-
 <div class="carrusel">
     <div class="slides">
         <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">
             <img th:src="${receta.foto}" alt="Receta" class="img-slide">
+
             <div class="info">
                 <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h2>
                 <p class="descripcion-carrusel" th:text="${receta.descripcion}">Descripción de la receta</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
+
+                <a th:href="@{/comentarios/{id}(id=${receta.id})}" class="boton-receta">Ver Receta</a>
             </div>
         </div>
     </div>
-    
         
         <!-- botones de navegacion (carrusel) -->
         <button class="prev"><</button>
@@ -217,16 +217,19 @@
 
     <div id="grilla-recetas" class="grilla-recetas">
         <div class="tarjeta-receta" th:each="receta : ${recetas}">
-            <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de Espaguetis">
+            <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de [[${receta.nombre}]]">
             <div class="info-receta">
-                <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
+                <h2 class="grids-estilos">
+                    <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}">Nombre de la Receta</a>
+                </h2>
                 <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
-                
+
+                <!-- Botón de agregar a favoritos -->
                 <form th:action="@{'/favorito/agregar/' + ${receta.id}}" method="post">
                     <button type="submit" class="btn btn-favoritos">Agregar a Favoritos</button>
                 </form>
 
-                <!-- BOTONES CRUD SOLO VISIBLES PARA ADMIN -->
+                <!-- Botones CRUD visibles solo para admin -->
                 <div th:block th:if="${esAdmin}">
                     <a th:href="@{'/editar-receta-admin/' + ${receta.id}}" class="boton-editar">Editar</a>
                     <form th:action="@{'/eliminarRecetaAdmin/' + ${receta.id}}" method="post" style="display: inline;">

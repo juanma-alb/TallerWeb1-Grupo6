@@ -46,7 +46,8 @@
             <div class="info">
                 <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h2>
                 <p class="descripcion-carrusel" th:text="${receta.descripcion}">Descripción de la receta</p>
-                <a href="#" class="boton-receta">Ver Receta</a>
+
+                <a th:href="@{/comentarios/{id}(id=${receta.id})}" class="boton-receta">Ver Receta</a>
             </div>
         </div>
     </div>
