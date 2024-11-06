@@ -45,6 +45,9 @@
 
   <div class="receta-info">
     <h2 class="grids-estilos" th:text="${receta.nombre}"></h2>
+    <p>Creada por:
+      <a th:href="@{/perfil/{id}(id=${receta.usuario.id})}" th:text="${receta.usuario.nombre}">Nombre del Creador</a>
+    </p>
     <h2 class="receta-titulo" th:text="${receta.descripcion}"></h2>
   </div>
 
