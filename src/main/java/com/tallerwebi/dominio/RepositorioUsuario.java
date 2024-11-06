@@ -14,7 +14,7 @@ public interface RepositorioUsuario {
 
     List<Receta> obtenerRecetasGuardadas(Long usuarioId);
 
+    List<Usuario> buscarPorNombre(String nombre);
 
-    ;
 }
 

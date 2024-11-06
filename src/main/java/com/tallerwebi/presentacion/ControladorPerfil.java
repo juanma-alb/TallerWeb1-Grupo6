@@ -75,7 +75,16 @@ public class ControladorPerfil {
     }
 
 
+    @GetMapping("/perfil/{id}")
+    public String verPerfilUsuario(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = servicioUsuario.obtenerUsuarioPorId(id);
 
+
+        usuario.getRecetas().size();
+
+        model.addAttribute("usuario", usuario);
+        return "perfil";
+    }
 
 
 

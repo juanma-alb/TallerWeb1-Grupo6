@@ -71,6 +71,17 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         Usuario usuario = buscarPorId(usuarioId);
         return usuario.getRecetasGuardadas();
     }
+
+    @Override
+    public List<Usuario> buscarPorNombre(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Usuario.class)
+                .add(Restrictions.ilike("nombre", "%" + nombre + "%"))
+                .list();
+    }
+
+
+
 }
 
 

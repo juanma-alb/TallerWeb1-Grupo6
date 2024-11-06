@@ -41,26 +41,42 @@
         <h2 th:text="'Resultados obtenidos y/o coincidentes: '"></h2>
     </section>
 
-    <section class="lista-recetas">
-        <div th:if="${#lists.isEmpty(recetas)}">
-            <p>No se encontraron recetas en esta categoría.</p>
-        </div>
-
-        
-        <div id="grilla-recetas" class="grilla-recetas">
-            <div class="tarjeta-receta" th:each="receta : ${recetas}">
-                <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de [[${receta.nombre}]]">
-                <div class="info-receta">
-                    <a th:href="@{/comentarios/{id}(id=${receta.id})}"><h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2></a>
-                    <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
-
-
-
-                </div>
+<section class="lista-recetas">
+    <h3>Recetas Encontradas</h3>
+    <div th:if="${#lists.isEmpty(recetas)}">
+        <p>No se encontraron recetas en esta categoría.</p>
+    </div>
+    <div id="grilla-recetas" class="grilla-recetas">
+        <div class="tarjeta-receta" th:each="receta : ${recetas}">
+            <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de [[${receta.nombre}]]">
+            <div class="info-receta">
+                <a th:href="@{/comentarios/{id}(id=${receta.id})}">
+                    <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
+                </a>
+                <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
             </div>
         </div>
     </div>
-    </section>
+</section>
+
+<section class="lista-usuarios">
+    <h3>Usuarios Encontrados</h3>
+    <div th:if="${#lists.isEmpty(usuarios)}">
+        <p>No se encontraron usuarios que coincidan con la búsqueda.</p>
+    </div>
+    <div th:if="${not #lists.isEmpty(usuarios)}">
+        <ul>
+            <li th:each="usuario : ${usuarios}">
+                <!-- Enlace al perfil usando el ID del usuario -->
+                <a th:href="@{/perfil/{id}(id=${usuario.id})}">
+                    <div class="tarjeta-usuario">
+                        <h4 th:text="${usuario.nombre}">Nombre del Usuario</h4>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
 
    <!-- Footer -->
 <footer>
