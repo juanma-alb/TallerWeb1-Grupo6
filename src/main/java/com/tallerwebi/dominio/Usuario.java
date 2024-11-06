@@ -23,8 +23,13 @@ public class Usuario {
     private String ciudad;
     private String foto;
 
+    /*
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private List<Receta> recetas;
+    */
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Receta> recetas;
+
 
     @Transient
     private String confirmPassword;
@@ -51,9 +56,21 @@ public class Usuario {
     @ElementCollection
     private Map<String, Integer> contadorPorTipoComida = new HashMap<>();
 
-    // Asegúrate de que esto exista
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_seguidos",
+            joinColumns = @JoinColumn(name = "seguidor_id"),
+            inverseJoinColumns = @JoinColumn(name = "seguido_id")
+    )
+    private List<Usuario> seguidos = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "seguidos")
+    private List<Usuario> seguidores = new ArrayList<>();
+
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<InteresComida> interesComidas = new ArrayList<>();
+
 
     public List<InteresComida> getInteresComidas() {
         return interesComidas;
@@ -178,6 +195,22 @@ public class Usuario {
         this.recetasGuardadas = recetasGuardadas;
     }
 
+    public List<Usuario> getSeguidos() {
+        return seguidos;
+    }
+
+    public void setSeguidos(List<Usuario> seguidos) {
+        this.seguidos = seguidos;
+    }
+
+    public List<Usuario> getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(List<Usuario> seguidores) {
+        this.seguidores = seguidores;
+    }
+
     public String obtenerTipoComidaFavorito() {
         return contadorPorTipoComida.entrySet()
                 .stream()
@@ -186,4 +219,14 @@ public class Usuario {
                 .orElse(null);
     }
 
+
+    public void seguir(Usuario usuario) {
+        seguidos.add(usuario);
+        usuario.getSeguidores().add(this);
+    }
+
+    public void dejarDeSeguir(Usuario usuario) {
+        seguidos.remove(usuario);
+        usuario.getSeguidores().remove(this);
+    }
 }

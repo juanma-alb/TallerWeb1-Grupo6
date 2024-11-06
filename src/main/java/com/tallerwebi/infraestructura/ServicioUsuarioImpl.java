@@ -92,6 +92,32 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         return repositorioUsuario.obtenerRecetasGuardadas(usuarioId);
     }
 
+    @Override
+    public void seguirUsuario(Usuario seguidor, Usuario seguido) throws Exception {
+        if (seguidor.getId().equals(seguido.getId())) {
+            throw new Exception("No te podes seguir");
+        }
+        seguidor.seguir(seguido);
+        repositorioUsuario.modificar(seguidor);
+        repositorioUsuario.modificar(seguido);
+    }
+
+    @Override
+    public void dejarDeSeguirUsuario(Usuario seguidor, Usuario seguido) throws Exception {
+        seguidor.dejarDeSeguir(seguido);
+        repositorioUsuario.modificar(seguidor);
+        repositorioUsuario.modificar(seguido);
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosPorNombre(String nombre) {
+        return repositorioUsuario.buscarPorNombre(nombre);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return repositorioUsuario.buscarPorId(id);
+    }
 
 
 }
