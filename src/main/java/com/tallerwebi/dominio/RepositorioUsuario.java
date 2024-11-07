@@ -16,5 +16,8 @@ public interface RepositorioUsuario {
 
     List<Usuario> buscarPorNombre(String nombre);
 
+    void actualizarUsuario(Usuario usuario);
+
+
 }
 
