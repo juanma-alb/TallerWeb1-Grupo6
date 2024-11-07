@@ -40,12 +40,16 @@
 <h2 class="titulos">Recetas Creadas</h2>
 
 <div class="grilla-recetas">
+
+    <div th:if="${recetasCreadas.size() == 0}">
+        <p class="advertencia">Aún no has creado tu receta, haz click <a th:href="@{/crear-receta}">AQUÍ</a> para crear una.</p>
+    </div>
+
     <div class="tarjeta-receta" th:each="receta : ${recetasCreadas}">
         <a th:href="@{/comentarios/{id}(id=${receta.id})}">
             <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" class="img-receta-tarjeta" alt="Imagen de receta creada"></a>
         <div class="info-receta">
             <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}" class="grids-estilos"></a>
-            <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
             <a th:href="@{/editar-receta-user/{id}(id=${receta.id})}" class="boton-editar">Editar</a>
             <form th:action="@{/eliminarRecetaUser/{id}(id=${receta.id})}" method="POST" style="display:inline;">
                 <button type="submit" class="boton-eliminar">Eliminar</button>
@@ -64,13 +68,17 @@
 <!-- Sección de recetas guardadas -->
 <h2 class="titulos">Recetas Guardadas</h2>
 <div class="grilla-recetas">
+
+    <div th:if="${recetasGuardadas.size() == 0}">
+        <p class="advertencia">Aún no has guardado ninguna receta en favoritos.</p>
+    </div>
+
     <div class="tarjeta-receta" th:each="receta : ${recetasGuardadas}">
         <a th:href="@{/comentarios/{id}(id=${receta.id})}">
             <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" class="img-receta-tarjeta" alt="Imagen de receta guardada">
         </a>
         <div class="info-receta">
             <a th:href="@{/comentarios/{id}(id=${receta.id})}" th:text="${receta.nombre}" class="grids-estilos"></a>
-            <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
             <!-- Botón para eliminar la receta guardada -->
             <form th:action="@{/eliminarRecetaGuardada/{id}(id=${receta.id})}" method="POST" style="display:inline;">
                 <button type="submit" class="boton-eliminar">Eliminar de Guardadas</button>

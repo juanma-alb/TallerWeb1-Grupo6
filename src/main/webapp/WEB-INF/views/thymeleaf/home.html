@@ -38,11 +38,28 @@
     </div>
 </nav>
 
+<!-- Ventana flotante -->
+<div id="interes-modal" class="modal" th:if="${usuario.primerIngreso}">
+    <div class="modal-content">
+        <h3>¿Qué tipo de comida te interesa?</h3>
+        <form th:action="@{/guardar-intereses}" method="post" accept-charset="UTF-8">
+            <div>
+                <input type="checkbox" name="tiposComida" value="Vegano"> Vegano<br>
+                <input type="checkbox" name="tiposComida" value="Ovolactovegetariano"> Ovolactovegetariano<br>
+                <input type="checkbox" name="tiposComida" value="Flexitariano"> Flexitariano<br>
+                <input type="checkbox" name="tiposComida" value="Básica"> Básica<br>
+            </div>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cerrar-modal">Cerrar</button>
+        </form>
+    </div>
+</div>
+
 
 <div class="carrusel">
     <div class="slides">
         <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">
-            <img th:src="${receta.foto}" alt="Receta" class="img-slide">
+            <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" alt="Receta" class="img-slide">
             <div class="info">
                 <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h2>
                 <p class="descripcion-carrusel" th:text="${receta.descripcion}">Descripción de la receta</p>
@@ -91,7 +108,7 @@
     <div class="recetas-grid">
         <a th:each="receta : ${recetas}" th:href="@{/comentarios/{id}(id=${receta.id})}" class="receta">
             <div>
-                <img th:src="${receta.foto}" alt="Receta" class="img-receta">
+                <img th:src="@{/imagenesSubidas/{fileName}(fileName=${receta.foto})}" alt="Receta" class="img-receta">
                 <h4 class="grids-estilos" th:text="${receta.nombre}">Nombre de la receta</h4>
                 <p class="rating" th:text="'Calificación: ' + ${receta.calificacion} + ' ★'"></p>
             </div>

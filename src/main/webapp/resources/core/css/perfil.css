@@ -351,6 +351,13 @@ nav {
     background-color: white;
 }
 
+.advertencia
+{
+    margin: 35px 0 -10px 20px;
+    margin-top: 35px;
+}    
+
+
 .modal {
     position: fixed;
     top: 0;
@@ -368,7 +375,7 @@ footer {
     color: white;
     padding: 10px 0;
     text-align: center;
-    margin-top: 230px;
+    margin-top: 180px;
 
 }
 
