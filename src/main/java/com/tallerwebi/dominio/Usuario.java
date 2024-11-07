@@ -23,6 +23,8 @@ public class Usuario {
     private String ciudad;
     private String foto;
 
+    private boolean primerIngreso = true;
+
     /*
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private List<Receta> recetas;
@@ -71,6 +73,14 @@ public class Usuario {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<InteresComida> interesComidas = new ArrayList<>();
 
+
+    public boolean isPrimerIngreso() {
+        return primerIngreso;
+    }
+
+    public void setPrimerIngreso(boolean primerIngreso) {
+        this.primerIngreso = primerIngreso;
+    }
 
     public List<InteresComida> getInteresComidas() {
         return interesComidas;
