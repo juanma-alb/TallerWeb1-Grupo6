@@ -63,12 +63,14 @@ public class ServicioRecetaImpl implements ServicioReceta {
     public void guardarReceta(Long recetaId, Long usuarioId) {
         Receta receta = repositorioReceta.buscarRecetaPorId(recetaId);
         Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
-
-        // Aquí puedes agregar la lógica para marcar una receta como guardada
-        receta.setGuardada(true);
-        receta.setUsuario(usuario);  // Asegúrate de que la receta esté asociada al usuario
-        repositorioReceta.save(receta);
+    
+        if (receta != null && usuario != null) {
+            receta.setGuardada(true);
+            receta.setUsuario(usuario);  
+            repositorioReceta.save(receta);
+        }
     }
+    
 
     // Método para contar recetas guardadas por tipo de comida
     @Override
@@ -91,25 +93,33 @@ public class ServicioRecetaImpl implements ServicioReceta {
 
     @Override
     public int calcularPorcentaje(int cantidad) {
-        // Suponiendo que el máximo es 10 recetas guardadas para obtener un 100% de interés
-        int maxRecetas = 10; // Puedes ajustar este valor según tus necesidades
+        
+        int maxRecetas = 10; 
         if (cantidad <= 0) {
-            return 0; // Si no hay recetas, el porcentaje es 0
+            return 0; 
         } else if (cantidad >= maxRecetas) {
-            return 100; // Si se alcanzan o superan las 10 recetas, el interés es 100%
+            return 100; 
         } else {
-            return (cantidad * 100) / maxRecetas; // Cálculo del porcentaje
+            return (cantidad * 100) / maxRecetas; 
         }
     }
 
     @Override
-    public void eliminarRecetaGuardada(Long recetaId, Long usuarioId) {
-        Receta receta = repositorioReceta.buscarRecetaPorId(recetaId);
-        if (receta != null && receta.getUsuario().getId().equals(usuarioId)) {
-            receta.setGuardada(false); // Cambia el estado de guardada
-            actualizarReceta(receta); // Guarda los cambios
+public void eliminarRecetaGuardada(Long recetaId, Long usuarioId) {
+    Receta receta = repositorioReceta.buscarRecetaPorId(recetaId);
+
+    if (receta != null) {
+        if (receta.isPredefinida()) {
+            receta.setGuardada(false);
+            actualizarReceta(receta);
+        }
+        else if (receta.getUsuario() != null && receta.getUsuario().getId().equals(usuarioId)) {
+            receta.setGuardada(false);
+            actualizarReceta(receta);
         }
     }
+}
+
 
     @Override
     public String obtenerTipoComidaFavorito(Long usuarioId) {
@@ -121,6 +131,29 @@ public class ServicioRecetaImpl implements ServicioReceta {
         return repositorioReceta.encontrarRecetasPorTipo(tipoComida);
     }
 
+
+    @Override
+    public void actualizarInteresesUsuario(Long usuarioId, List<String> tiposComida) {
+        Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
+        if (usuario != null) {
+            for (String tipo : tiposComida) {
+                InteresComida interes = usuario.getInteresComidas()
+                    .stream()
+                    .filter(i -> i.getTipo().equals(tipo))
+                    .findFirst()
+                    .orElse(new InteresComida(tipo, "poco", 0));
+                
+                int nuevoPorcentaje = Math.min(100, interes.getPorcentaje() + 20);
+                interes.setPorcentaje(nuevoPorcentaje);
+                interes.setNivel(calcularNivelInteres(nuevoPorcentaje / 10)); 
+                
+                if (!usuario.getInteresComidas().contains(interes)) {
+                    usuario.getInteresComidas().add(interes);
+                }
+            }
+            repositorioUsuario.guardar(usuario);
+        }
+    }
 
 }
 

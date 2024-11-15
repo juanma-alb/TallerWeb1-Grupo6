@@ -87,51 +87,54 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
 
     @Override
     public List<Receta> listarRecetasGuardadasPorUsuario(Long usuarioId) {
+        String query = "FROM Receta r WHERE (r.usuario.id = :usuarioId OR r.predefinida = true) AND r.guardada = true";
         return sessionFactory.getCurrentSession()
-                .createQuery("FROM Receta r WHERE r.usuario.id = :usuarioId AND r.guardada = true", Receta.class)
+                .createQuery(query, Receta.class)
                 .setParameter("usuarioId", usuarioId)
                 .getResultList();
-
-
     }
-
+    
     @Override
     public int contarRecetasGuardadasPorUsuarioYTipo(Long usuarioId, String tipoComida) {
+        String query = "SELECT COUNT(r) FROM Receta r " +
+                       "WHERE (r.usuario.id = :usuarioId OR r.predefinida = true) " +
+                       "AND r.tipoComida = :tipoComida AND r.guardada = true";
         Long count = sessionFactory.getCurrentSession()
-                .createQuery("SELECT COUNT(r) FROM Receta r WHERE r.usuario.id = :usuarioId AND r.tipoComida = :tipoComida AND r.guardada = true", Long.class)
+                .createQuery(query, Long.class)
                 .setParameter("usuarioId", usuarioId)
                 .setParameter("tipoComida", tipoComida)
                 .getSingleResult();
         return count.intValue();
     }
-
+    
     @Override
     public String encontrarTipoComidaFavorito(Long usuarioId) {
         String query = "SELECT r.tipoComida, COUNT(r) AS total FROM Receta r " +
-                "WHERE r.usuario.id = :usuarioId AND r.guardada = true " +
-                "GROUP BY r.tipoComida " +
-                "ORDER BY total DESC";
+                       "WHERE (r.usuario.id = :usuarioId OR r.predefinida = true) AND r.guardada = true " +
+                       "GROUP BY r.tipoComida " +
+                       "ORDER BY total DESC";
         List<Object[]> result = sessionFactory.getCurrentSession()
                 .createQuery(query, Object[].class)
                 .setParameter("usuarioId", usuarioId)
                 .setMaxResults(1)
                 .getResultList();
-
+    
         if (!result.isEmpty()) {
             return (String) result.get(0)[0];
         } else {
             return "No se encontraron recetas";
         }
     }
-
+    
     @Override
     public List<Receta> encontrarRecetasPorTipo(String tipoComida) {
-        String query = "FROM Receta r WHERE r.tipoComida = :tipoComida";
+        String query = "FROM Receta r WHERE r.tipoComida = :tipoComida AND (r.predefinida = true OR r.guardada = true)";
         return sessionFactory.getCurrentSession()
                 .createQuery(query, Receta.class)
                 .setParameter("tipoComida", tipoComida)
                 .getResultList();
     }
+    
 
 }
 

@@ -62,3 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.getElementById("cerrar-modal").addEventListener("click", function () {
+    document.getElementById("interes-modal").style.display = "none";
+});

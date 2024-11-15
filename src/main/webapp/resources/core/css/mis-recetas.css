@@ -111,6 +111,16 @@ nav {
     justify-content: center;
 }
 
+.grids-estilos{
+    font-family:"Bebas Neue", sans-serif; 
+    font-weight: bold;
+    font-size: 20px !important;
+    letter-spacing: 1.2px;
+    word-spacing: 1.5px;
+    text-align: center !important; 
+    margin-top: 10px;
+}
+
 
 .barra-busqueda-dos input {
     padding: 10px;
@@ -142,6 +152,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+    margin-top: 150px;
 }
 
 .iconos-sociales img {
@@ -205,6 +216,7 @@ footer {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    margin-left: -10px;
 }
 
 .recetas-guardadas {

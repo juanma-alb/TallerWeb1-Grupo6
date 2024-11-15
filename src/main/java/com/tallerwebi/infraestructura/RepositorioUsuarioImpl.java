@@ -80,7 +80,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .list();
     }
 
-
+    @Override
+    public void actualizarUsuario(Usuario usuario) {
+        sessionFactory.getCurrentSession().update(usuario);
+    }
 
 }
 

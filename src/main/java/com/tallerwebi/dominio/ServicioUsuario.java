@@ -17,4 +17,7 @@ public interface ServicioUsuario {
     List<Usuario> buscarUsuariosPorNombre(String nombre);
 
     Usuario obtenerUsuarioPorId(Long id);
+
+    void actualizarUsuario(Usuario usuario);
+
 }

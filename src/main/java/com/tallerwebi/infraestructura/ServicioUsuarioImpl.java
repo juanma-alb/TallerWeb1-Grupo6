@@ -119,5 +119,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         return repositorioUsuario.buscarPorId(id);
     }
 
-
+    @Override
+    public void actualizarUsuario(Usuario usuario) {
+        repositorioUsuario.actualizarUsuario(usuario);
+    }
 }

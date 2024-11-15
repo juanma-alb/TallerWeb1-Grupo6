@@ -32,6 +32,11 @@ public class ControladorComentario {
 
         Receta receta = servicioReceta.buscarRecetaPorId(recetaId);
 
+        
+        if (receta.getUsuario() == null) {
+            receta.setUsuario(new Usuario()); 
+        }
+
         ModelAndView modelAndView = new ModelAndView("comentarios");
         modelAndView.addObject("receta", receta);
 
