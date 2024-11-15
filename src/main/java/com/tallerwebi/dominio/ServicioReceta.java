@@ -30,4 +30,7 @@ public interface ServicioReceta {
     String obtenerTipoComidaFavorito(Long usuarioId);
 
     List<Receta> recomendarRecetasPorTipo(String tipoComida);
+
+    void actualizarInteresesUsuario(Long usuarioId, List<String> tiposComida);
 }
+

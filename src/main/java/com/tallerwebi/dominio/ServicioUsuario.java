@@ -12,5 +12,12 @@ public interface ServicioUsuario {
 
     List<Receta> obtenerRecetasGuardadas(Long usuarioId);
 
+    void seguirUsuario(Usuario seguidor, Usuario seguido) throws Exception;
+    void dejarDeSeguirUsuario(Usuario seguidor, Usuario seguido) throws Exception;
+    List<Usuario> buscarUsuariosPorNombre(String nombre);
+
+    Usuario obtenerUsuarioPorId(Long id);
+
+    void actualizarUsuario(Usuario usuario);
 
 }

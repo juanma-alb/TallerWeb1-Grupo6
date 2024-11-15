@@ -113,6 +113,27 @@
     </div>
   </div>
 
+  <div id="comentarios" style="display: none;">
+    <h3>Comentarios Realizados</h3>
+    <div th:if="${usuario.comentarios.size() > 0}">
+      <ul class="comentarios-lista">
+        <li th:each="comentario : ${usuario.comentarios}">
+          <a th:href="@{/comentarios/{id}(id=${comentario.receta.id})}">
+            <div class="comentario-item">
+              <p class="receta-nombre">Receta: <span th:text="${comentario.receta.nombre}"></span></p>
+              <p class="comentario-texto" th:text="${comentario.contenido}"></p>
+              <p class="comentario-fecha">Publicado el: <span th:text="${comentario.fecha}"></span></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${usuario.comentarios.size() == 0}">
+      <p>No has hecho ningún comentario.</p>
+    </div>
+  </div>
+
+
   <!-- Progreso de interés por tipo de comida -->
   <div class="interes-tipo-comida">
     <h3>Interés en Tipos de Comida</h3>
@@ -127,33 +148,7 @@
     </div>
   </div>
 
-      </li>
-    </ul>
-  </div>
 </div>
-
-              <div id="comentarios" style="display: none;">
-                <h3>Comentarios Realizados</h3>
-                <div th:if="${usuario.comentarios.size() > 0}">
-                  <ul class="comentarios-lista">
-                    <li th:each="comentario : ${usuario.comentarios}">
-                      <a th:href="@{/comentarios/{id}(id=${comentario.receta.id})}">
-                        <div class="comentario-item">
-                          <p class="receta-nombre">Receta: <span th:text="${comentario.receta.nombre}"></span></p>
-                          <p class="comentario-texto" th:text="${comentario.contenido}"></p>
-                          <p class="comentario-fecha">Publicado el: <span th:text="${comentario.fecha}"></span></p>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div th:if="${usuario.comentarios.size() == 0}">
-                  <p>No has hecho ningún comentario.</p>
-                </div>
-              </div>
-
-
-            </div>
 
             <!-- Footer -->
 <footer>
@@ -184,6 +179,7 @@
     window.location.href = '/eliminar-cuenta';
   }
 </script>
+
 
 </body>
 </html>
