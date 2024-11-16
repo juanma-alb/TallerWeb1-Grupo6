@@ -43,14 +43,14 @@ public class ControladorPerfil {
 
         // Obtener comentarios y recetas del usuario
         List<Comentario> comentarios = servicioComentario.listarComentariosPorUsuario(usuario.getId());
-        usuario.setComentarios(comentarios);
+        usuario.setComentarios(new HashSet<>(comentarios));
 
         List<Receta> recetas = servicioReceta.listarRecetasPorUsuario(usuario.getId());
-        usuario.setRecetas(recetas);
+        usuario.setRecetas(new HashSet<>(recetas));
 
 
         if (usuario.getInteresComidas() == null) {
-            usuario.setInteresComidas(new ArrayList<>());
+            usuario.setInteresComidas(new HashSet<>());
         }
 
         String[] tiposComida = {"Vegano", "Ovolactovegetariano", "Flexitariano", "Básica"};
@@ -66,7 +66,7 @@ public class ControladorPerfil {
         }
 
 
-        usuario.setInteresComidas(listaIntereses);
+        usuario.setInteresComidas(new HashSet<>(listaIntereses));
 
 
         ModelMap model = new ModelMap();
@@ -191,7 +191,10 @@ public class ControladorPerfil {
         return new ModelAndView("plan-alimenticio", model);
     }
 
-    private String obtenerTipoComidaMayor(List<InteresComida> interesComidas) {
+    private String obtenerTipoComidaMayor(Set<InteresComida> interesComidas) {
+        if (interesComidas == null || interesComidas.isEmpty()) {
+            return null;
+        }
         return interesComidas.stream()
                 .max(Comparator.comparingInt(InteresComida::getPorcentaje))
                 .map(InteresComida::getTipo)

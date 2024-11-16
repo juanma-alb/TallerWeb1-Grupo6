@@ -48,11 +48,16 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         sessionFactory.getCurrentSession().update(usuario);
     }
 
+    //
     @Override
-    public Usuario buscarPorId(Long usuarioId) {
+    public Usuario buscarPorId(Long id) {
         return (Usuario) sessionFactory.getCurrentSession()
-                .createCriteria(Usuario.class)
-                .add(Restrictions.eq("id", usuarioId))
+                .createQuery("SELECT u FROM Usuario u " +
+                        "LEFT JOIN FETCH u.interesComidas " +
+                        "LEFT JOIN FETCH u.recetas " +
+                        "LEFT JOIN FETCH u.comentarios " +
+                        "WHERE u.id = :id", Usuario.class)
+                .setParameter("id", id)
                 .uniqueResult();
     }
 
@@ -69,7 +74,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         // Consulta para obtener recetas guardadas por el usuario
         final Session session = sessionFactory.getCurrentSession();
         Usuario usuario = buscarPorId(usuarioId);
-        return usuario.getRecetasGuardadas();
+        return (List<Receta>) usuario.getRecetasGuardadas();
     }
 
     @Override

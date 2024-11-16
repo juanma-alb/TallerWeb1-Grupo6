@@ -1,12 +1,7 @@
 package com.tallerwebi.dominio;
 
-import org.springframework.beans.MutablePropertyValues;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Usuario {
@@ -29,9 +24,8 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private List<Receta> recetas;
     */
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Receta> recetas;
-
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Receta> recetas = new LinkedHashSet<>();
 
     @Transient
     private String confirmPassword;
@@ -41,11 +35,12 @@ public class Usuario {
 
     private String newPassword; // Nueva contraseña (para actualización)
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comentario> comentarios = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Comentario> comentarios = new LinkedHashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Receta> recetasFavoritas = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(
@@ -53,7 +48,8 @@ public class Usuario {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "receta_id")
     )
-    private List<Receta> recetasGuardadas = new ArrayList<>();
+    private Set<Receta> recetasGuardadas = new LinkedHashSet<>();
+
 
     @ElementCollection
     private Map<String, Integer> contadorPorTipoComida = new HashMap<>();
@@ -64,14 +60,14 @@ public class Usuario {
             joinColumns = @JoinColumn(name = "seguidor_id"),
             inverseJoinColumns = @JoinColumn(name = "seguido_id")
     )
-    private List<Usuario> seguidos = new ArrayList<>();
+    private Set<Usuario> seguidos = new LinkedHashSet<>();
 
     @ManyToMany(mappedBy = "seguidos")
-    private List<Usuario> seguidores = new ArrayList<>();
-
+    private Set<Usuario> seguidores = new LinkedHashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<InteresComida> interesComidas = new ArrayList<>();
+    private Set<InteresComida> interesComidas = new LinkedHashSet<>();
+
 
 
     public boolean isPrimerIngreso() {
@@ -82,11 +78,11 @@ public class Usuario {
         this.primerIngreso = primerIngreso;
     }
 
-    public List<InteresComida> getInteresComidas() {
+    public Set<InteresComida> getInteresComidas() {
         return interesComidas;
     }
 
-    public void setInteresComidas(List<InteresComida> interesComidas) {
+    public void setInteresComidas(Set<InteresComida> interesComidas) {
         this.interesComidas = interesComidas;
     }
 
@@ -95,15 +91,15 @@ public class Usuario {
         return contadorPorTipoComida;
     }
 
-    public List<Comentario> getComentarios() {
+    public Set<Comentario> getComentarios() {
         return comentarios;
     }
 
-    public List<Receta> getRecetas() {
+    public Set<Receta> getRecetas() {
         return recetas;
     }
 
-    public void setRecetas(List<Receta> recetas) {
+    public void setRecetas(Set<Receta> recetas) {
         this.recetas = recetas;
     }
 
@@ -185,7 +181,7 @@ public class Usuario {
         this.foto = foto;
     }
 
-    public void setComentarios(List<Comentario> comentarios) {
+    public void setComentarios(Set<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
 
@@ -197,27 +193,27 @@ public class Usuario {
         activo = true;
     }
 
-    public List<Receta> getRecetasGuardadas() {
+    public Set<Receta> getRecetasGuardadas() {
         return recetasGuardadas;
     }
 
-    public void setRecetasGuardadas(List<Receta> recetasGuardadas) {
+    public void setRecetasGuardadas(Set<Receta> recetasGuardadas) {
         this.recetasGuardadas = recetasGuardadas;
     }
 
-    public List<Usuario> getSeguidos() {
+    public Set<Usuario> getSeguidos() {
         return seguidos;
     }
 
-    public void setSeguidos(List<Usuario> seguidos) {
+    public void setSeguidos(Set<Usuario> seguidos) {
         this.seguidos = seguidos;
     }
 
-    public List<Usuario> getSeguidores() {
+    public Set<Usuario> getSeguidores() {
         return seguidores;
     }
 
-    public void setSeguidores(List<Usuario> seguidores) {
+    public void setSeguidores(Set<Usuario> seguidores) {
         this.seguidores = seguidores;
     }
 
