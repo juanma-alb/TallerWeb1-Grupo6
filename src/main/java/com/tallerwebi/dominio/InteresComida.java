@@ -22,6 +22,10 @@ public class InteresComida {
         this.porcentaje = porcentaje;
     }
 
+    public InteresComida() {
+
+    }
+
 
     // Getters
     public String getTipo() {
