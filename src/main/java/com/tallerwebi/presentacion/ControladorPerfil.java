@@ -76,14 +76,25 @@ public class ControladorPerfil {
 
 
     @GetMapping("/perfil/{id}")
-    public String verPerfilUsuario(@PathVariable("id") Long id, Model model) {
+    public String verPerfilUsuario(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        Usuario usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuarioActual == null) {
+            return "redirect:/login";
+        }
+
         Usuario usuario = servicioUsuario.obtenerUsuarioPorId(id);
 
+        if (usuario == null) {
+            return "redirect:/error";
+        }
 
-        usuario.getRecetas().size();
+        if (usuarioActual.getId().equals(id)) {
+            return "redirect:/perfil";
+        }
 
         model.addAttribute("usuario", usuario);
-        return "perfil";
+
+        return "perfilUsuario";
     }
 
 
