@@ -134,6 +134,9 @@ public class RepositorioRecetaImpl implements RepositorioReceta {
                 .setParameter("tipoComida", tipoComida)
                 .getResultList();
     }
+
+
+
     
 
 }

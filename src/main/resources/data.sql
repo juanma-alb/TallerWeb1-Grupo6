@@ -1,8 +1,8 @@
 -- usuarios
-INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto, primerIngreso)
+INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto)
 VALUES
-    ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png', false),
-   ('test2@unlam.edu.ar', 'test2', 'USER', true, 'alguien', 'Usuario prueba', 'BuenosAires', 'default-user.png', true);
+    ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png'),
+   ('test2@unlam.edu.ar', 'test2', 'USER', true, 'alguien', 'Usuario prueba', 'BuenosAires', 'default-user.png');
 -- recetas definidas
 INSERT INTO receta (predefinida, calorias, comensales, descripcion, foto, nombre, tiempoPreparacion, calificacion, categoria, subcategoria, usuario_id, calificacionPromedio, guardada, tipoComida)
 VALUES

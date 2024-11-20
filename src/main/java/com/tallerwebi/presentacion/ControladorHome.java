@@ -58,9 +58,9 @@ public class ControladorHome {
     }
 
 
-    @PostMapping("/guardar-intereses")
+   /* @PostMapping("/guardar-intereses")
 
-    public String guardarIntereses(@RequestParam List<String> tiposComida, HttpServletRequest request) {
+   public String guardarIntereses(@RequestParam List<String> tiposComida, HttpServletRequest request) {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         if (usuario == null) {
             return "redirect:/login";
@@ -74,6 +74,6 @@ public class ControladorHome {
         System.out.println("Datos recibidos: " + tiposComida);
 
         return "redirect:/home";
-    }
+    }*/
 
 }
