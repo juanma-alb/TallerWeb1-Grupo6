@@ -1,8 +1,16 @@
+-- planes
+    INSERT INTO Plan (id, nombrePlan, precio) VALUES
+(1, 'Básico', 0.00),
+(2, 'Avanzado', 10.00),
+(3, 'Premium', 20.00);
+
 -- usuarios
-INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto)
+INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto, plan_id )
 VALUES
-    ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png'),
-   ('test2@unlam.edu.ar', 'test2', 'USER', true, 'alguien', 'Usuario prueba', 'BuenosAires', 'default-user.png');
+    ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png', 3),
+   ('test2@unlam.edu.ar', 'test2', 'USER', true, 'alguien', 'Usuario prueba', 'BuenosAires', 'default-user.png',1);
+
+
 -- recetas definidas
 INSERT INTO receta (predefinida, calorias, comensales, descripcion, foto, nombre, tiempoPreparacion, calificacion, categoria, subcategoria, usuario_id, calificacionPromedio, guardada, tipoComida)
 VALUES
@@ -16,3 +24,4 @@ VALUES
     (true, 240, 5, 'Brownies caseros muy ricos.', 'slide8.jpg', 'Brownie', 50, 5, 'pasta', 'espaguetis', null, 4, false,'Básica'),
     (true, 239, 5, 'Tacos Veganos de Garbanzos.', 'slide9.jpeg', 'Tacos Veganos de Garbanzos', 72, 3, 'pasta', 'pizza', null, 0.0, false,'vegano'),
     (true, 239, 2, 'Hamburguesas de Lentejas.', 'slide10.jpg', 'Hamburguesas de Lentejas', 72, 3, 'pasta', 'pizza', null, 0.0, false,'vegano');
+
