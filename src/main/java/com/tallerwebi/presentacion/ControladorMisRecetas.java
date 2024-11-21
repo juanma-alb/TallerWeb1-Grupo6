@@ -151,11 +151,10 @@ public String eliminarRecetaUser(@PathVariable Long id, HttpServletRequest reque
 
         Receta receta = servicioReceta.buscarRecetaPorId(id);
         if (receta == null) {
-            return "redirect:/misRecetas"; // Manejar el caso en que la receta no existe
+            return "redirect:/misRecetas";
         }
 
-        // Marcar la receta como guardada y actualizarla
-        receta.setGuardada(true); // Suponiendo que tienes este campo en la entidad Receta
+        receta.setGuardada(true);
         servicioReceta.actualizarReceta(receta);
 
         return "redirect:/misRecetas";
@@ -169,7 +168,7 @@ public String eliminarRecetaUser(@PathVariable Long id, HttpServletRequest reque
             return "redirect:/login";
         }
 
-        // Aquí deberías implementar la lógica para eliminar la receta de los guardados
+
         servicioReceta.eliminarRecetaGuardada(id, usuarioActual.getId());
         return "redirect:/misRecetas";
     }
