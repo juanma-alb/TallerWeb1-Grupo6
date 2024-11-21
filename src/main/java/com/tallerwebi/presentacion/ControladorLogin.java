@@ -2,7 +2,9 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.DatosLogin;
 import com.tallerwebi.dominio.DatosRegistro;
+import com.tallerwebi.dominio.Plan;
 import com.tallerwebi.dominio.ServicioLogin;
+import com.tallerwebi.dominio.ServicioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import com.tallerwebi.dominio.excepcion.ValidacionesIncorrectas;
@@ -20,10 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
+    private ServicioUsuario servicioUsuario;
 
     @Autowired
-    public ControladorLogin(ServicioLogin servicioLogin){
+    public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario) {
         this.servicioLogin = servicioLogin;
+        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping("/login")
@@ -39,10 +43,6 @@ public class ControladorLogin {
 
         ModelMap model = new ModelMap();
 
-       /* if (!validarContraseña(datosLogin.getPassword())) {
-            model.put("error", "La contraseña no cumple con los requisitos.");
-            return new ModelAndView("login", model);
-        }*/
 
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
@@ -67,6 +67,9 @@ public class ControladorLogin {
         usuario.setNombre(datosRegistro.getNombre());
 
         usuario.setRol("USER");
+
+        Plan planBasico = servicioUsuario.obtenerPlanPorId(1L); 
+        usuario.setPlan(planBasico);
 
         try {
             servicioLogin.registrar(usuario,datosRegistro);

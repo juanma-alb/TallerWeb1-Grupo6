@@ -3,6 +3,8 @@ package com.tallerwebi.dominio;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public interface ServicioUsuario {
 
     Usuario obtenerUsuarioPorEmail(String email);
@@ -20,4 +22,8 @@ public interface ServicioUsuario {
 
     void actualizarUsuario(Usuario usuario);
 
+    Plan obtenerPlanPorId(Long id);
+    List<Plan> obtenerTodosLosPlanes();
+
+    void actualizarPlanUsuario(Usuario usuario);
 }
