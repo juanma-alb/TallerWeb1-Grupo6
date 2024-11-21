@@ -20,7 +20,7 @@ public class Usuario {
     private String ciudad;
     private String foto;
 
-    private boolean puedeEditarPerfil;
+    // private boolean puedeEditarPerfil;
 
     @ManyToOne
     @JoinColumn(name = "plan_id")

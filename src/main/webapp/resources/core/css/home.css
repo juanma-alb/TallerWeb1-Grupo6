@@ -482,3 +482,47 @@ footer {
     text-align: center;
     width: 300px;
 }
+
+/* PLANES */
+.planes-seccion {
+    text-align: center;
+    background: linear-gradient(to bottom right, #f6a997, #ffaa01);
+    color: white;
+    padding: 50px 20px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.planes-seccion h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5em;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.planes-seccion p {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-explorar-planes {
+    font-size: 1.3em;
+    padding: 15px 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-explorar-planes:hover {
+    background-color: #d32f2f;
+    color: #fff;
+    transform: translateY(-3px);
+}
