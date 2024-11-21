@@ -48,7 +48,7 @@
     </div>
     <div id="grilla-recetas" class="grilla-recetas">
         <div class="tarjeta-receta" th:each="receta : ${recetas}">
-            <img th:src="${receta.foto}" class="img-receta-tarjeta" alt="Receta de [[${receta.nombre}]]">
+            <img th:src="${receta.foto}" class="img-receta-tarjeta">
             <div class="info-receta">
                 <a th:href="@{/comentarios/{id}(id=${receta.id})}">
                     <h2 class="grids-estilos" th:text="${receta.nombre}">Nombre de la Receta</h2>
