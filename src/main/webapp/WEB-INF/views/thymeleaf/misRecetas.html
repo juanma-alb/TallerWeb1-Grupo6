@@ -7,6 +7,8 @@
     <!-- Bootstrap core css -->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/mis-recetas.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -14,26 +16,7 @@
 
 <body>
 
-<!-- nav todo -->
-<nav fragment="barraNavegacion">
-    <div class="logo">
-        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
-    </div>
-        <div class="barra-busqueda">
-            <form th:action="@{/buscar}" method="get">
-                <input type="text" name="query" placeholder="¿Qué estás buscando?">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
-
-    <div class="enlaces-navegacion">
-        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
-        <a th:href="@{/crear-receta}" class="">Crear</a>
-        <a th:href="@{/perfil}" class="">Perfil</a>
-        <a th:href="@{/login}" class="">Cerrar Sesión</a>
-    </div>
-</nav>
+    <div th:insert="fragmentos/nav :: barraNavegacion"></div>
 
 
 
@@ -89,14 +72,8 @@
 
 </div>
 
-<footer>
-    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
-    <div class="iconos-sociales">
-        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
-        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
-        <a href="#"><img th:src="@{/imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
-    </div>
-</footer>
+<div th:insert="fragmentos/footer :: footer"></div>
+
 
 </body>
 
