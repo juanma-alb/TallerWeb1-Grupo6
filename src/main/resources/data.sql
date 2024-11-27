@@ -1,8 +1,14 @@
 -- planes
-    INSERT INTO Plan (id, nombrePlan, precio) VALUES
-(1, 'Básico', 0.00),
-(2, 'Avanzado', 10.00),
-(3, 'Premium', 20.00);
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (1, 'basico', 'funciones basicas');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (2, 'avanzado', 'puedes crear y editar tus recetas');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (3, 'premium', 'acceso a todas las funcionalidades de la pagina');
+
+INSERT INTO plan (id, tipo_plan_id, fechaCompra, fechaVencimiento) VALUES 
+(1, 1, NOW(), NOW() + INTERVAL 30 DAY),
+(2, 2, NOW(), NOW() + INTERVAL 30 DAY),
+(3, 3, NOW(), NOW() + INTERVAL 30 DAY);
+
+
 
 -- usuarios
 INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto, plan_id )
