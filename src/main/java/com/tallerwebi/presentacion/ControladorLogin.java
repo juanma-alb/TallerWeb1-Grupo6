@@ -24,7 +24,10 @@ public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
     private ServicioUsuario servicioUsuario;
+    
+    @Autowired
     private ServicioPlan servicioPlan;
+
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario) {
