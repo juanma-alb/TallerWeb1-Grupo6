@@ -14,6 +14,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import com.paypal.base.rest.APIContext;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan({"com.tallerwebi.presentacion", "com.tallerwebi.dominio", "com.tallerwebi.infraestructura"})
@@ -84,5 +86,19 @@ public class SpringWebConfig implements WebMvcConfigurer {
         multipartResolver.setDefaultEncoding("utf-8");
         return multipartResolver;
     }
+
+
+    @Configuration
+public class PayPalConfig {
+
+    private final String clientId = "AZxpPDhIPw0nAM-Nrbv5LjYtHJC-UMCFit_ABTsNVdze8lUXk-Z5BnWbGMT3BIs1mWTkfFrGEv2A-SWF"; // Reemplaza con tu Client ID
+    private final String clientSecret = "EHPsz6MYq4Np162viS1ByS2JGMeWRSnwf_TilPeI8IS7ackR5tuvHlv1UvMTJwDDlR7GqbQi4bNj20kR"; // Reemplaza con tu Client Secret
+    private final String mode = "sandbox"; // Modo sandbox para pruebas
+
+    @Bean
+    public APIContext apiContext() {
+        return new APIContext(clientId, clientSecret, mode);
+    }
+}
 
 }
