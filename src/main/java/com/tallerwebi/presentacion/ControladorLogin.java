@@ -5,6 +5,7 @@ import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.Plan;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.ServicioUsuario;
+import com.tallerwebi.infraestructura.*;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import com.tallerwebi.dominio.excepcion.ValidacionesIncorrectas;
@@ -23,6 +24,7 @@ public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
     private ServicioUsuario servicioUsuario;
+    private ServicioPlan servicioPlan;
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario) {
@@ -68,8 +70,8 @@ public class ControladorLogin {
 
         usuario.setRol("USER");
 
-        Plan planBasico = servicioUsuario.obtenerPlanPorId(1L); 
-        usuario.setPlan(planBasico);
+        Plan planBasico = servicioPlan.obtenerPlanPorId(1L); // Método del servicio para obtener el plan con id 1
+         usuario.setPlan(planBasico);
 
         try {
             servicioLogin.registrar(usuario,datosRegistro);

@@ -19,97 +19,62 @@
 
     <div th:insert="fragmentos/nav :: barraNavegacion"></div>
 
-<main>
-
-    <!-- Mensaje de error (opcional) -->
-    <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
-    </div>
-
-    <!-- Contenedor de planes -->
-    <div class="plans-container">
-
-        <!-- Plan Basico -->
-        <div class="plan-card">
-            <h2>Plan Básico</h2>
-            <img th:src="@{imagenes/plan1.png}" class="img-plan" alt="Plan Mensual">
-            <p>Plan Básico.</p>
-
+    <main>
+        
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
         </div>
-
-        <!-- Plan Avanzado -->
-        <div class="plan-card">
-            <h2>Plan Anual</h2>
-            <img th:src="@{imagenes/plan2.png}" class="img-plan" alt="Plan Anual">
-            <p>Con este plan puedes crear recetas y disfrutar de todas las funcionalidades durante un año.</p>
-            <p class="price">$13500 / año</p>
-            <form th:action="@{/comprar}" method="get">
-                <input type="hidden" name="suscripcion" value="Plan Anual">
-                <input type="hidden" name="suscripcionValor" value="13500.00">
-                <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
-            </form>
-
-            <form th:action="@{/planes/adquirir-plan}" method="post">
-                <input type="hidden" name="idPlan" value="2">
-                <button type="submit" class="buy-btn btn btn-primary">Adquirir</button>
-            </form>
-
+    
+        
+        <div class="plans-container">
+    
+            <!-- Plan Básico -->
+            <div class="plan-card">
+                <h2>Plan Básico</h2>
+                <img th:src="@{imagenes/plan1.png}" class="img-plan" alt="Plan Básico">
+                <p>Plan Básico: funciones básicas al registrarse.</p>
+                <p class="price">Gratuito</p>
+                
+                <button class="btn btn-secondary disabled" disabled>Incluido</button>
+            </div>
+    
+            <!-- Plan Avanzado -->
+            <div class="plan-card">
+                <h2>Plan Avanzado</h2>
+                <img th:src="@{imagenes/plan2.png}" class="img-plan" alt="Plan Avanzado">
+                <p>Con este plan puedes crear tus propias recetas y acceder a ellas.</p>
+                <p class="price">$5 USD</p>
+                <form th:action="@{/planes/compra}" method="post">
+                    <input type="hidden" name="planId" value="2">
+                    <input type="hidden" th:value="${usuarioId}" name="usuarioId">
+                    <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
+                </form>
+            </div>
+    
+            <!-- Plan Premium -->
+            <div class="plan-card">
+                <h2>Plan Premium</h2>
+                <img th:src="@{imagenes/plan3.png}" class="img-plan" alt="Plan Premium">
+                <p>Accede a todas las funcionalidades sin límites y disfruta de lo mejor de nuestras recetas.</p>
+                <p class="price">$10 USD</p>
+                <form th:action="@{/planes/compra}" method="post">
+                    <input type="hidden" name="planId" value="3">
+                    <input type="hidden" th:value="${usuarioId}" name="usuarioId">
+                    <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
+                </form>
+            </div>
         </div>
-
-        <!-- Plan Premium -->
-        <div class="plan-card">
-            <h2>Plan Premium</h2>
-            <img th:src="@{imagenes/plan3.png}" class="img-plan" alt="Plan Premium">
-            <p>Accede a todas las funcionalidades sin límites y disfruta de lo mejor de nuestras recetas.</p>
-            <p class="price">$1500 / mes</p>
-            <form th:action="@{/comprar}" method="get">
-                <input type="hidden" name="suscripcion" value="Plan Premium">
-                <input type="hidden" name="suscripcionValor" value="1500.00">
-                <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
-            </form>
-
-            <form th:action="@{/planes/adquirir-plan}" method="post">
-                <input type="hidden" name="idPlan" value="3">
-                <button type="submit" class="buy-btn btn btn-primary">Adquirir</button>
-            </form>
-
+    
+        <!-- Botón de cancelar -->
+        <div class="actions">
+            <a th:href="@{/home}" class="btn btn-secondary cancel-btn">Cancelar</a>
         </div>
-    </div>
-
-    <!-- Botón de cancelar -->
-    <div class="actions">
-        <a th:href="@{/home}" class="btn btn-secondary cancel-btn">Cancelar</a>
-    </div>
-</main>
+    </main>
+    
 
 <div th:insert="fragmentos/footer :: footer"></div>
 
 </body>
-<script>
-    function comprar(button) {
-        const mp = new MercadoPago('APP_USR-ff839ce6-3f26-4d53-81b1-af7643333c5f');
-
-        // Obtener el ID de la criptomoneda del botón
-        let suscripcion = button.getAttribute('data-id');
-
-        // Obtener el valor de la suscripcion usando su ID, y quitar el símbolo $.
-        let suscripcionValor = document.getElementById('precio-diamante').textContent.split(" ")[0].replace('$', '').replace('/mes', '').trim();
-
-        // Llamada al servidor para crear la preferencia
-        fetch(`/spring/comprar?suscripcion=${suscripcion}&suscripcionValor=${suscripcionValor}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(initPoint => {
-                window.location.href = initPoint;
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-</script>
 
 
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface ServicioUsuario {
 
+
     Usuario obtenerUsuarioPorEmail(String email);
     void modificarContraseniaUsuario(Usuario usuarioActual, String currentPassword, String newPassword, String confirmPassword) throws Exception;
     void modificarDatosPerfil(Usuario usuarioActual, Usuario datosPerfil) throws Exception;
@@ -21,9 +22,5 @@ public interface ServicioUsuario {
     Usuario obtenerUsuarioPorId(Long id);
 
     void actualizarUsuario(Usuario usuario);
-
-    Plan obtenerPlanPorId(Long id);
-    List<Plan> obtenerTodosLosPlanes();
-
-    void actualizarPlanUsuario(Usuario usuario);
+      
 }
