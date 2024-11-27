@@ -10,29 +10,17 @@
 
     <!-- estilos -->
     <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/planes.css}"/>
 </head>
+
 <body>
 
-<main>
-    <nav fragment="barraNavegacion">
-        <div class="logo">
-            <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
-        </div>
-        <div class="barra-busqueda">
-            <form th:action="@{/buscar}" method="get">
-                <input type="text" name="query" placeholder="¿Qué estás buscando?">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
+    <div th:insert="fragmentos/nav :: barraNavegacion"></div>
 
-        <div class="enlaces-navegacion">
-            <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-            <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
-            <a th:href="@{/crear-receta}" class="">Crear</a>
-            <a th:href="@{/perfil}" class="">Perfil</a>
-            <a th:href="@{/login}" class="">Cerrar Sesión</a>
-        </div>
-    </nav>
+<main>
+
     <!-- Mensaje de error (opcional) -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
@@ -40,36 +28,38 @@
 
     <!-- Contenedor de planes -->
     <div class="plans-container">
-        <!-- Plan Mensual -->
+
+        <!-- Plan Basico -->
         <div class="plan-card">
-            <h2>Plan Mensual</h2>
-            <img src="path/to/image1.jpg" alt="Plan Mensual">
-            <p>Con este plan podrás editar tu perfil y disfrutar de un mes de servicio premium.</p>
-            <p class="price">$1255 / mes</p>
-            <form th:action="@{/comprar}" method="get">
-                <input type="hidden" name="suscripcion" value="Plan Mensual">
-                <input type="hidden" name="suscripcionValor" value="1255.00">
-                <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
-            </form>
+            <h2>Plan Básico</h2>
+            <img th:src="@{imagenes/plan1.png}" class="img-plan" alt="Plan Mensual">
+            <p>Plan Básico.</p>
+
         </div>
 
-        <!-- Plan Anual -->
+        <!-- Plan Avanzado -->
         <div class="plan-card">
             <h2>Plan Anual</h2>
-            <img src="path/to/image2.jpg" alt="Plan Anual">
-            <p>Con este plan puedes crear recetas y disfrutar de todas las funcionalidades durante un año con un 10% de descuento.</p>
+            <img th:src="@{imagenes/plan2.png}" class="img-plan" alt="Plan Anual">
+            <p>Con este plan puedes crear recetas y disfrutar de todas las funcionalidades durante un año.</p>
             <p class="price">$13500 / año</p>
             <form th:action="@{/comprar}" method="get">
                 <input type="hidden" name="suscripcion" value="Plan Anual">
                 <input type="hidden" name="suscripcionValor" value="13500.00">
                 <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
             </form>
+
+            <form th:action="@{/planes/adquirir-plan}" method="post">
+                <input type="hidden" name="idPlan" value="2">
+                <button type="submit" class="buy-btn btn btn-primary">Adquirir</button>
+            </form>
+
         </div>
 
         <!-- Plan Premium -->
         <div class="plan-card">
             <h2>Plan Premium</h2>
-            <img src="path/to/image3.jpg" alt="Plan Premium">
+            <img th:src="@{imagenes/plan3.png}" class="img-plan" alt="Plan Premium">
             <p>Accede a todas las funcionalidades sin límites y disfruta de lo mejor de nuestras recetas.</p>
             <p class="price">$1500 / mes</p>
             <form th:action="@{/comprar}" method="get">
@@ -77,23 +67,22 @@
                 <input type="hidden" name="suscripcionValor" value="1500.00">
                 <button type="submit" class="buy-btn btn btn-primary">Comprar</button>
             </form>
+
+            <form th:action="@{/planes/adquirir-plan}" method="post">
+                <input type="hidden" name="idPlan" value="3">
+                <button type="submit" class="buy-btn btn btn-primary">Adquirir</button>
+            </form>
+
         </div>
     </div>
 
     <!-- Botón de cancelar -->
     <div class="actions">
-        <button class="cancel-btn btn btn-secondary" onclick="window.location.href='/home'">Cancelar</button>
+        <a th:href="@{/home}" class="btn btn-secondary cancel-btn">Cancelar</a>
     </div>
 </main>
 
-<footer>
-    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
-    <div class="iconos-sociales">
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
-    </div>
-</footer>
+<div th:insert="fragmentos/footer :: footer"></div>
 
 </body>
 <script>
@@ -122,127 +111,5 @@
 
 </script>
 
-<style>
-    h2 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 20px;
-        margin-top: 15px;
-        margin-left: 10px;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: black;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    header h1 {
-        margin: 0;
-    }
-
-    .usuario {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .cerrar-sesion {
-        background: black;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .cerrar-sesion:hover {
-        background: red;
-    }
-
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-    }
-
-    .planes {
-        display: flex;
-        gap: 2rem;
-    }
-
-    .plan {
-        background: rgba(0, 0, 0, 0.7);
-        padding: 1rem;
-        border-radius: 10px;
-        text-align: center;
-        width: 250px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .plan img {
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-    }
-
-    .plan h2 {
-        margin: 0 0 1rem;
-    }
-
-    .plan p {
-        font-size: 0.9rem;
-        margin: 0 0 1.5rem;
-    }
-
-    .comprar {
-        background: #ff6600;
-        color: black;
-        border: none;
-        padding: 0.7rem 1rem;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-
-    .comprar:hover {
-        background: #ff4500;
-    }
-
-    .acciones {
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    .cancelar, .avanzar {
-        background: black;
-        color: black;
-        border: none;
-        padding: 0.7rem 1.5rem;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-
-    .cancelar:hover {
-        background: gray;
-    }
-
-    .avanzar:hover {
-        background: green;
-    }
-
-</style>
 
 </html>

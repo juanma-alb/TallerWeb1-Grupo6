@@ -20,7 +20,7 @@ public class Usuario {
     private String ciudad;
     private String foto;
 
-    private boolean puedeEditarPerfil;
+    // private boolean puedeEditarPerfil;
 
     @ManyToOne
     @JoinColumn(name = "plan_id")
@@ -38,7 +38,6 @@ public class Usuario {
     @Transient
     private String confirmPassword;
 
-    @Transient
     private String currentPassword;
 
     private String newPassword; // Nueva contraseña (para actualización)
@@ -240,5 +239,14 @@ public class Usuario {
     public void dejarDeSeguir(Usuario usuario) {
         seguidos.remove(usuario);
         usuario.getSeguidores().remove(this);
+    }
+
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

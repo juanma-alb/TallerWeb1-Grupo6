@@ -30,6 +30,10 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
     @Override
     public void modificarContraseniaUsuario(Usuario usuarioActual, String currentPassword, String newPassword, String confirmPassword) throws Exception {
+        // Log de depuración
+        System.out.println("Contraseña actual: " + currentPassword);
+        System.out.println("Contraseña actual en la base de datos: " + usuarioActual.getPassword());
+
         if (currentPassword == null || !usuarioActual.getPassword().equals(currentPassword)) {
             throw new Exception("La contraseña actual no es válida.");
         }
@@ -57,6 +61,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         usuarioActual.setPassword(newPassword);
         repositorioUsuario.modificar(usuarioActual);
     }
+
 
 
     @Override
@@ -122,5 +127,18 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     @Override
     public void actualizarUsuario(Usuario usuario) {
         repositorioUsuario.actualizarUsuario(usuario);
+    }
+
+    public Plan obtenerPlanPorId(Long id) {
+        return repositorioUsuario.obtenerPlanPorId(id);
+    }
+
+    public List<Plan> obtenerTodosLosPlanes() {
+        return repositorioUsuario.obtenerTodosLosPlanes();
+    }
+
+    @Override
+    public void actualizarPlanUsuario(Usuario usuario) {
+        repositorioUsuario.actualizarPlanUsuario(usuario);
     }
 }

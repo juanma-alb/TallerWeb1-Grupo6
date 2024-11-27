@@ -147,12 +147,12 @@ public class ControladorPerfil {
             servicioUsuario.modificarContraseniaUsuario(usuarioActual, usuario.getCurrentPassword(), usuario.getNewPassword(), usuario.getConfirmPassword());
             return new ModelAndView("redirect:/perfil");
         } catch (Exception e) {
-            model.put("usuario", usuario);
             model.put("error", e.getMessage());
+            model.put("usuario", usuario);
             return new ModelAndView("editarPerfil", model);
         }
-
     }
+
 
 
     @RequestMapping(path = "/eliminar-cuenta", method = RequestMethod.GET)

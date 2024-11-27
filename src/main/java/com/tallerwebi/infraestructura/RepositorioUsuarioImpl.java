@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Plan;
 import com.tallerwebi.dominio.Receta;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -15,10 +17,13 @@ import java.util.List;
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     private SessionFactory sessionFactory;
+    private final JdbcTemplate jdbcTemplate;
+
 
     @Autowired
-    public RepositorioUsuarioImpl(SessionFactory sessionFactory){
+    public RepositorioUsuarioImpl(SessionFactory sessionFactory, JdbcTemplate jdbcTemplate){
         this.sessionFactory = sessionFactory;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
@@ -90,6 +95,36 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         sessionFactory.getCurrentSession().update(usuario);
     }
 
+
+    @Override
+    public Plan obtenerPlanPorId(Long id) {
+        String sql = "SELECT * FROM Plan WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
+            Plan plan = new Plan();
+            plan.setId(rs.getLong("id"));
+            plan.setNombrePlan(rs.getString("nombrePlan"));
+            plan.setPrecio(rs.getDouble("precio"));
+            return plan;
+        });
+    }
+
+    @Override
+    public List<Plan> obtenerTodosLosPlanes() {
+        String sql = "SELECT * FROM Plan";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Plan plan = new Plan();
+            plan.setId(rs.getLong("id"));
+            plan.setNombrePlan(rs.getString("nombrePlan"));
+            plan.setPrecio(rs.getDouble("precio"));
+            return plan;
+        });
+    }
+
+    @Override
+public void actualizarPlanUsuario(Usuario usuario) {
+    String sql = "UPDATE Usuario SET plan_id = ? WHERE id = ?";
+    jdbcTemplate.update(sql, usuario.getPlan().getId(), usuario.getId());
 }
 
+}
 

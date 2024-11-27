@@ -10,81 +10,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-/* nav todo */
-nav {
-    background-color: #ffaa01;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    max-height: 45px;
-}
 
-.titulo {
-    font-family: "Bebas Neue", sans-serif;
-    color: #e50914;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-
-.enlace-titulo-home{
-    text-decoration: none;
-    color: #c44004;
-
-}
-
-.enlace-titulo-home:hover{
-    color: #f6d5d5;
-    transform: scale(5.5);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;
-}
-
-.barra-busqueda{
-    margin-left: 150px;
-}
-
-.barra-busqueda input {
-    padding: 3px;
-    border-radius: 4px;
-    border: none;
-}
-
-.barra-busqueda button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #c44004;
-    color: white;
-    cursor: pointer;
-    font-family: "Bebas Neue", sans-serif;
-    margin-bottom: 2px;
-    
-}
-
-.barra-busqueda button:hover{
-    transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.enlaces-navegacion a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 20px;
-    font-family: "Bebas Neue", sans-serif;
-}
-
-.enlaces-navegacion a:hover {
-    text-decoration: none;
-    color:  #c44004;
-    transform: scale(2.2);
-        box-sizing: 0 8px 16px rgba(209, 10, 10, 0.2);
-        transition: transform 0.3s ease, 0.3s ease;
-}
 
 
 
@@ -434,27 +360,6 @@ a {
 }
 
 
-/* footer */
-footer {
-    background-color: #ffaa01;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.iconos-sociales img {
-    width: 24px;
-    margin: 0 10px;
-    cursor: pointer;
-}
-
-
-.img-icon:hover{
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-}
 
 #tip-detalle ul {
     list-style-type: none;
@@ -481,4 +386,48 @@ footer {
     border-radius: 10px;
     text-align: center;
     width: 300px;
+}
+
+/* PLANES */
+.planes-seccion {
+    text-align: center;
+    background: linear-gradient(to bottom right, #f6a997, #ffaa01);
+    color: white;
+    padding: 50px 20px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.planes-seccion h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5em;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.planes-seccion p {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-explorar-planes {
+    font-size: 1.3em;
+    padding: 15px 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-explorar-planes:hover {
+    background-color: #d32f2f;
+    color: #fff;
+    transform: translateY(-3px);
 }

@@ -18,6 +18,10 @@ public interface RepositorioUsuario {
 
     void actualizarUsuario(Usuario usuario);
 
+    Plan obtenerPlanPorId(Long id);
+    List<Plan> obtenerTodosLosPlanes();
+
+    void actualizarPlanUsuario(Usuario usuario);
 
 }
 
