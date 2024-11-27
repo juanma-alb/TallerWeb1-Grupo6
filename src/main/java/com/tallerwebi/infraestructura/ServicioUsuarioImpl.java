@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 @Transactional
 public class ServicioUsuarioImpl implements ServicioUsuario {
 
+    @Autowired
+    private RepositorioPlanImpl repositorioPlan;
+
 
     private RepositorioUsuario repositorioUsuario;
 
@@ -129,16 +132,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         repositorioUsuario.actualizarUsuario(usuario);
     }
 
-    public Plan obtenerPlanPorId(Long id) {
-        return repositorioUsuario.obtenerPlanPorId(id);
-    }
+   
 
-    public List<Plan> obtenerTodosLosPlanes() {
-        return repositorioUsuario.obtenerTodosLosPlanes();
-    }
-
-    @Override
-    public void actualizarPlanUsuario(Usuario usuario) {
-        repositorioUsuario.actualizarPlanUsuario(usuario);
-    }
 }
