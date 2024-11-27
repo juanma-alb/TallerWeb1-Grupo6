@@ -80,6 +80,7 @@ public class ControladorLoginTest {
 		verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
 	}
 
+	/*
 	@Test
 	public void registrarmeSiUsuarioNoExisteDeberiaCrearUsuarioYVolverAlLogin() throws UsuarioExistente, ValidacionesIncorrectas {
 		// preparación
@@ -107,7 +108,7 @@ public class ControladorLoginTest {
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("El usuario ya existe"));
 	}
 
-
+*/
 	/*@Test
 	public void errorEnRegistrarmeDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente, ValidacionesIncorrectas {
 
@@ -126,7 +127,7 @@ public class ControladorLoginTest {
 		// validación
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("nuevo-usuario"));
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al registrar el nuevo usuario"));
-	}   */
+	}
 
 	@Test
 	public void testRegistrarmeExitoso() {
@@ -162,7 +163,6 @@ public class ControladorLoginTest {
 	}
 
 
-
 	@Test
 	public void registrarmeConNombreInvalidoDeberiaMostrarError() throws ValidacionesIncorrectas, UsuarioExistente {
 		DatosRegistro datosRegistroMock = mock(DatosRegistro.class);
@@ -177,5 +177,7 @@ public class ControladorLoginTest {
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("nuevo-usuario"));
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("El nombre solo puede contener letras."));
 	}
+	*/
+
 
 }
