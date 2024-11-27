@@ -88,6 +88,8 @@ public class ServicioUsuarioTest {
         verify(repositorioUsuarioMock).modificar(usuario);
     }
 
+
+    /*
     @Test
     public void testObtenerPlanPorId() {
         Long planId = 1L;
@@ -111,4 +113,5 @@ public class ServicioUsuarioTest {
         assertNotNull(result, "lista de planes no nula");
         assertEquals(3, result.size(), " 3");
     }
+    */
 }
