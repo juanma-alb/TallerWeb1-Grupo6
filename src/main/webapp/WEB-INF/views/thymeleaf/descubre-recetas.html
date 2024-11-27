@@ -12,30 +12,15 @@
 
 <!-- estilos -->
 <link rel="stylesheet" th:href="@{/css/descubre-recetas.css}"/>
+<link rel="stylesheet" th:href="@{/css/nav.css}"/>
+<link rel="stylesheet" th:href="@{/css/footer.css}"/>
+
 </head>
 
 <body>
     
-<!-- nav todo -->
-<nav fragment="barraNavegacion">
-    <div class="logo">
-        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
-    </div>
-        <div class="barra-busqueda">
-            <form th:action="@{/buscar}" method="get">
-                <input type="text" name="query" placeholder="¿Qué estás buscando?">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
+    <div th:insert="fragmentos/nav :: barraNavegacion"></div>
 
-    <div class="enlaces-navegacion">
-        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
-        <a th:href="@{/crear-receta}" class="">Crear</a>
-        <a th:href="@{/perfil}" class="">Perfil</a>
-        <a th:href="@{/login}" class="">Cerrar Sesión</a>
-    </div>
-</nav>
 <div class="carrusel">
     <div class="slides">
         <div th:each="receta, stat : ${recetas}" th:class="${stat.index == 0} ? 'slide active' : 'slide'">

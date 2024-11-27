@@ -12,31 +12,14 @@
 
 <!-- estilos -->
 <link rel="stylesheet" th:href="@{/css/home.css}"/>
-
+<link rel="stylesheet" th:href="@{/css/nav.css}"/>
+<link rel="stylesheet" th:href="@{/css/footer.css}"/>
 </head>
 
 <body>
 
 <!-- nav todo -->
-<nav fragment="barraNavegacion">
-    <div class="logo">
-        <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
-    </div>
-        <div class="barra-busqueda">
-            <form th:action="@{/buscar}" method="get">
-                <input type="text" name="query" placeholder="¿Qué estás buscando?">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
-
-    <div class="enlaces-navegacion">
-        <a th:href="@{/descubre-recetas}" class="">Descubre recetas </a>
-        <a th:href="@{/misRecetas}" class="">Mis Recetas</a>
-        <a th:href="@{/crear-receta}" class="">Crear</a>
-        <a th:href="@{/perfil}" class="">Perfil</a>
-        <a th:href="@{/login}" class="">Cerrar Sesión</a>
-    </div>
-</nav>
+<div th:insert="fragmentos/nav :: barraNavegacion"></div>
 
 <!-- Ventana flotante -->
 <!--<div id="interes-modal" class="modal" th:if="${usuario.primerIngreso}">
@@ -100,7 +83,13 @@
 </section>
 
 
-
+<!-- seccion de planes -->
+<section class="planes-seccion">
+    <h2 class="titulos-notas">Explorá nuestros Planes</h2>
+    <div class="planes-contenedor">
+        <p>Descubrí los beneficios de nuestros planes premium y potenciá tu experiencia en EasyCocina.net.</p>
+        <a th:href="@{/planes}" class="btn btn-primary btn-explorar-planes">Ver Planes</a>    </div>
+</section>
 
 <!-- Sección de Top 10 Recetas  (falta agregar slide)-->
 <section class="top-recetas">
@@ -117,13 +106,7 @@
 </section>
 
 
-<!-- seccion de planes -->
-<section class="planes-seccion">
-    <h2 class="titulos-notas">Explorá nuestros Planes</h2>
-    <div class="planes-contenedor">
-        <p>Descubrí los beneficios de nuestros planes premium y potenciá tu experiencia en EasyCocina.net.</p>
-        <a th:href="@{/planes}" class="btn btn-primary btn-explorar-planes">Ver Planes</a>    </div>
-</section>
+
 
 
 <!-- seccion de tips y notas -->
@@ -185,17 +168,7 @@
     </ul>
 </div>
 
-
-
-<!-- Footer -->
-<footer>
-    <p>© 2024 EasyCocina.net - Todos los derechos reservados</p>
-    <div class="iconos-sociales">
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/facebook.png}" class="img-icon" alt="Facebook"></a>
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/twitter.png}" class="img-icon" alt="Twitter"></a>
-        <a href="#"><img th:src="@{imagenes/descubre-recetas-icons/instagram.png}" class="img-icon" alt="Instagram"></a>
-    </div>
-</footer>
+<div th:insert="fragmentos/footer :: footer"></div>
 
 
 

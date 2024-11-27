@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragmento Nav</title>
+</head>
+<body>
+    <nav th:fragment="barraNavegacion">
+        <div class="logo">
+            <h1 class="titulo"><a th:href="@{/home}" class="enlace-titulo-home">EASYCOCINA.NET</a></h1>
+        </div>
+        <div class="barra-busqueda">
+            <form th:action="@{/buscar}" method="get">
+                <input type="text" name="query" placeholder="¿Qué estás buscando?">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="enlaces-navegacion">
+            <a th:href="@{/descubre-recetas}">Descubre recetas</a>
+            <a th:href="@{/misRecetas}" th:if="${#session.getAttribute('usuario').plan.id >= 2}">Mis Recetas</a>
+            <a th:href="@{/crear-receta}" th:if="${#session.getAttribute('usuario').plan.id >= 2}">Crear</a>
+            <a th:href="@{/perfil}">Perfil</a>
+            <a th:href="@{/login}">Cerrar Sesión</a>
+        </div>
+        
+    </nav>
+</body>
+</html>

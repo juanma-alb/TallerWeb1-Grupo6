@@ -123,4 +123,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     public void actualizarUsuario(Usuario usuario) {
         repositorioUsuario.actualizarUsuario(usuario);
     }
+
+    public Plan obtenerPlanPorId(Long id) {
+        return repositorioUsuario.obtenerPlanPorId(id);
+    }
+
+    public List<Plan> obtenerTodosLosPlanes() {
+        return repositorioUsuario.obtenerTodosLosPlanes();
+    }
+
+    @Override
+    public void actualizarPlanUsuario(Usuario usuario) {
+        repositorioUsuario.actualizarPlanUsuario(usuario);
+    }
 }
