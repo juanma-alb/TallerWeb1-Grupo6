@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.InteresComida;
 import com.tallerwebi.dominio.ServicioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -36,18 +40,44 @@ public class ControladorPerfilTest {
         when(sessionMock.getAttribute("usuario")).thenReturn(usuarioMock);
     }
 
-    /*
+
     @Test
-    public void verPerfilDeberiaMostrarPerfilDelUsuario() {
-        String email = "alguien@gmail.com";
-        when(usuarioMock.getEmail()).thenReturn(email);
-        when(servicioUsuarioMock.obtenerUsuarioPorEmail(email)).thenReturn(usuarioMock);
+    public void verPerfilSinUsuarioEnSesionDeberiaRedirigirALogin() {
+        when(sessionMock.getAttribute("usuario")).thenReturn(null);
 
         ModelAndView modelAndView = controladorPerfil.verPerfil(requestMock);
 
-        assertThat(modelAndView.getViewName(), equalToIgnoringCase("perfil"));
-        assertThat(modelAndView.getModel().get("usuario"), equalTo(usuarioMock));
-    }*/
+        assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+    }
+
+    @Test
+    public void eliminarCuentaConUsuarioDeberiaInvalidarSesionYRedirigirALogin() {
+        when(sessionMock.getAttribute("usuario")).thenReturn(usuarioMock);
+        when(usuarioMock.getId()).thenReturn(1L);
+
+        ModelAndView modelAndView = controladorPerfil.eliminarCuenta(requestMock);
+
+        assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+        verify(servicioUsuarioMock, times(1)).eliminar(1L);
+        verify(sessionMock, times(1)).invalidate();
+    }
+
+    @Test
+    public void cambiarContraseniaConErrorDeberiaMostrarError() throws Exception {
+        when(sessionMock.getAttribute("usuario")).thenReturn(usuarioMock);
+        doThrow(new RuntimeException("Error cambiando contraseña")).when(servicioUsuarioMock)
+                .modificarContraseniaUsuario(eq(usuarioMock), anyString(), anyString(), anyString());
+
+        Usuario usuario = new Usuario();
+        usuario.setCurrentPassword("passVieja");
+        usuario.setNewPassword("passNueva");
+        usuario.setConfirmPassword("passNueva");
+
+        ModelAndView modelAndView = controladorPerfil.cambiarContrasenia(usuario, requestMock);
+
+        assertThat(modelAndView.getViewName(), equalToIgnoringCase("editarPerfil"));
+        assertThat(modelAndView.getModel().get("error").toString(), equalTo("Error cambiando contraseña"));
+    }
 
     @Test
     public void editarPerfilDeberiaMostrarFormularioDeEdicion() {
@@ -61,6 +91,38 @@ public class ControladorPerfilTest {
         assertThat(modelAndView.getModel().get("usuario"), equalTo(usuarioMock));
     }
 
+    @Test
+    public void cambiarContraseniaExitoso() throws Exception {
+        Usuario usuario = new Usuario();
+        usuario.setCurrentPassword("PasswordVieja");
+        usuario.setNewPassword("NuevaPassword");
+        usuario.setConfirmPassword("NuevaPassword");
+
+        Usuario usuarioActual = new Usuario();
+        usuarioActual.setEmail("alguien@gmail.com");
+
+        when(requestMock.getSession()).thenReturn(sessionMock);
+        when(sessionMock.getAttribute("usuario")).thenReturn(usuarioActual);
+
+        doNothing().when(servicioUsuarioMock).modificarContraseniaUsuario(
+                eq(usuarioActual),
+                eq("PasswordVieja"),
+                eq("NuevaPassword"),
+                eq("NuevaPassword")
+        );
+
+        ModelAndView modelAndView = controladorPerfil.cambiarContrasenia(usuario, requestMock);
+
+        assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/perfil"));
+
+        verify(servicioUsuarioMock, times(1)).modificarContraseniaUsuario(
+                eq(usuarioActual),
+                eq("PasswordVieja"),
+                eq("NuevaPassword"),
+                eq("NuevaPassword")
+        );
+    }
+
 
     @Test
     public void editarPerfilSinUsuarioEnSesionDeberiaRedirigirALogin() {
@@ -72,44 +134,21 @@ public class ControladorPerfilTest {
         assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
     }
 
-    /*
     @Test
-    public void guardarCambiosDePerfilExitoso() throws Exception {
-        Usuario usuarioEditado = new Usuario();
-        usuarioEditado.setNombre("Nuevo Nombre");
-        usuarioEditado.setDescripcion("Nueva Descripción");
-        usuarioEditado.setCiudad("Nueva Ciudad");
-        usuarioEditado.setPassword("NuevaPassword");
+    public void mostrarPlanAlimenticioDeberiaSeleccionarTipoComidaCorrecto() {
+        InteresComida interes1 = new InteresComida("Vegano", "Alto", 80);
+        InteresComida interes2 = new InteresComida("Básica", "Medio", 50);
+        Set<InteresComida> intereses = new HashSet<>();
+        intereses.add(interes1);
+        intereses.add(interes2);
 
-        Usuario usuarioActual = new Usuario();
-        usuarioActual.setEmail("alguien@gmail.com");
-        usuarioActual.setPassword("PasswordVieja");
+        when(sessionMock.getAttribute("usuario")).thenReturn(usuarioMock);
+        when(usuarioMock.getInteresComidas()).thenReturn(intereses);
 
-        when(requestMock.getSession()).thenReturn(sessionMock);
-        when(sessionMock.getAttribute("usuario")).thenReturn(usuarioActual);
+        ModelAndView modelAndView = controladorPerfil.mostrarPlanAlimenticio(requestMock);
 
-        doNothing().when(servicioUsuarioMock).cambiarContrasenia(
-                anyString(),  // email
-                anyString(),  // currentPassword
-                anyString(),  // newPassword
-                anyString()   // confirmPassword
-        );
-
-        doNothing().when(servicioUsuarioMock).modificarPerfil(any(Usuario.class));
-
-
-        ModelAndView modelAndView = controladorPerfil.editarPerfil(usuarioEditado, "PasswordVieja", "NuevaPassword", "NuevaPassword", requestMock);
-
-        assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/perfil"));
-
-        verify(servicioUsuarioMock, times(1)).cambiarContrasenia(
-                eq(usuarioActual.getEmail()),  // email
-                eq("PasswordVieja"),           // currentPassword
-                eq("NuevaPassword"),           // newPassword
-                eq("NuevaPassword")            // confirmPassword
-        );
-
-        verify(servicioUsuarioMock, times(1)).modificarPerfil(usuarioActual);
+        assertThat(modelAndView.getViewName(), equalToIgnoringCase("plan-alimenticio"));
+        assertThat(modelAndView.getModel().get("tipoComida").toString(), equalTo("Vegano"));
     }
-     */
+
 }

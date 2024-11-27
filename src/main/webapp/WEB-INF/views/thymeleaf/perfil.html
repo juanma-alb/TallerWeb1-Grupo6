@@ -37,7 +37,7 @@
       </button>
 
       <button class="btn-ajustes" onclick="mostrarModalEliminar()">
-        <i class="fas fa-cog"></i>
+        <i class="fas fa-trash"></i>
       </button>
 
       <div id="modal-eliminar" class="modal" style="display: none;">
@@ -72,9 +72,6 @@
     </div>
     <button onclick="toggleSection('recetas')">Recetas</button>
     <button onclick="toggleSection('comentarios')">Comentarios</button>
-    <button class="favoritos">
-      <a th:href="@{/favoritos}">Favoritos</a>
-    </button>
   </div>
 
   <div id="recetas" style="display: none;">
