@@ -21,6 +21,10 @@ public class ServicioRecetaImpl implements ServicioReceta {
     @Autowired
     private RepositorioUsuario repositorioUsuario;
 
+    public ServicioRecetaImpl(RepositorioReceta repositorioReceta, RepositorioUsuario repositorioUsuario) {
+        this.repositorioReceta = repositorioReceta;
+        this.repositorioUsuario = repositorioUsuario;
+    }
 
     @Override
     public void crearReceta(Receta receta) {
@@ -66,13 +70,11 @@ public class ServicioRecetaImpl implements ServicioReceta {
         Receta receta = repositorioReceta.buscarRecetaPorId(recetaId);
         Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
 
-        // Aquí puedes agregar la lógica para marcar una receta como guardada
         receta.setGuardada(true);
-        receta.setUsuario(usuario);  // Asegúrate de que la receta esté asociada al usuario
+        receta.setUsuario(usuario);
         repositorioReceta.save(receta);
     }
 
-    // Método para contar recetas guardadas por tipo de comida
     @Override
     public int contarRecetasGuardadasPorTipo(Long usuarioId, String tipoComida) {
         return repositorioReceta.contarRecetasGuardadasPorUsuarioYTipo(usuarioId, tipoComida);
@@ -93,14 +95,13 @@ public class ServicioRecetaImpl implements ServicioReceta {
 
     @Override
     public int calcularPorcentaje(int cantidad) {
-        // Suponiendo que el máximo es 10 recetas guardadas para obtener un 100% de interés
-        int maxRecetas = 10; // Puedes ajustar este valor según tus necesidades
+        int maxRecetas = 10;
         if (cantidad <= 0) {
-            return 0; // Si no hay recetas, el porcentaje es 0
+            return 0;
         } else if (cantidad >= maxRecetas) {
-            return 100; // Si se alcanzan o superan las 10 recetas, el interés es 100%
+            return 100;
         } else {
-            return (cantidad * 100) / maxRecetas; // Cálculo del porcentaje
+            return (cantidad * 100) / maxRecetas;
         }
     }
 

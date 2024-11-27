@@ -55,7 +55,6 @@
                 <!-- Enlace al perfil usando el ID del usuario -->
                 <a th:href="@{/perfil/{id}(id=${usuario.id})}">
                     <div class="tarjeta-usuario">
-                        <img th:src="@{'/imagenes/'+${usuario.foto}}" class="img-receta-usuario">
                         <h4 th:text="${usuario.nombre}">Nombre del Usuario</h4>
                     </div>
                 </a>

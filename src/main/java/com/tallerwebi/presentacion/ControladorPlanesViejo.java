@@ -26,7 +26,6 @@ public class ControladorPlanes {
 
     @PostMapping
     public String procesarCompra(@RequestParam("plan") String planSeleccionado, Model model) {
-        // Lógica para obtener la URL de Mercado Pago según el plan seleccionado
         String initPoint;
         try {
             switch (planSeleccionado) {
@@ -41,31 +40,24 @@ public class ControladorPlanes {
                     break;
                 default:
                     model.addAttribute("error", "Plan no válido. Intenta nuevamente.");
-                    return "planes"; // Redirige a la misma página de planes si el plan es inválido
+                    return "planes";
             }
 
-            // Redirige al botón de pago de Mercado Pago
             return "redirect:" + initPoint;
 
         } catch (Exception e) {
-            // En caso de error, agrega un mensaje al modelo y vuelve a la página de planes
             model.addAttribute("error", "Ocurrió un problema al procesar tu compra. Inténtalo nuevamente.");
             return "planes";
         }
     }
 
-    // Método para generar la URL de Mercado Pago
     private String generarUrlMercadoPago(String titulo, double precio, String descripcion) {
-        // Aquí se implementa la lógica de integración con Mercado Pago
-        // Puedes usar el SDK de Mercado Pago para generar la URL de pago
-        // Esto es un ejemplo simplificado
         String urlPrueba = "https://www.mercadopago.com.ar/init-point-mock";
         return urlPrueba + "?title=" + titulo + "&price=" + precio + "&description=" + descripcion;
     }
 
      @GetMapping
     public String mostrarPlanes(Model model) {
-        // Muestra la página de planes
         return "planes";
     }
 

@@ -26,7 +26,7 @@ VALUES
     (true, 244, 2, 'Plato tradicional de la cocina arequipeña.', 'slide4.jpg', 'Ají de calabaza', 74, 2, 'pasta', 'espaguetis', null, 0.0, false,'Ovolactovegetariano'),
     (true, 243, 1, 'Receta con un toque especial al estilo mexicano.', 'slide5.jpg', 'Bacalao a la vazcaína', 73, 1, 'cocteles', 'ponche', null, 0.0, false,'Flexitariano'),
     (true, 242, 5, 'Estofado japonés que combina múltiples sabores.', 'slide6.jpg', 'Sukiyaki', 72, 5, 'pasta', 'pizza', null, 0.0, false,'Ovolactovegetariano'),
-    (true, 241, 5, 'Tacos de Pescado, una receta muy rica para compartir entre amigos.', 'slide7.jpg', 'Tacos de Pescado', 72, 4, 'carne', 'cerdo', null, 0.0, false,'Básica'),
+    (true, 241, 5, 'Tacos de Pescado, una receta muy rica.', 'slide7.jpg', 'Tacos de Pescado', 72, 4, 'carne', 'cerdo', null, 0.0, false,'Básica'),
     (true, 240, 5, 'Brownies caseros muy ricos.', 'slide8.jpg', 'Brownie', 50, 5, 'pasta', 'espaguetis', null, 4, false,'Básica'),
     (true, 239, 5, 'Tacos Veganos de Garbanzos.', 'slide9.jpeg', 'Tacos Veganos de Garbanzos', 72, 3, 'pasta', 'pizza', null, 0.0, false,'vegano'),
     (true, 239, 2, 'Hamburguesas de Lentejas.', 'slide10.jpg', 'Hamburguesas de Lentejas', 72, 3, 'pasta', 'pizza', null, 0.0, false,'vegano');

@@ -10,8 +10,13 @@ import java.util.List;
 @Service
 public class ServicioDescubreRecetasImpl implements ServicioDescubreRecetas {
 
-    @Autowired
     private RepositorioDescubreRecetas repositorioDescubreRecetas;
+
+    @Autowired
+    public ServicioDescubreRecetasImpl(RepositorioDescubreRecetas repositorioDescubreRecetas) {
+        this.repositorioDescubreRecetas = repositorioDescubreRecetas;
+    }
+
 
     @Override
     public void crearReceta2(Receta receta) {

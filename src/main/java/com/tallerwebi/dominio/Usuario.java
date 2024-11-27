@@ -38,7 +38,6 @@ public class Usuario {
     @Transient
     private String confirmPassword;
 
-    @Transient
     private String currentPassword;
 
     private String newPassword; // Nueva contraseña (para actualización)
