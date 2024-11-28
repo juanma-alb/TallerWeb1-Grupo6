@@ -210,9 +210,9 @@
                 <p class="subcategoria" th:text="'Subcategoría: ' + ${receta.subcategoria}"></p>
 
                  <!-- Botón para guardar la receta -->
-            <form th:action="@{/guardarReceta/{id}(id=${receta.id})}" method="POST" style="display:inline;">
-                <button type="submit" class="boton-guardar">Guardar</button>
-            </form>
+<form th:if="${#session.getAttribute('usuario') != null and #session.getAttribute('usuario').plan != null and #session.getAttribute('usuario').plan.id >= 3}" th:action="@{/guardarReceta/{id}(id=${receta.id})}" method="POST" style="display:inline;">
+    <button type="submit" class="boton-guardar">Guardar</button>
+</form>
 
                 <!-- Botones CRUD visibles solo para admin -->
                 <div th:block th:if="${esAdmin}">

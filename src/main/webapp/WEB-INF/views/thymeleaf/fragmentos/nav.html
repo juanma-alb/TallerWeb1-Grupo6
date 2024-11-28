@@ -16,8 +16,8 @@
         </div>
         <div class="enlaces-navegacion">
             <a th:href="@{/descubre-recetas}">Descubre recetas</a>
-            <a th:href="@{/misRecetas}" th:if="${#session.getAttribute('usuario').plan.id >= 2}">Mis Recetas</a>
-            <a th:href="@{/crear-receta}" th:if="${#session.getAttribute('usuario').plan.id >= 2}">Crear</a>
+            <a th:href="@{/misRecetas}" th:if="${#session.getAttribute('usuario') != null and #session.getAttribute('usuario').plan != null and #session.getAttribute('usuario').plan.id >= 2}">Mis Recetas</a>
+            <a th:href="@{/crear-receta}" th:if="${#session.getAttribute('usuario') != null and #session.getAttribute('usuario').plan != null and #session.getAttribute('usuario').plan.id >= 2}">Crear</a>
             <a th:href="@{/perfil}">Perfil</a>
             <a th:href="@{/login}">Cerrar Sesión</a>
         </div>

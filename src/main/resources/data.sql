@@ -1,7 +1,7 @@
 -- planes
 INSERT INTO tipoplan (id, nombre, descripcion) VALUES (1, 'basico', 'funciones basicas');
 INSERT INTO tipoplan (id, nombre, descripcion) VALUES (2, 'avanzado', 'puedes crear y editar tus recetas');
-INSERT INTO tipoplan (id, nombre, descripcion) VALUES (3, 'premium', 'acceso a todas las funcionalidades de la pagina');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (3, 'premium', 'tenés acceso a todas las funcionalidades de la pagina');
 
 INSERT INTO plan (id, tipo_plan_id, fechaCompra, fechaVencimiento) VALUES 
 (1, 1, NOW(), NOW() + INTERVAL 30 DAY),
@@ -13,7 +13,7 @@ INSERT INTO plan (id, tipo_plan_id, fechaCompra, fechaVencimiento) VALUES
 -- usuarios
 INSERT INTO Usuario(email, password, rol, activo, nombre, descripcion, ciudad, foto, plan_id )
 VALUES
-    ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png', 3),
+   ('test@unlam.edu.ar', 'test', 'ADMIN', true, 'alguien', 'Me gusta mucho cocinar y compartir recetas con mis seres queridos', 'BuenosAires', 'default-user.png', 3),
    ('test2@unlam.edu.ar', 'test2', 'USER', true, 'alguien', 'Usuario prueba', 'BuenosAires', 'default-user.png',1);
 
 

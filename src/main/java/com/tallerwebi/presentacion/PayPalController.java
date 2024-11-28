@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.Collections;
 import java.util.List; // Importación necesaria para manejar listas
@@ -78,36 +80,45 @@ public String checkout(@RequestParam Long planId, @RequestParam Long usuarioId, 
 
 
 @GetMapping("/paypal/success")
-public String success(@RequestParam String paymentId, 
-                      @RequestParam String PayerID, 
-                      @RequestParam(required = false) Long planId, 
-                      @RequestParam(required = false) Long usuarioId) {
-    if (planId == null || usuarioId == null) {
-        System.out.println("Error: planId o usuarioId no válidos.");
-        return "redirect:/planes?error=ParametrosInvalidos";
-    }
-
+public String success(@RequestParam String paymentId,
+                      @RequestParam String PayerID,
+                      @RequestParam Long planId,
+                      @RequestParam Long usuarioId,
+                      HttpSession session,
+                      RedirectAttributes redirectAttributes) {
     try {
-        // Ejecutar el pago en PayPal
         Payment payment = new Payment().setId(paymentId);
         PaymentExecution execution = new PaymentExecution().setPayerId(PayerID);
-        payment.execute(apiContext, execution);
+        Payment executedPayment = payment.execute(apiContext, execution);
 
-        // Obtener el usuario y el plan comprado
+        if (!"approved".equals(executedPayment.getState())) {
+            redirectAttributes.addFlashAttribute("error", "El pago no fue aprobado.");
+            return "redirect:/planes";
+        }
+
+        // Actualizar el plan del usuario
         Usuario usuario = servicioUsuario.obtenerUsuarioPorId(usuarioId);
         Plan planComprado = servicioPlan.obtenerPlanPorId(planId);
 
-        // Actualizar el plan del usuario
-        servicioPlan.actualizarPlan(usuario, planComprado);
+        if (usuario == null || planComprado == null) {
+            redirectAttributes.addFlashAttribute("error", "Datos no válidos para la compra.");
+            return "redirect:/planes";
+        }
 
+        servicioPlan.actualizarPlan(usuario, planComprado);
         
+        session.setAttribute("usuario", usuario);
+
+        String mensajeExito = String.format("Felicidades, acabas de comprar el plan %s. Durante 30 días, ahora podés %s. ¡Gracias por tu compra!",
+                                            planComprado.getTipoPlan().getNombre(),
+                                            planComprado.getTipoPlan().getDescripcion());
+
+        redirectAttributes.addFlashAttribute("success", mensajeExito);
         return "redirect:/planes";
     } catch (PayPalRESTException e) {
         e.printStackTrace();
-        return "redirect:/planes?error=ErrorPayPal";
+        redirectAttributes.addFlashAttribute("error", "Hubo un problema al procesar el pago.");
+        return "redirect:/planes";
     }
 }
-
-
 }
-
