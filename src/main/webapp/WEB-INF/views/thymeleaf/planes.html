@@ -126,6 +126,16 @@
             <a th:href="@{/home}" class="btn btn-secondary cancel-btn">Cancelar</a>
         </div>
     </main>
+
+    <!-- fragmento_descontar.html -->
+<div>
+    <form th:action="@{/descuento/aplicar}" method="post">
+        <label for="codigo">Ingresa tu código de descuento:</label>
+        <input type="text" name="codigo" id="codigo" required />
+        <button type="submit">Aplicar</button>
+    </form>
+</div>
+
     
 
 <div th:insert="fragmentos/footer :: footer"></div>

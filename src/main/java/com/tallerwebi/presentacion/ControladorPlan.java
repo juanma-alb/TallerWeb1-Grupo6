@@ -67,9 +67,6 @@ public String iniciarCompra(@RequestParam Long planId, @RequestParam Long usuari
 
     return "redirect:/paypal/checkout?planId=" + planId + "&usuarioId=" + usuarioId;
 }
-
-
-
 }
 
 

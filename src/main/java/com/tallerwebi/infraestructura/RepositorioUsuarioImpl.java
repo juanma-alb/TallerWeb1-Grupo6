@@ -38,6 +38,15 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .uniqueResult();
     }
 
+
+    @Override
+public List<Usuario> findAll() {
+    return sessionFactory.getCurrentSession()
+            .createQuery("FROM Usuario", Usuario.class)
+            .list();
+}
+
+
     @Override
     public void guardar(Usuario usuario) {
         sessionFactory.getCurrentSession().save(usuario);

@@ -3,7 +3,6 @@ package com.tallerwebi.presentacion;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import com.tallerwebi.infraestructura.ServicioPlan;
 import com.tallerwebi.dominio.Plan;
 import com.tallerwebi.infraestructura.*;
 import com.tallerwebi.dominio.*;
@@ -19,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
-import java.util.List; // Importación necesaria para manejar listas
+import java.util.List; 
 
 @Controller
 public class PayPalController {
@@ -34,21 +35,44 @@ public class PayPalController {
     @Autowired
     private ServicioUsuario servicioUsuario;
 
+    @Autowired
+    private ServicioCodigoDescuento servicioCodigoDescuento;
+
     @GetMapping("/paypal/checkout")
-public String checkout(@RequestParam Long planId, @RequestParam Long usuarioId, HttpServletRequest request) {
+public String checkout(@RequestParam Long planId, 
+                       @RequestParam Long usuarioId, 
+                       HttpServletRequest request, 
+                       HttpSession session, 
+                       RedirectAttributes redirectAttributes) {
     Plan plan = servicioPlan.obtenerPlanPorId(planId);
 
-    // Determinar el precio según el plan
-    String precio = "10.00"; // Default: Premium
+    // Determinar el precio base según el plan
+    BigDecimal precioBase = BigDecimal.valueOf(10.00); // Default: Premium
     if (planId == 2) {
-        precio = "5.00"; // Plan Avanzado
+        precioBase = BigDecimal.valueOf(5.00); // Plan Avanzado
     } else if (planId == 1) {
-        return "redirect:/planes?error=PlanBasicoNoSeCompra";
+        redirectAttributes.addFlashAttribute("error", "El plan básico no se puede comprar.");
+        return "redirect:/planes";
     }
 
+    // Verificar si hay un descuento aplicado
+    BigDecimal descuento = BigDecimal.ZERO;
+    if (session.getAttribute("descuento") != null) {
+        descuento = (BigDecimal) session.getAttribute("descuento");
+    }
+
+    // Calcular el precio con descuento
+    BigDecimal precioConDescuento = precioBase.subtract(precioBase.multiply(descuento).divide(BigDecimal.valueOf(100)));
+
+    // Asegurar que el precio no sea negativo
+    if (precioConDescuento.compareTo(BigDecimal.ZERO) < 0) {
+        precioConDescuento = BigDecimal.ZERO;
+    }
+
+    // Configurar el monto para la transacción de PayPal
     Amount amount = new Amount();
     amount.setCurrency("USD");
-    amount.setTotal(precio);
+    amount.setTotal(precioConDescuento.setScale(2, RoundingMode.HALF_UP).toString()); // Convertir a string con 2 decimales
 
     Transaction transaction = new Transaction();
     transaction.setAmount(amount);
@@ -75,8 +99,10 @@ public String checkout(@RequestParam Long planId, @RequestParam Long usuarioId, 
     } catch (PayPalRESTException e) {
         e.printStackTrace();
     }
+
     return "redirect:/planes";
 }
+
 
 
 @GetMapping("/paypal/success")
@@ -106,14 +132,19 @@ public String success(@RequestParam String paymentId,
         }
 
         servicioPlan.actualizarPlan(usuario, planComprado);
-        
         session.setAttribute("usuario", usuario);
 
-        String mensajeExito = String.format("Felicidades, acabas de comprar el plan %s. Durante 30 días, ahora podés %s. ¡Gracias por tu compra!",
-                                            planComprado.getTipoPlan().getNombre(),
-                                            planComprado.getTipoPlan().getDescripcion());
+        // Generar un código de descuento
+        CodigoDescuento codigoDescuento = servicioCodigoDescuento.crearCodigoDescuento(usuario, BigDecimal.valueOf(25.0)); // 25% descuento
 
+        // Notificar al usuario
+        String mensajeExito = String.format("¡Felicidades! Has comprado el plan %s. Durante 30 días, ahora podés %s. "
+                                            + "¡Gracias por tu compra! Tu código de descuento para tu próxima compra es: %s",
+                                            planComprado.getTipoPlan().getNombre(),
+                                            planComprado.getTipoPlan().getDescripcion(),
+                                            codigoDescuento.getCodigo());
         redirectAttributes.addFlashAttribute("success", mensajeExito);
+
         return "redirect:/planes";
     } catch (PayPalRESTException e) {
         e.printStackTrace();
@@ -121,4 +152,5 @@ public String success(@RequestParam String paymentId,
         return "redirect:/planes";
     }
 }
+
 }

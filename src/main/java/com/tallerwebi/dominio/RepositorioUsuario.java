@@ -19,7 +19,8 @@ public interface RepositorioUsuario {
 
     void actualizarUsuario(Usuario usuario);
 
-  
+    public List<Usuario> findAll();
+
 
 }
 
