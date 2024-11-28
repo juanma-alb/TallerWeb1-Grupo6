@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activar Cuenta</title>
+</head>
+<body>
+<form action="#" th:action="@{/activar}" method="GET">
+    <input type="text" name="codigo" placeholder="Ingresa el código de activación" required>
+    <button type="submit">Activar cuenta</button>
+    <p th:if="${error != null}" class="alert alert-danger" th:text="${error}"></p>
+</form>
+</body>
+</html>

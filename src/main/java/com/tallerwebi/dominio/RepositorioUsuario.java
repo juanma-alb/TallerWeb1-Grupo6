@@ -19,7 +19,7 @@ public interface RepositorioUsuario {
 
     void actualizarUsuario(Usuario usuario);
 
-  
 
+    Usuario buscarPorCodigoActivacion(String codigo);
 }
 

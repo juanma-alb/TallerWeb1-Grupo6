@@ -19,6 +19,7 @@ public class Usuario {
     private String descripcion;
     private String ciudad;
     private String foto;
+    private String activationCode;
 
     // private boolean puedeEditarPerfil;
 
@@ -220,6 +221,14 @@ public class Usuario {
 
     public void setSeguidores(List<Usuario> seguidores) {
         this.seguidores = seguidores;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public String obtenerTipoComidaFavorito() {

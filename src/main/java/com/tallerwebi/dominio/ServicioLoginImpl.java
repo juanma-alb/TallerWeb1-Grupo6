@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 @Service("servicioLogin")
 @Transactional
@@ -14,20 +15,26 @@ public class ServicioLoginImpl implements ServicioLogin {
     private RepositorioUsuario repositorioUsuario;
 
     @Autowired
+    private ServicioEmail servicioEmail;
+
+    @Autowired
     public ServicioLoginImpl(RepositorioUsuario repositorioUsuario){
         this.repositorioUsuario = repositorioUsuario;
     }
 
     @Override
-    public Usuario consultarUsuario (String email, String password) {
-        return repositorioUsuario.buscarUsuario(email, password);
+    public Usuario consultarUsuario(String email, String password) {
+        Usuario usuario = repositorioUsuario.buscarUsuario(email, password);
+        if (usuario != null && usuario.getActivo()) {
+            return usuario;
+        }
+        return null;
     }
-
     @Override
-    public void registrar(Usuario usuario, DatosRegistro datosRegistro) throws UsuarioExistente,ValidacionesIncorrectas {
+    public void registrar(Usuario usuario, DatosRegistro datosRegistro) throws UsuarioExistente, ValidacionesIncorrectas {
         Usuario usuarioEncontrado = repositorioUsuario.buscarUsuario(usuario.getEmail(), usuario.getPassword());
 
-        if(usuarioEncontrado != null){
+        if (usuarioEncontrado != null) {
             throw new UsuarioExistente("ya existe ese usuario");
         }
 
@@ -39,10 +46,13 @@ public class ServicioLoginImpl implements ServicioLogin {
             throw new ValidacionesIncorrectas("El nombre solo puede contener letras.");
         }
 
+        String activationCode = UUID.randomUUID().toString();
+        usuario.setActivationCode(activationCode);
+        usuario.setActivo(false);
+
         repositorioUsuario.guardar(usuario);
 
-
-
+        servicioEmail.enviarCorreoActivacion(usuario);
     }
 
     public boolean validarContraseña(String contraseña) {

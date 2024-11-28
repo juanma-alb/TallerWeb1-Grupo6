@@ -22,5 +22,8 @@ public interface ServicioUsuario {
     Usuario obtenerUsuarioPorId(Long id);
 
     void actualizarUsuario(Usuario usuario);
-      
+
+    Usuario buscarPorCodigoActivacion(String codigo);
+
+    void guardar(Usuario usuario);
 }

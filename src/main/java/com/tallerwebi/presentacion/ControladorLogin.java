@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,6 +100,19 @@ public class ControladorLogin {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping(path = "/activar", method = RequestMethod.GET)
+    public ModelAndView activarCuenta(@RequestParam("codigo") String codigo) {
+        Usuario usuario = servicioUsuario.buscarPorCodigoActivacion(codigo);
+        if (usuario != null && !usuario.getActivo()) {
+            usuario.setActivo(true);
+            usuario.setActivationCode(null);
+            servicioUsuario.guardar(usuario);
+            return new ModelAndView("redirect:/login");
+        } else {
+            return new ModelAndView("error", "mensaje", "Código de activación inválido o ya usado.");
+        }
     }
 
 }

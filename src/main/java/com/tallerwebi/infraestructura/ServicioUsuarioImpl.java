@@ -132,6 +132,15 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         repositorioUsuario.actualizarUsuario(usuario);
     }
 
-   
+    @Override
+    public Usuario buscarPorCodigoActivacion(String codigo) {
+        return repositorioUsuario.buscarPorCodigoActivacion(codigo);
+    }
+
+    @Override
+    public void guardar(Usuario usuario) {
+        repositorioUsuario.guardar(usuario);
+    }
+
 
 }
